@@ -1,0 +1,40 @@
+! by evilroot (Karol Czeryna)
+! 26 grudzien, 2012
+
+*background: #141415
+*foreground: #f7f7f7
+
+! Black
+*color0:    #1B1D1E
+*color8:    #505354
+
+! Red
+*color1:    #ff005f
+*color9:    #ff6767
+
+! Green
+*color2:    #a4d32d
+*color10:   #a0e11e
+
+! Yellow
+*color3:    #f6c336
+*color11:   #F7D325
+
+! Blue
+*color12:   #5496ff
+*color4:    #1CA1DB
+
+! Magenta
+*color5:    #803cb6
+!*color13:   #c48dff
+!*color5: #9E6FFE
+*color13: #9E6FFE
+
+
+! Cyan
+*color6:    #218693
+*color14:   #77dfd8
+
+! White
+*color7:    #b0b0b0
+*color15:   #F7f7f7

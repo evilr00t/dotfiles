@@ -1,0 +1,45 @@
+[user]
+	name = evilroot
+	email = karol@e-dot.pl
+
+	[alias]
+	    s = status -s
+	    c = commit
+	    co = checkout
+	    r = remote -v
+	    t = tag -l
+	    b = branch -v
+	    nb = checkout -b
+	    unstage = reset HEAD
+	    uncommit = reset --soft HEAD^
+	    last = diff HEAD^
+	    lastc = diff HEAD^ --cached
+	    dt = !git --work-tree=$HOME/ --git-dir=$HOME/dane/repos/my-dotfiles/.git/
+	#   l = log --graph --all --oneline --abbrev-commit --relative-date --format='%Cred%h%Cgreen %aN%Cblue %ar %Creset %s'
+	    l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+			ll = log --graph --decorate --oneline --stat --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --date=relative
+
+	[color]
+	    ui = true
+	[color "branch"]
+	    current = yellow reverse
+	    local = yellow
+	    remote = green
+	[color "diff"]
+	    meta = yellow bold
+	    frag = magenta bold
+	    old = red bold
+	    new = green bold
+	[color "status"]
+	    added = yellow
+	    changed = green
+	    untracked = cyan
+	[core]
+	    editor = vim
+	    excludesfile = /home/czeryna/.gitignore
+	[diff]
+	    tool = vimdiff
+	[push]
+	    default = tracking
+	[merge]
+	    ff = false

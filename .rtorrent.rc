@@ -1,0 +1,42 @@
+session = ~/rtorrent/session/
+#directory = ~/rtorrent/downloads/
+upload_rate = 235
+download_rate = 0
+use_udp_trackers = yes
+max_uploads = 10
+port_range = 9888-9888
+max_peers = 100
+dht = auto
+dht_port = 9773
+max_peers=100
+check_hash = no
+schedule = low_diskspace,5,60,close_low_diskspace=100M
+
+# // schedule = watch_directory,5,5,load_start=~/rtorrent/watch/*.torrent 
+
+# Sort by creation date
+view_sort_new = main,less=d.get_creation_date=
+view_sort_current = main,less=d.get_creation_date=
+
+# // Color / Canvas patch
+#done_fg_color = 2
+#done_bg_color = -1
+#active_fg_color = 1
+#active_bg_color = -1
+
+max_memory_usage = 99999999999
+encryption = allow_incoming,try_outgoing,enable_retry
+
+schedule = watch_directory_music, 5, 10, "load_start=~/rtorrent/torrents/music/*.torrent,d.set_directory=~/rtorrent/downloads/incomplete/,d.set_custom1=~/rtorrent/downloads/music/"
+schedule = watch_directory_movies, 5, 10, "load_start=~/rtorrent/torrents/movies/*.torrent,d.set_directory=~/rtorrent/downloads/incomplete/,d.set_custom1=~/rtorrent/downloads/movies/"
+schedule = watch_directory_apps, 5, 10, "load_start=~/rtorrent/torrents/apps/*.torrent,d.set_directory=~/rtorrent/downloads/incomplete/,d.set_custom1=~/rtorrent/downloads/apps/"
+schedule = watch_directory_other, 5, 10, "load_start=~/rtorrent/torrents/other/*.torrent,d.set_directory=~/rtorrent/downloads/incomplete/,d.set_custom1=~/rtorrent/downloads/other/"
+#on_finished = move_complete,"execute=mv,-u,$d.get_base_path=,$d.get_custom1=;d.set_directory=$d.get_custom1="
+#system.method.set_key = event.download.finished,move_complete,"execute=mv,-u,$d.get_base_path=,$d.get_custom1= ;d.set_directory=$d.get_custom1=" 
+system.method.insert=checkdirs1,simple,"not=\"$equal={d.get_custom1=,d.get_base_path=}\""
+system.method.insert=movecheck1,simple,"and={checkdirs1=,d.get_complete=,d.get_custom1=}"
+system.method.insert=movedir1,simple,"d.set_directory=$d.get_custom1=;execute=mv,-u,$d.get_base_path=,$d.get_custom1=;d.set_custom1=;d.stop=;d.start="
+system.method.set_key=event.download.hash_done,move_hashed1,"branch={$movecheck1=,movedir1=}"
+schedule = untied_directory,5,5,stop_untied=
+schedule = filter_active,30,30,"view_filter = active,\"or={d.get_up_rate=,d.get_down_rate=}\""
+# evilroot.eu.org lipiec 28, 2012

@@ -1,0 +1,51 @@
+#-------------------------------------------------------------------------------------
+# ~/.screenrc
+# Last modified 18/11/2008
+#-------------------------------------------------------------------------------------
+
+startup_message off
+vbell off
+vbell_msg "[[[ ding ]]]"
+activity "active: %n (%t) [%w:%s]"
+bell "bell: %n (%t) [%w:%s]^G"
+activity "active: %n (%t) [%w:%s]"
+msgwait 2 # 1 second messages
+defscrollback 10000
+
+autodetach on
+deflogin on
+defutf8 on
+altscreen on
+defbce on
+defflow off
+#nethack on
+nonblock on
+defhstatus "screen: ^En (^Et)"
+term screen-256color
+terminfo rxvt* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+#termcapinfo rxvt|rxvt-unicode|urxvt|rxvt-256color|screen|xs|rxvt ti@:te@
+#sorendition +b kG
+
+#[randy@voodoo] updates :: none                        1 irssi  [2 vim .screenrc]
+hardstatus on
+#hardstatus string '%{= m}Load Avg:%{= G} %l %= %{= w}%-w%{+b r}%n:%t%{-b r}%{w}%+w %= %{b}%D %d/%m/%Y %{Y}%c'
+hardstatus alwayslastline
+hardstatus alwayslastline '%{= M} %H%{= G} %l %= %{= w}%-w%{+b r}%n*%t%{-b r}%{w}%+w %= %{c}%d %D %{B}%c '
+
+#caption always "%{= dd}%{b}[ %=%{w}%?%-Lw%?%{b}(%{W}%n*%f %t%?(%u)%?%{b})%{w}%?%+Lw%?%?%= %{b}][%{B} %H %{W}%l %{b}]"
+
+# Default apps
+# screen -t irc weechat-curses
+#screen -t gg 0 ekg2
+#screen -t mp3 4 mocp
+screen -t torek 2 rtorrent
+screen -t root 1 sudo su -
+#screen -t mp3 3 ncmpcpp
+
+bindkey "^[q" prev
+bindkey "^[w" next
+bindkey "^[Od" prev  # change window with ctrl-left
+bindkey "^[Oc" next  # change window with ctrl-right
+#bindkey -k k; quit    # bind F10 to Screen's quit command
+
+
