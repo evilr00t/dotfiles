@@ -48,14 +48,16 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'jez/vim-c0'
 Plugin 'jez/vim-ispc'
 Plugin 'kchmck/vim-coffee-script'
-
+Plugin 'reedes/vim-pencil'
+Plugin 'junegunn/goyo.vim'
+Plugin 'tpope/vim-markdown'
 " ---- Extras/Advanced plugins ----------------------------------------
 " Highlight and strip trailing whitespace
 "Plugin 'ntpeters/vim-better-whitespace'
 " Easily surround chunks of text
-"Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-surround'
 " Align CSV files at commas, align Markdown tables, and more
-"Plugin 'godlygeek/tabular'
+Plugin 'godlygeek/tabular'
 " Automaticall insert the closing HTML tag
 "Plugin 'HTML-AutoCloseTag'
 " Make tmux look like vim-airline (read README for extra instructions)
@@ -166,4 +168,8 @@ augroup mydelimitMate
   au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
 augroup END
 
+let g:vim_markdown_folding_disabled=1
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+let g:goyo_width = "85%"
 
