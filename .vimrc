@@ -52,6 +52,8 @@ Plugin 'reedes/vim-pencil'
 Plugin 'junegunn/goyo.vim'
 Plugin 'tpope/vim-markdown'
 Plugin 'chase/vim-ansible-yaml'
+Plugin 't9md/vim-chef'
+
 " ---- Extras/Advanced plugins ----------------------------------------
 " Highlight and strip trailing whitespace
 "Plugin 'ntpeters/vim-better-whitespace'
