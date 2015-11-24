@@ -10,6 +10,7 @@ set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
+"set rtp+=~/.fzf
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
@@ -31,6 +32,7 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 Plugin 'sjl/badwolf'
+Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'Valloric/YouCompleteMe'
 
 " ----- Working with Git ----------------------------------------------
@@ -54,19 +56,20 @@ Plugin 'tpope/vim-markdown'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 't9md/vim-chef'
 
+Plugin 'fatih/vim-go'
 " ---- Extras/Advanced plugins ----------------------------------------
 " Highlight and strip trailing whitespace
-"Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'ntpeters/vim-better-whitespace'
 " Easily surround chunks of text
 Plugin 'tpope/vim-surround'
 " Align CSV files at commas, align Markdown tables, and more
 Plugin 'godlygeek/tabular'
 " Automaticall insert the closing HTML tag
-"Plugin 'HTML-AutoCloseTag'
+Plugin 'HTML-AutoCloseTag'
 " Make tmux look like vim-airline (read README for extra instructions)
 "Plugin 'edkolev/tmuxline.vim'
 " All the other syntax plugins I use
-"Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'ekalinin/Dockerfile.vim'
 "Plugin 'digitaltoad/vim-jade'
 "Plugin 'tpope/vim-liquid'
 "Plugin 'cakebaker/scss-syntax.vim'
@@ -97,7 +100,7 @@ set background=dark
 "let g:solarized_termcolors=256
 
 " Set the colorscheme
-colorscheme badwolf
+colorscheme dracula
 
 
 " ----- bling/vim-airline settings -----
@@ -175,4 +178,3 @@ let g:vim_markdown_folding_disabled=1
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 let g:goyo_width = "85%"
-
