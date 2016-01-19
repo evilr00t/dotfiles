@@ -34,6 +34,7 @@ Plugin 'ervandew/supertab'
 Plugin 'sjl/badwolf'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'fatih/vim-go'
 
 " ----- Working with Git ----------------------------------------------
 Plugin 'airblade/vim-gitgutter'
@@ -55,8 +56,9 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'tpope/vim-markdown'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 't9md/vim-chef'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
-Plugin 'fatih/vim-go'
 " ---- Extras/Advanced plugins ----------------------------------------
 " Highlight and strip trailing whitespace
 Plugin 'ntpeters/vim-better-whitespace'
@@ -178,3 +180,8 @@ let g:vim_markdown_folding_disabled=1
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 let g:goyo_width = "85%"
+
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-k>"
+let g:UltiSnipsJumpBackwardTrigger="<c-j>"
+
