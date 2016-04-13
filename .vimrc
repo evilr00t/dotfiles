@@ -102,7 +102,7 @@ set background=dark
 "let g:solarized_termcolors=256
 
 " Set the colorscheme
-colorscheme dracula
+colorscheme badwolf
 
 
 " ----- bling/vim-airline settings -----
