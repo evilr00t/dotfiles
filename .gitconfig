@@ -47,9 +47,9 @@
 			ff = false
 
 [pager]
-    log = diff-highlight | less
-    show = diff-highlight | less
-    diff = diff-highlight | less
+    log = diff-so-fancy | less --tabs=4 -RFX
+    show = diff-so-fancy | less --tabs=4 -RFX
+    diff = diff-so-fancy | less --tabs=4 -RFX
 
 [filter "lfs"]
 	clean = git-lfs clean %f
