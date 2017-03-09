@@ -1,6 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 . ~/repos/z/z.sh
+. ~/.zshenv
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -82,21 +83,19 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source ~/.zshenv
-
 source ~/Documents/tab-color.sh
+source $HOME/.zprezto/zsh-syntax-highlighting.zsh
+source $HOME/.zprezto/zsh-syntax-highlighting-filetypes.zsh
+
 alias ssh=color-ssh
+alias mosh=color-mosh
 
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
 eval $( dircolors -b $HOME/.dircolors )
-
 export LC_CTYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
-
 set umask 022
 
-source $HOME/.zprezto/zsh-syntax-highlighting.zsh
-source $HOME/.zprezto/zsh-syntax-highlighting-filetypes.zsh
 
 # Fish-style syntax highlighting for ZSH (by nicoulaj@github):¬
 if [[ -f $HOME/.zprezto/zsh-syntax-highlighting.zsh ]]; then
