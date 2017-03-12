@@ -2,6 +2,7 @@
 {
         "files.associations": {
  "*.yml": "ansible",
+ "Vagrantfile": "ruby",
         },
         "vsicons.icons": "http://github.com/robertohuertasm/vscode-icons/blob/master/icons.zip?raw=true",
         "editor.fontFamily": "Fira Code,PragmataPro,Ubuntu Mono",
@@ -10,6 +11,6 @@
         "editor.minimap.enabled": true,
         "typescript.check.tscVersion": false,
         "editor.wordWrap": true,
-        "workbench.colorTheme": "1337",
-        "workbench.iconTheme": "file-icons"
+        "workbench.colorTheme": "One Monokai",
+        "workbench.iconTheme": "vscode-icons"
     }
