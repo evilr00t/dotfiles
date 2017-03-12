@@ -20,4 +20,18 @@ color-ssh() {
     fi
     ssh $*
 }
+
+color-mosh() {
+    if [[ -n "$ITERM_SESSION_ID" ]]; then
+        trap "tab-reset" INT EXIT
+        if [[ "$*" =~ "production|ec2-.*compute-1" ]]; then
+            tab-color 255 0 0
+        else
+            tab-color $(jot -r 1 0 255) $(jot -r 1 0 255) $(jot -r 1 0 255)
+        fi
+    fi
+    mosh $*
+}
+
 compdef _ssh color-ssh=ssh
+compdef mosh color-mosh=mosh
