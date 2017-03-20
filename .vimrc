@@ -86,6 +86,20 @@ set number
 set showcmd
 set incsearch
 set hlsearch
+set cursorline
+set wildmenu
+set lazyredraw
+set showmatch
+
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
+
+set foldenable          " enable folding
+set foldlevelstart=10   " open most folds by default
+set foldnestmax=10      " 10 nested fold max
+" space open/closes folds
+nnoremap <space> za
+set foldmethod=indent   " fold based on indent level
 
 syntax on
 
@@ -110,6 +124,17 @@ set laststatus=2
 
 set tabstop=2
 set shiftwidth=2
+set softtabstop=2
+set expandtab
+
+
+
+" ----- ctrlp ------ 
+"
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 " Fancy arrow symbols, requires a patched font
 " To install a patched font, run over to
