@@ -8,9 +8,11 @@
         "editor.fontFamily": "Fira Code,PragmataPro,Ubuntu Mono",
         "editor.fontSize": 12,
         "editor.fontLigatures": true,
+        "editor.cursorBlinking": "solid", # https://github.com/Microsoft/vscode/issues/22900
         "editor.minimap.enabled": true,
         "typescript.check.tscVersion": false,
         "editor.wordWrap": true,
-        "workbench.colorTheme": "One Monokai",
-        "workbench.iconTheme": "vscode-icons"
-    }
+        "workbench.colorTheme": "1337",
+        "workbench.iconTheme": "vscode-icons",
+        "python.pythonPath": "/Users/evilroot/py-env/bin/python"
+}
