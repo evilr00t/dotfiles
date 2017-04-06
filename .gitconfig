@@ -1,7 +1,6 @@
 [user]
-	name = evilroot
-	email = karol@e-dot.pl
-	signingkey = DE7B040D
+	name = "evilroot
+  email = k [AT] e [DASH] dot [DOT] pl
 
 	[alias]
 			a = add
@@ -16,10 +15,13 @@
 	    uncommit = reset --soft HEAD^
 	    last = diff HEAD^
 	    lastc = diff HEAD^ --cached
-	    dt = !git --work-tree=$HOME/ --git-dir=$HOME/dane/repos/my-dotfiles/.git/
+      # not used anymore :(
+      #dt = !git --work-tree=$HOME/ --git-dir=$HOME/dane/repos/my-dotfiles/.git/
 	#   l = log --graph --all --oneline --abbrev-commit --relative-date --format='%Cred%h%Cgreen %aN%Cblue %ar %Creset %s'
 	    l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 			ll = log --graph --decorate --oneline --stat --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --date=relative
+      undo = reset --soft HEAD^
+      prune = fetch --prune 
 
 	[color]
 	    ui = true
@@ -38,13 +40,21 @@
 	    untracked = cyan
 	[core]
 	    editor = vim
-	excludesfile = /Users/evilroot/.gitignore_global
+	    excludesfile = ~/.gitignore_global
+	    autocrlf = input
 	[diff]
 	    tool = vimdiff
 	[push]
-	    default = tracking
+      default = simple
+      followTags = true
+  [status]
+      showUntrackedFiles = all
 	[merge]
-			ff = false
+			ff = only
+      conflictstyle = diff3
+  [transfer]
+      fsckobjects = true
+
 
 [pager]
     log = diff-so-fancy | less --tabs=4 -RFX
