@@ -1,6 +1,6 @@
 [user]
-	name = "evilroot
-  email = k [AT] e [DASH] dot [DOT] pl
+	name = "Karol Czeryna"
+  email = k@e-dot.uk
 
 	[alias]
 			a = add
@@ -11,6 +11,8 @@
 	    t = tag -l
 	    b = branch -v
 	    nb = checkout -b
+      p = pull
+      f = fetch
 	    unstage = reset HEAD
 	    uncommit = reset --soft HEAD^
 	    last = diff HEAD^
