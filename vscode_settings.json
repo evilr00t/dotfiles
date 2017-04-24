@@ -1,8 +1,8 @@
 // Place your settings in this file to overwrite the default settings
 {
         "files.associations": {
- "*.yml": "ansible",
- "Vagrantfile": "ruby",
+          "*.yml": "ansible",
+          "Vagrantfile": "ruby"
         },
         "editor.fontFamily": "Fira Code,PragmataPro,Ubuntu Mono",
         "editor.fontSize": 12,
@@ -15,5 +15,7 @@
         "workbench.colorTheme": "1337",
         "workbench.iconTheme": "file-icons",
         "python.pythonPath": "/Users/evilroot/py-env/bin/python",
-        "editor.autoClosingBrackets": false
+        "editor.autoClosingBrackets": false,
+        "editor.renderWhitespace": "all",
+        "diffEditor.ignoreTrimWhitespace": false
 }
