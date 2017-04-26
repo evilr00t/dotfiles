@@ -43,7 +43,7 @@
 	[core]
 	    editor = vim
 	    excludesfile = ~/.gitignore_global
-	    autocrlf = input
+      autocrlf = true
 	[diff]
 	    tool = vimdiff
 	[push]
