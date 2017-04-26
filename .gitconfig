@@ -23,7 +23,7 @@
 	    l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 			ll = log --graph --decorate --oneline --stat --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --date=relative
       undo = reset --soft HEAD^
-      prune = fetch --prune 
+      prune = fetch --prune
 
 	[color]
 	    ui = true
@@ -43,7 +43,7 @@
 	[core]
 	    editor = vim
 	    excludesfile = ~/.gitignore_global
-      autocrlf = true
+      autocrlf = input
 	[diff]
 	    tool = vimdiff
 	[push]
@@ -69,7 +69,7 @@
 	required = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
