@@ -100,7 +100,7 @@ set foldnestmax=10      " 10 nested fold max
 " space open/closes folds
 nnoremap <space> za
 set foldmethod=indent   " fold based on indent level
-
+set colorcolumn=80
 syntax on
 
 set mouse=a
