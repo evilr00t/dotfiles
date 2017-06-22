@@ -54,7 +54,8 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'reedes/vim-pencil'
 Plugin 'junegunn/goyo.vim'
 Plugin 'tpope/vim-markdown'
-Plugin 'chase/vim-ansible-yaml'
+"Plugin 'chase/vim-ansible-yaml'
+Plugin 'pearofducks/ansible-vim'
 Plugin 't9md/vim-chef'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -217,3 +218,5 @@ let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
+let g:ansible_name_highlight = 'd'
+let g:ansible_extra_keywords_highlight = 1
