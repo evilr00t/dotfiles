@@ -26,6 +26,8 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'scrooloose/syntastic'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-endwise'
 Plugin 'majutsushi/tagbar'
 Plugin 'kien/ctrlp.vim'
 Plugin 'vim-scripts/a.vim'
@@ -33,7 +35,7 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 Plugin 'sjl/badwolf'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
 
 " ----- Working with Git ----------------------------------------------
@@ -54,11 +56,10 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'reedes/vim-pencil'
 Plugin 'junegunn/goyo.vim'
 Plugin 'tpope/vim-markdown'
-"Plugin 'chase/vim-ansible-yaml'
-Plugin 'pearofducks/ansible-vim'
+Plugin 'chase/vim-ansible-yaml'
 Plugin 't9md/vim-chef'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+"Plugin 'SirVer/ultisnips'
+"Plugin 'honza/vim-snippets'
 
 " ---- Extras/Advanced plugins ----------------------------------------
 " Highlight and strip trailing whitespace
@@ -91,6 +92,7 @@ set cursorline
 set wildmenu
 set lazyredraw
 set showmatch
+set list
 
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
@@ -218,5 +220,3 @@ let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
-let g:ansible_name_highlight = 'd'
-let g:ansible_extra_keywords_highlight = 1
