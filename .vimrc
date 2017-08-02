@@ -37,6 +37,7 @@ Plugin 'sjl/badwolf'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
+Plugin 'Glench/Vim-Jinja2-Syntax'
 
 " ----- Working with Git ----------------------------------------------
 Plugin 'airblade/vim-gitgutter'
@@ -56,7 +57,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'reedes/vim-pencil'
 Plugin 'junegunn/goyo.vim'
 Plugin 'tpope/vim-markdown'
-Plugin 'chase/vim-ansible-yaml'
+Plugin 'pearofducks/ansible-vim'
 Plugin 't9md/vim-chef'
 "Plugin 'SirVer/ultisnips'
 "Plugin 'honza/vim-snippets'
@@ -76,6 +77,9 @@ Plugin 'HTML-AutoCloseTag'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'hashivim/vim-vagrant'
+Plugin 'othree/html5.vim'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'nanotech/jellybeans.vim'
 
 call vundle#end()
 
@@ -119,7 +123,7 @@ set background=dark
 "let g:solarized_termcolors=256
 
 " Set the colorscheme
-colorscheme badwolf
+colorscheme jellybeans
 
 
 " ----- bling/vim-airline settings -----
@@ -133,7 +137,7 @@ set expandtab
 
 
 
-" ----- ctrlp ------ 
+" ----- ctrlp ------
 "
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
@@ -220,3 +224,9 @@ let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
+
+let mapleader = ","
+nmap <leader>ne :NERDTree<cr>
+
+nnoremap <F5> "=strftime("%c")<CR>P
+inoremap <F5> <C-R>=strftime("%c")<CR>
