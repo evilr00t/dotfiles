@@ -123,7 +123,7 @@ set background=dark
 "let g:solarized_termcolors=256
 
 " Set the colorscheme
-colorscheme jellybeans
+colorscheme turtles
 
 
 " ----- bling/vim-airline settings -----
