@@ -1,10 +1,11 @@
 [user]
 	name = "Karol Czeryna"
-  email = k@e-dot.uk
+	email = k@e-dot.uk
 
 	[alias]
-			a = add
-	    s = status -s
+      a = add
+      s = show
+	    st = status -s
 	    c = commit
 	    co = checkout
 	    r = remote -v
@@ -69,7 +70,7 @@
 	required = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
+	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
