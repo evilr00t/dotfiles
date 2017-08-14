@@ -38,6 +38,7 @@ Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
 Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'Shougo/neocomplete'
 
 " ----- Working with Git ----------------------------------------------
 Plugin 'airblade/vim-gitgutter'
@@ -98,6 +99,7 @@ set lazyredraw
 set showmatch
 set list
 
+let mapleader = ","
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 
@@ -161,6 +163,7 @@ let g:airline#extensions#tabline#enabled = 1
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t
 nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+nmap <F8> :TagbarToggle<CR>
 " To have NERDTree always open on startup
 let g:nerdtree_tabs_open_on_console_startup = 0
 
@@ -225,7 +228,7 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
-let mapleader = ","
+
 nmap <leader>ne :NERDTree<cr>
 
 nnoremap <F5> "=strftime("%c")<CR>P
