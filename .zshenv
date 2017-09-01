@@ -11,10 +11,10 @@ if [ -f ~/.ec2 ]; then
 fi
 
 export GOPATH=$HOME/golang
-export GOROOT=/usr/local/Cellar/go/1.6.2/libexec/
+export GOROOT=$(/usr/local/bin/brew --prefix golang)/libexec
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
-alias knife=myknife
+alias apb='[ ! -z "$ANSIBLE_BECOME_PASS" ] && ansible-playbook -e "ansible_become_pass=$ANSIBLE_BECOME_PASS"'
+alias bue='brew update && brew upgrade && brew cask outdated|cut -f 1 -d ' '|xargs brew cask reinstall'
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
