@@ -22,12 +22,22 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
 fi
 
 pass() {
-        if [ -z "$1" ]; then
-                gpg --quiet -d ~/Dropbox/pass.gpg 2> /dev/null
-        else
-                gpg --quiet -d ~/Dropbox/pass.gpg 2> /dev/null|grep -iA5 $1
-        fi
-        }
+if which gpg >/dev/null 2>&1;
+then
+  BIN=gpg
+elif which gpg2 >/dev/null 2>&1;
+then
+  BIN=gpg2
+else
+  echo 'No gnupg installed... exiting'
+  exit 1;
+fi
+if [ -z "$1" ]; then
+  $BIN --quiet -d ~/Dropbox/pass.gpg 2> /dev/null
+else
+  $BIN --quiet -d ~/Dropbox/pass.gpg 2> /dev/null|grep -iA5 $1
+fi
+}
 
 
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
