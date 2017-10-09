@@ -2,18 +2,19 @@
 export ZSH=$HOME/.oh-my-zsh
 . ~/repos/z/z.sh
 . ~/.zshenv
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="honukai"
+ZSH_THEME="juanghurtado"
 
 # Uncomment the following line to use case-sensitive completion.
-CASE_SENSITIVE="true"
+CASE_SENSITIVE="false"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="false"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -41,8 +42,8 @@ ENABLE_CORRECTION="true"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
+HIST_STAMPS="dd.mm.yyyy"
+HIST_IGNORE_SPACE="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -50,7 +51,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git autopep8 brew brew-cask bundler coffee github gitignore history history-substring-search mosh osx pep8 postgres rsync python zsh-syntax-highlighting)
+plugins=(gitfast autopep8 brew bundler coffee tmux docker django httpie mvn history osx python)
 
 # User configuration
 
@@ -91,9 +92,10 @@ alias ssh=color-ssh
 alias mosh=color-mosh
 
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
+export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 eval $( dircolors -b $HOME/.dircolors )
-export LC_CTYPE=en_US.UTF-8
-export LANG=en_US.UTF-8
+export LC_CTYPE=en_GB.UTF-8
+export LANG=en_GB.UTF-8
 set umask 022
 
 
@@ -142,3 +144,6 @@ setopt hist_ignore_space
 #Auto Escape URLS
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+#export PATH="$PATH:$HOME/.rvm/bin"
