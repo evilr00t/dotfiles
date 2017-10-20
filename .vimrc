@@ -1,6 +1,6 @@
 " File: .vimrc
 " Original Author: Jake Zimmerman <jake@zimmerman.io>
-" Author: Karol Czeryna <karol@e-dot.pl>
+" Author: Karol Czeryna <k@e-dot.uk>
 " How I configure Vim :P
 "
 
@@ -10,7 +10,7 @@ set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
-"set rtp+=~/.fzf
+set rtp+=/usr/local/opt/fzf
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
@@ -21,6 +21,8 @@ Plugin 'tomasr/molokai'
 Plugin 'bling/vim-airline'
 
 " ----- Vim as a programmer's text editor -----------------------------
+Plugin 'junegunn/fzf.vim'
+Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 " Plugin 'scrooloose/syntastic'
@@ -29,7 +31,7 @@ Plugin 'xolox/vim-easytags'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-endwise'
 Plugin 'majutsushi/tagbar'
-Plugin 'kien/ctrlp.vim'
+" Plugin 'kien/ctrlp.vim' " since now on - we use ack.vim with fzf.vim
 Plugin 'vim-scripts/a.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
@@ -43,6 +45,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'szw/vim-maximizer'
 Plugin 'sjl/gundo.vim'
 Plugin 'w0rp/ale'
+Plugin 'tpope/vim-unimpaired'
 
 " ----- Working with Git ----------------------------------------------
 Plugin 'airblade/vim-gitgutter'
@@ -102,6 +105,7 @@ set wildmenu
 set lazyredraw
 set showmatch
 set list
+set hidden
 
 let mapleader = ","
 " turn off search highlight
@@ -170,15 +174,6 @@ nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 nmap <F8> :TagbarToggle<CR>
 " To have NERDTree always open on startup
 let g:nerdtree_tabs_open_on_console_startup = 0
-
-
-" ----- scrooloose/syntastic settings -----
-let g:syntastic_error_symbol = '✘'
-let g:syntastic_warning_symbol = "▲"
-augroup mySyntastic
-  au!
-  au FileType tex let b:syntastic_mode = "passive"
-augroup END
 
 
 " ----- xolox/vim-easytags settings -----
@@ -301,9 +296,66 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" Error and warning signs.
-let g:ale_sign_error = '⤫'
-let g:ale_sign_warning = '⚠'
+" ALE - Error and warning signs.
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '▲'
+highlight link ALEWarningSign String
+highlight link ALEErrorSign Title
 
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
+
+
+" SuperTab
+let g:SuperTabLongestEnhanced=1
+let g:SuperTabLongestHighlight=1
+
+" Tell ack.vim to use ag (the Silver Searcher) instead
+let g:ackprg = 'ag --vimgrep'
+
+" ----------------------------------------------------------------------------
+" FILE TYPE TRIGGERS
+" ----------------------------------------------------------------------------
+
+" Reset all autocommands
+augroup vimrc
+autocmd!
+
+au BufNewFile,BufRead *.cson    set ft=coffee
+au BufNewFile,BufRead *.glsl    setf glsl
+au BufNewFile,BufRead *.gyp     set ft=python
+au BufNewFile,BufRead *.html    setlocal nocindent smartindent
+au BufNewFile,BufRead *.i7x     setf inform7
+au BufNewFile,BufRead *.ini     setf conf
+au BufNewFile,BufRead *.input   setf gnuplot
+au BufNewFile,BufRead *.json    set ft=json tw=0
+au BufNewFile,BufRead *.less    setlocal ft=less nocindent smartindent
+au BufNewFile,BufRead *.md      setlocal ft=markdown nolist spell
+au BufNewFile,BufRead *.md,*.markdown setlocal foldlevel=999 tw=0 nocin
+au BufNewFile,BufRead *.ni      setlocal ft=inform nolist ts=2 sw=2 noet
+au BufNewFile,BufRead *.plist   setf xml
+au BufNewFile,BufRead *.rb      setlocal noai
+au BufNewFile,BufRead *.rxml    setf ruby
+au BufNewFile,BufRead *.sass    setf sass
+au BufNewFile,BufRead *.ttml    setf xml
+au BufNewFile,BufRead *.vert,*.frag set ft=glsl
+au BufNewFile,BufRead *.xml     setlocal ft=xml  ts=2 sw=2 et
+au BufNewFile,BufRead *.zone    setlocal nolist ts=4 sw=4 noet
+au BufNewFile,BufRead *.zsh     setf zsh
+au BufNewFile,BufRead *templates/*.html setf htmldjango
+au BufNewFile,BufRead .git/config setlocal ft=gitconfig nolist ts=4 sw=4 noet
+au BufNewFile,BufRead .gitconfig* setlocal ft=gitconfig nolist ts=4 sw=4 noet
+au BufNewFile,BufRead .vimlocal,.gvimlocal setf vim
+au BufNewFile,BufRead .zshlocal setf zsh
+au BufNewFile,BufRead /tmp/crontab* setf crontab
+au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
+au BufNewFile,BufRead Makefile setlocal nolist
+
+au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet
+au FileType inform7 setlocal nolist tw=0 ts=4 sw=4 noet foldlevel=999
+au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
+au FileType make setlocal nolist ts=4 sts=4 sw=4 noet
+au FileType markdown syn sync fromstart
+au Filetype gitcommit setlocal tw=80
+
+augroup END
