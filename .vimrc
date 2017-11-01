@@ -18,7 +18,8 @@ Plugin 'gmarik/Vundle.vim'
 " ----- Making Vim look good ------------------------------------------
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
-Plugin 'bling/vim-airline'
+"Plugin 'bling/vim-airline'
+Plugin 'itchyny/lightline.vim'
 
 " ----- Vim as a programmer's text editor -----------------------------
 Plugin 'junegunn/fzf.vim'
@@ -37,13 +38,15 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 Plugin 'sjl/badwolf'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
+Plugin 'NLKNguyen/papercolor-theme'
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'Shougo/neocomplete'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'szw/vim-maximizer'
-Plugin 'sjl/gundo.vim'
+"Plugin 'sjl/gundo.vim'
+Plugin 'mbbill/undotree'
 Plugin 'w0rp/ale'
 Plugin 'tpope/vim-unimpaired'
 
@@ -133,7 +136,7 @@ set background=dark
 "let g:solarized_termcolors=256
 
 " Set the colorscheme
-colorscheme jellybeans
+colorscheme PaperColor
 
 
 " ----- bling/vim-airline settings -----
@@ -162,11 +165,14 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 "let g:airline_powerline_fonts = 1
 
 " Show PASTE if in paste mode
-let g:airline_detect_paste=1
+"let g:airline_detect_paste=1
 
 " Show airline for tabs too
-let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
 
+" LightLine Preferences
+let g:tmuxline_powerline_separators = 0
+let g:lightline = {'colorscheme': 'molokai'}
 
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t
@@ -301,6 +307,7 @@ let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '▲'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
+highlight SpecialKey ctermfg=124 guifg=#af3a03
 
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
@@ -312,6 +319,10 @@ let g:SuperTabLongestHighlight=1
 
 " Tell ack.vim to use ag (the Silver Searcher) instead
 let g:ackprg = 'ag --vimgrep'
+
+" Ansible preferences
+let g:ansible_extra_syntaxes = "sh.vim python.vim"
+let g:ansible_extra_keywords_highlight = 1
 
 " ----------------------------------------------------------------------------
 " FILE TYPE TRIGGERS
@@ -350,6 +361,7 @@ au BufNewFile,BufRead .zshlocal setf zsh
 au BufNewFile,BufRead /tmp/crontab* setf crontab
 au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
 au BufNewFile,BufRead Makefile setlocal nolist
+au BufRead,BufNewFile *.yml,*.yaml set filetype=ansible
 
 au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet
 au FileType inform7 setlocal nolist tw=0 ts=4 sw=4 noet foldlevel=999
@@ -357,5 +369,7 @@ au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
 au FileType make setlocal nolist ts=4 sts=4 sw=4 noet
 au FileType markdown syn sync fromstart
 au Filetype gitcommit setlocal tw=80
+
+
 
 augroup END
