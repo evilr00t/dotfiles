@@ -64,3 +64,5 @@ alias lssmall="ls -Srl *(.oL[1,10])"   # display the smallest files
 alias diff='diff -Nuar'
 alias piplist='pip freeze | cut -d = -f 1 | xargs -n 1 pip search | grep -B2 LATEST:'
 alias py="source virt/bin/activate;clear"
+alias grep='ggrep'
+alias python='python2' # use python2.7 from brew!
