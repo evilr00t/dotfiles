@@ -7,7 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="juanghurtado"
+ZSH_THEME="kphoen"
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="false"
@@ -51,7 +51,7 @@ HIST_IGNORE_SPACE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(gitfast autopep8 brew bundler coffee tmux docker django httpie mvn history osx python)
+plugins=(osx django httpie history mvn python)
 
 # User configuration
 
@@ -90,7 +90,7 @@ source $HOME/repos/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 alias ssh=color-ssh
 alias mosh=color-mosh
 
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:$PATH"
 export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 eval $( dircolors -b $HOME/.dircolors )
 export LC_CTYPE=en_GB.UTF-8

@@ -11,7 +11,7 @@ if [ -f ~/.ec2 ]; then
 fi
 
 export GOPATH=$HOME/golang
-export GOROOT=$(/usr/local/bin/brew --prefix golang)/libexec
+export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 alias apb='[ ! -z "$ANSIBLE_BECOME_PASS" ] && ansible-playbook -e "ansible_become_pass=$ANSIBLE_BECOME_PASS"'
 alias bue="brew update && brew upgrade && brew cask outdated|cut -f 1 -d ' '|xargs brew cask reinstall"
