@@ -29,6 +29,7 @@ Plugin 'jistr/vim-nerdtree-tabs'
 " Plugin 'scrooloose/syntastic'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
+Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-endwise'
 Plugin 'majutsushi/tagbar'
@@ -49,6 +50,7 @@ Plugin 'szw/vim-maximizer'
 Plugin 'mbbill/undotree'
 Plugin 'w0rp/ale'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'farmergreg/vim-lastplace'
 
 " ----- Working with Git ----------------------------------------------
 Plugin 'airblade/vim-gitgutter'
@@ -113,6 +115,15 @@ set hidden
 let mapleader = ","
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
+"inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<C-g>u\<Tab>"
+"map <Leader> <Plug>(easymotion-prefix)
+
+" Vim should reload automatically when config file has been changed
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
 
 set foldenable          " enable folding
 set foldlevelstart=10   " open most folds by default
