@@ -11,4 +11,4 @@ reattach-to-user-namespace shellcheck sshpass mosh macvim gnupg2 asciinema fzf
 
 ### ScreenShot
 
-![](https://i.imgur.com/CQy5j4M.png)
+![](https://i.imgur.com/M1CIRsF.jpg)
