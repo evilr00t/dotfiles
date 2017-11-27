@@ -22,6 +22,10 @@ Plugin 'tomasr/molokai'
 Plugin 'itchyny/lightline.vim'
 
 " ----- Vim as a programmer's text editor -----------------------------
+Plugin 'python-mode/python-mode'
+Plugin 'Vimjas/vim-python-pep8-indent'
+Plugin 'lepture/vim-jinja'
+Plugin 'mitsuhiko/vim-python-combined'
 Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdtree'
@@ -49,8 +53,9 @@ Plugin 'szw/vim-maximizer'
 "Plugin 'sjl/gundo.vim'
 Plugin 'mbbill/undotree'
 Plugin 'w0rp/ale'
-Plugin 'tpope/vim-unimpaired'
+"Plugin 'tpope/vim-unimpaired'
 Plugin 'farmergreg/vim-lastplace'
+Plugin 'martinda/Jenkinsfile-vim-syntax'
 
 " ----- Working with Git ----------------------------------------------
 Plugin 'airblade/vim-gitgutter'
@@ -189,6 +194,8 @@ let g:lightline = {'colorscheme': 'molokai'}
 " Open/close NERDTree Tabs with \t
 nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 nmap <F8> :TagbarToggle<CR>
+nmap <F9> :bprev<CR>
+nmap <F10> :bnext<CR>
 " To have NERDTree always open on startup
 let g:nerdtree_tabs_open_on_console_startup = 0
 
@@ -381,6 +388,17 @@ au FileType make setlocal nolist ts=4 sts=4 sw=4 noet
 au FileType markdown syn sync fromstart
 au Filetype gitcommit setlocal tw=80
 
+"python3 << EOF
+"import vim
+"import git
+"def is_git_repo():
+"     try:
+"         _ = git.Repo('.', search_parent_directories=True).git_dir
+"         return "1"
+"     except:
+"         return "0"
+"vim.command("let g:pymode_rope = " + is_git_repo())
+"EOF
 
+let g:pymode_indent = 0
 
-augroup END
