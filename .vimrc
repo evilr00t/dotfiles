@@ -150,6 +150,14 @@ set background=dark
 
 " Uncomment the next line if your terminal is not configured for solarized
 "let g:solarized_termcolors=256
+set t_Co=256
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default': {
+  \       'transparent_background': 1
+  \     }
+  \   }
+  \ }
 
 " Set the colorscheme
 colorscheme PaperColor
@@ -401,4 +409,3 @@ au Filetype gitcommit setlocal tw=80
 "EOF
 
 let g:pymode_indent = 0
-
