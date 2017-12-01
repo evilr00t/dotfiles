@@ -10,6 +10,10 @@ if [ -f ~/.ec2 ]; then
 	source ~/.ec2
 fi
 
+if [ -f ~/.work ]; then
+  source ~/.work
+fi
+
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
@@ -66,3 +70,4 @@ alias piplist='pip freeze | cut -d = -f 1 | xargs -n 1 pip search | grep -B2 LAT
 alias py="source virt/bin/activate;clear"
 alias grep='ggrep'
 alias python='python2' # use python2.7 from brew!
+alias shrug="echo '¯\_(ツ)_/¯' | pbcopy";
