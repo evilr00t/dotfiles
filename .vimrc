@@ -98,6 +98,7 @@ Plugin 'hashivim/vim-vagrant'
 Plugin 'othree/html5.vim'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'nanotech/jellybeans.vim'
+Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 
 call vundle#end()
 
@@ -408,4 +409,10 @@ au Filetype gitcommit setlocal tw=80
 "vim.command("let g:pymode_rope = " + is_git_repo())
 "EOF
 
+let g:pymode = 1
+let g:pymode_options = 0
+let g:pymode_folding = 0
+let g:pymode_rope = 0
+let g:pymode_rope_completion = 0
 let g:pymode_indent = 0
+let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mypy']
