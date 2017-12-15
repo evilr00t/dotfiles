@@ -60,6 +60,7 @@ Plugin 'martinda/Jenkinsfile-vim-syntax'
 " ----- Working with Git ----------------------------------------------
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+Plugin 'hashivim/vim-terraform'
 
 " ----- Other text editing features -----------------------------------
 Plugin 'Raimondi/delimitMate'
