@@ -226,6 +226,11 @@ nmap <silent> <leader>b :TagbarToggle<CR>
 " Uncomment to open tagbar automatically whenever possible
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
 
+" ----- pymode -----
+let g:pymode = 1
+let g:pymode_python = 'python3'
+let g:pymode_lint_checkers = ['flake8']
+
 
 " ----- airblade/vim-gitgutter settings -----
 " Required after having changed the colorscheme
@@ -323,13 +328,6 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 "let g:neocomplete#disable_auto_complete = 1
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
 " ALE - Error and warning signs.
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '▲'
@@ -410,10 +408,3 @@ au Filetype gitcommit setlocal tw=80
 "vim.command("let g:pymode_rope = " + is_git_repo())
 "EOF
 
-let g:pymode = 1
-let g:pymode_options = 0
-let g:pymode_folding = 0
-let g:pymode_rope = 0
-let g:pymode_rope_completion = 0
-let g:pymode_indent = 0
-let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mypy']
