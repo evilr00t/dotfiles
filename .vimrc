@@ -24,7 +24,7 @@ Plugin 'itchyny/lightline.vim'
 " ----- Vim as a programmer's text editor -----------------------------
 Plugin 'python-mode/python-mode'
 Plugin 'Vimjas/vim-python-pep8-indent'
-Plugin 'lepture/vim-jinja'
+Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'mitsuhiko/vim-python-combined'
 Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
@@ -46,16 +46,14 @@ Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'NLKNguyen/papercolor-theme'
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
-Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'Shougo/neocomplete'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'szw/vim-maximizer'
 "Plugin 'sjl/gundo.vim'
 Plugin 'mbbill/undotree'
 Plugin 'w0rp/ale'
-"Plugin 'tpope/vim-unimpaired'
-Plugin 'farmergreg/vim-lastplace'
 Plugin 'martinda/Jenkinsfile-vim-syntax'
+Plugin 'auxiliary/vim-layout'
 
 " ----- Working with Git ----------------------------------------------
 Plugin 'airblade/vim-gitgutter'
@@ -198,7 +196,7 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 " LightLine Preferences
 let g:tmuxline_powerline_separators = 0
-let g:lightline = {'colorscheme': 'molokai'}
+let g:lightline = {'colorscheme': 'Dracula'}
 
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t
@@ -407,4 +405,3 @@ au Filetype gitcommit setlocal tw=80
 "         return "0"
 "vim.command("let g:pymode_rope = " + is_git_repo())
 "EOF
-
