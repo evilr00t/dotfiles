@@ -116,6 +116,10 @@ set lazyredraw
 set showmatch
 set list
 set hidden
+" auto reloadfile
+set autoread
+set ttyfast
+set modeline
 
 let mapleader = ","
 " turn off search highlight
@@ -393,6 +397,9 @@ au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
 au FileType make setlocal nolist ts=4 sts=4 sw=4 noet
 au FileType markdown syn sync fromstart
 au Filetype gitcommit setlocal tw=80
+
+" autoreload file if cursor does not move
+au CursorHold,CursorHoldI * checktime
 
 "python3 << EOF
 "import vim
