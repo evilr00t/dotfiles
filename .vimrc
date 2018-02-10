@@ -393,6 +393,14 @@ au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
 au BufNewFile,BufRead Makefile setlocal nolist
 au BufRead,BufNewFile *.yml,*.yaml set filetype=ansible
 
+au BufNewFile,BufRead *.py
+    \ setlocal tabstop=2
+    \ setlocal softtabstop=2
+    \ setlocal shiftwidth=2
+    \ setlocal textwidth=80
+    \ setlocal smarttab
+    \ setlocal expandtab
+
 au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet
 au FileType inform7 setlocal nolist tw=0 ts=4 sw=4 noet foldlevel=999
 au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
@@ -414,3 +422,6 @@ au CursorHold,CursorHoldI * checktime
 "         return "0"
 "vim.command("let g:pymode_rope = " + is_git_repo())
 "EOF
+augroup END
+
+

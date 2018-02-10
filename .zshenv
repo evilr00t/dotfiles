@@ -79,7 +79,9 @@ alias diff='diff -Nuar'
 alias piplist='pip freeze | cut -d = -f 1 | xargs -n 1 pip search | grep -B2 LATEST:'
 alias py="source virt/bin/activate;clear"
 alias grep='ggrep'
-alias python='python2' # use python2.7 from brew!
 alias shrug="echo '¯\_(ツ)_/¯' | pbcopy";
 alias vim='nvim'
 alias bue="brew update && brew upgrade && brew cask outdated|cut -f 1 -d ' '|xargs brew cask reinstall"
+alias python='python2' # use python2.7 from brew!
+alias local_svcs='lsof -i -n -P|grep LISTEN'
+alias nib='ssh 10.50.55.100'
