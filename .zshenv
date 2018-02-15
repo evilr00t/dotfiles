@@ -17,7 +17,17 @@ fi
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-alias apb='[ ! -z "$ANSIBLE_BECOME_PASS" ] && ansible-playbook -e "ansible_become_pass=$ANSIBLE_BECOME_PASS"'
+apb()
+{
+  if [ ! -z "$ANSIBLE_BECOME_PASS" ]; then
+    ansible-playbook -e "ansible_become_pass=$ANSIBLE_BECOME_PASS" $@
+  else
+    echo "[I] Did you forget about: "
+    echo -e "\e[31mexport ANSIBLE_BECOME_PASS=XXX\e[0m"
+    echo "[I] Oh, yes... you do!"
+
+  fi
+}
 alias bue="brew update && brew upgrade && brew cask outdated|cut -f 1 -d ' '|xargs brew cask reinstall"
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
@@ -71,3 +81,4 @@ alias py="source virt/bin/activate;clear"
 alias grep='ggrep'
 alias python='python2' # use python2.7 from brew!
 alias shrug="echo '¯\_(ツ)_/¯' | pbcopy";
+alias vim='nvim'
