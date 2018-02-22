@@ -120,6 +120,8 @@ set hidden
 set autoread
 set ttyfast
 set modeline
+" don't wrap lines automagically... it's pissing me off!
+set nowrap
 
 let mapleader = ","
 " turn off search highlight
