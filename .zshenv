@@ -4,7 +4,7 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-
+# Updated: Thu 22 Feb 16:07:02 2018
 #source ~/Documents/tab-color.sh
 if [ -f ~/.ec2 ]; then
 	source ~/.ec2
@@ -28,13 +28,13 @@ apb()
 
   fi
 }
-alias bue="brew update && brew upgrade && brew cask outdated|cut -f 1 -d ' '|xargs brew cask reinstall"
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
+# Old function... now I'm using KeePass...
 pass() {
 if which gpg >/dev/null 2>&1;
 then
@@ -82,3 +82,4 @@ alias grep='ggrep'
 alias python='python2' # use python2.7 from brew!
 alias shrug="echo '¯\_(ツ)_/¯' | pbcopy";
 alias vim='nvim'
+alias bue="brew update && brew upgrade && brew cask outdated|cut -f 1 -d ' '|xargs brew cask reinstall"
