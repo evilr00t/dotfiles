@@ -7,7 +7,8 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="kphoen"
+#ZSH_THEME="kphoen"
+ZSH_THEME="evilroot"
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="false"
@@ -85,8 +86,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source ~/Documents/tab-color.sh
-source $HOME/repos/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 alias ssh=color-ssh
 alias mosh=color-mosh
 
@@ -108,7 +107,7 @@ zle -N self-insert url-quote-magic
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 #export PATH="$PATH:$HOME/.rvm/bin"
 #
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor line regexp root)
 
 # fzf via Homebrew
 if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
@@ -124,3 +123,43 @@ export FZF_DEFAULT_OPTS='
 --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
 --color info:108,prompt:109,spinner:108,pointer:168,marker:168
 '
+
+source $HOME/repos/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# brackets
+ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=blue,bold'
+ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=red,bold'
+ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=yellow,bold'
+ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta,bold'
+# cursor
+#ZSH_HIGHLIGHT_STYLES[cursor]='bg=blue'
+# main
+# default
+ZSH_HIGHLIGHT_STYLES[default]='none'                                 # стандартный цвет
+# unknown
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'                         # неизвестная команда
+# command
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=magenta,bold'                # зарезервированное слово
+ZSH_HIGHLIGHT_STYLES[alias]='fg=yellow,bold'                         # алиас
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=green,bold'                        # built-in функция (например, echo)
+ZSH_HIGHLIGHT_STYLES[function]='fg=green,bold'                       # функция, определенная в шелле
+ZSH_HIGHLIGHT_STYLES[command]='fg=green'                             # обычная команда
+ZSH_HIGHLIGHT_STYLES[precommand]='fg=blue,bold'                      # пре-команда (например, sudo в sudo cp ...)
+ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=yellow'                   # разделитель команд, && || ;
+ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=green'                      # команда, найденная в путях (hashed)
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue,bold'            # флаги типа -*
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue,bold'            # флаги типа --*
+# path
+ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,bold'                            # станлартный путь
+ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=cyan'                          # префикс пути
+ZSH_HIGHLIGHT_STYLES[path_approx]='fg=cyan'                          # примерный путь
+# shell
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'                             # шаблон (например, /dev/sda*)
+ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=blue'                    # подстановка из истории (команда, начинающаяся с !)
+ZSH_HIGHLIGHT_STYLES[assign]='fg=magenta'                            # присвоение
+ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=cyan'        # конструкции типа "$VARIABLE"
+ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=cyan'          # конструкции типа \"
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=blue'                 # конструкции типа `command`
+# quotes
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow,underline'   # конструкции типа 'text'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'             # конструкции типа "text"
