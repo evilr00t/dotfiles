@@ -1,6 +1,7 @@
 " File: .vimrc
 " Original Author: Jake Zimmerman <jake@zimmerman.io>
 " Author: Karol Czeryna <k@e-dot.uk>
+" Update: Mon 12 Mar 14:08:32 2018
 " How I configure Vim :P
 "
 
@@ -45,8 +46,13 @@ Plugin 'sjl/badwolf'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'NLKNguyen/papercolor-theme'
 "Plugin 'Valloric/YouCompleteMe'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'fatih/vim-go'
-Plugin 'Shougo/neocomplete'
+"Plugin 'Shougo/neocomplete'
+" NeoVim does not have lua support... use proper completion tool!
+Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plugin 'zchee/deoplete-jedi'
+Plugin 'zchee/deoplete-go'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'szw/vim-maximizer'
 "Plugin 'sjl/gundo.vim'
@@ -54,6 +60,7 @@ Plugin 'mbbill/undotree'
 Plugin 'w0rp/ale'
 Plugin 'martinda/Jenkinsfile-vim-syntax'
 Plugin 'auxiliary/vim-layout'
+Plugin 'liuchengxu/space-vim-dark'
 
 " ----- Working with Git ----------------------------------------------
 Plugin 'airblade/vim-gitgutter'
@@ -123,6 +130,7 @@ set modeline
 " don't wrap lines automagically... it's pissing me off!
 set nowrap
 
+
 let mapleader = ","
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
@@ -157,17 +165,29 @@ set background=dark
 " Uncomment the next line if your terminal is not configured for solarized
 "let g:solarized_termcolors=256
 set t_Co=256
-let g:PaperColor_Theme_Options = {
-  \   'theme': {
-  \     'default': {
-  \       'transparent_background': 1
-  \     }
-  \   }
-  \ }
+"let g:PaperColor_Theme_Options = {
+"  \   'theme': {
+"  \     'default': {
+"  \       'transparent_background': 1
+"  \     }
+"  \   }
+"  \ }
+
+let g:space_vim_dark_background = 233
 
 " Set the colorscheme
-colorscheme PaperColor
+" colorscheme PaperColor
+colorscheme space-vim-dark
+hi Comment cterm=italic
 
+if exists('$TMUX')
+      " gui term colours
+      set termguicolors
+
+      " set Vim-specific sequences for RGB colors
+      let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+      let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
 
 " ----- bling/vim-airline settings -----
 " Always show statusbar
@@ -216,7 +236,7 @@ let g:nerdtree_tabs_open_on_console_startup = 0
 
 " ----- xolox/vim-easytags settings -----
 " Where to look for tags files
-set tags=./tags;,~/.vimtags
+set tags=~/.vimtags
 " Sensible defaults
 let g:easytags_events = ['BufReadPost', 'BufWritePost']
 let g:easytags_async = 1
@@ -240,8 +260,6 @@ let g:pymode_lint_checkers = ['flake8']
 " Required after having changed the colorscheme
 hi clear SignColumn
 " In vim-airline, only display "hunks" if the diff is non-zero
-let g:airline#extensions#hunks#non_zero_only = 1
-
 
 " ----- Raimondi/delimitMate settings -----
 let delimitMate_expand_cr = 1
@@ -258,9 +276,9 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 let g:goyo_width = "85%"
 
-let g:UltiSnipsExpandTrigger="<c-l>"
-let g:UltiSnipsJumpForwardTrigger="<c-k>"
-let g:UltiSnipsJumpBackwardTrigger="<c-j>"
+"let g:UltiSnipsExpandTrigger="<c-l>"
+"let g:UltiSnipsJumpForwardTrigger="<c-k>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-j>"
 
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -281,32 +299,6 @@ nmap <leader>ne :NERDTree<cr>
 nnoremap <F5> "=strftime("%c")<CR>P
 inoremap <F5> <C-R>=strftime("%c")<CR>
 
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -318,8 +310,8 @@ endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 " Close popup by <Space>.
 "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
@@ -327,7 +319,7 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 "let g:neocomplete#enable_auto_select = 1
 
 " Shell like behavior(not recommended).
-"set completeopt+=longest
+set completeopt=longest,menuone,preview
 "let g:neocomplete#enable_auto_select = 1
 "let g:neocomplete#disable_auto_complete = 1
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
@@ -342,10 +334,11 @@ highlight SpecialKey ctermfg=124 guifg=#af3a03
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
 
-
 " SuperTab
 let g:SuperTabLongestEnhanced=1
 let g:SuperTabLongestHighlight=1
+" close the preview window when you're not using it
+let g:SuperTabClosePreviewOnPopupClose = 1
 
 " Tell ack.vim to use ag (the Silver Searcher) instead
 let g:ackprg = 'ag --vimgrep'
@@ -414,3 +407,26 @@ au CursorHold,CursorHoldI * checktime
 "         return "0"
 "vim.command("let g:pymode_rope = " + is_git_repo())
 "EOF
+
+function! WrapForTmux(s)
+  if !exists('$TMUX')
+    return a:s
+  endif
+
+  let tmux_start = "\<Esc>Ptmux;"
+  let tmux_end = "\<Esc>\\"
+
+  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+endfunction
+
+let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+let g:deoplete#enable_at_startup = 1

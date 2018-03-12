@@ -22,9 +22,10 @@ apb()
   if [ ! -z "$ANSIBLE_BECOME_PASS" ]; then
     ansible-playbook -e "ansible_become_pass=$ANSIBLE_BECOME_PASS" $@
   else
-    echo "[I] Did you forget about: "
+    # \xE2\x9D\x98 is a cross mark ;-)
+    echo -e "[\e[1;31m\xE2\x9C\x98\e[0m] Did you forget about: "
     echo -e "\e[31mexport ANSIBLE_BECOME_PASS=XXX\e[0m"
-    echo "[I] Oh, yes... you do!"
+    echo -e "[\e[1;31m\xE2\x9C\x98\e[0m] Oh, yes... you do!"
 
   fi
 }
@@ -79,7 +80,7 @@ alias diff='diff -Nuar'
 alias piplist='pip freeze | cut -d = -f 1 | xargs -n 1 pip search | grep -B2 LATEST:'
 alias py="source virt/bin/activate;clear"
 alias grep='ggrep'
-alias python='python2' # use python2.7 from brew!
+#alias python='python2' # use python2.7 from brew!
 alias shrug="echo '¯\_(ツ)_/¯' | pbcopy";
 alias vim='nvim'
 alias bue="brew update && brew upgrade && brew cask outdated|cut -f 1 -d ' '|xargs brew cask reinstall"
