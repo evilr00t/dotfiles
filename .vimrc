@@ -180,14 +180,14 @@ let g:space_vim_dark_background = 233
 colorscheme space-vim-dark
 hi Comment cterm=italic
 
-if exists('$TMUX')
-      " gui term colours
-      set termguicolors
-
-      " set Vim-specific sequences for RGB colors
-      let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-      let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
+"if exists('$TMUX')
+"      " gui term colours
+"      set termguicolors
+"
+"      " set Vim-specific sequences for RGB colors
+"      let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"      let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"endif
 
 " ----- bling/vim-airline settings -----
 " Always show statusbar
@@ -202,10 +202,10 @@ set expandtab
 
 " ----- ctrlp ------
 "
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+"let g:ctrlp_match_window = 'bottom,order:ttb'
+"let g:ctrlp_switch_buffer = 0
+"let g:ctrlp_working_path_mode = 0
+"let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 " Fancy arrow symbols, requires a patched font
 " To install a patched font, run over to
@@ -230,6 +230,9 @@ nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F9> :bprev<CR>
 nmap <F10> :bnext<CR>
+nmap ; :Buffers<CR>
+nmap <Leader>f :Files<CR>
+nmap <Leader>r :Tags<CR>
 " To have NERDTree always open on startup
 let g:nerdtree_tabs_open_on_console_startup = 0
 
