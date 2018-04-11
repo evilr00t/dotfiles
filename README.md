@@ -10,6 +10,10 @@ reattach-to-user-namespace shellcheck sshpass mosh macvim gnupg2 asciinema fzf \
 grep gawk screenfetch
 ```
 
+Additional libraries/utilities:
+
+* https://github.com/zsh-users/zsh-completions
+
 ### ScreenShot
 
-![](https://i.imgur.com/ILkzC2E.png)
+![](https://i.imgur.com/aBeEeWN.png)
