@@ -222,7 +222,7 @@ set expandtab
 
 " LightLine Preferences
 let g:tmuxline_powerline_separators = 0
-let g:lightline = {'colorscheme': 'Dracula'}
+let g:lightline = {'colorscheme': 'one'}
 
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t

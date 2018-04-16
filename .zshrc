@@ -52,7 +52,9 @@ HIST_IGNORE_SPACE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(osx django httpie history mvn python)
+plugins=(osx django httpie history mvn python zsh-completions)
+autoload -U compinit && compinit
+
 
 # User configuration
 
