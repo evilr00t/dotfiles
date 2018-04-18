@@ -179,8 +179,12 @@ let g:space_vim_dark_background = 233
 
 " Set the colorscheme
 " colorscheme PaperColor
+let g:gruvbox_contrast_dark = 'hard'
+
 colorscheme gruvbox
 hi Comment cterm=italic
+
+
 
 "if exists('$TMUX')
 "      " gui term colours
