@@ -351,6 +351,7 @@ augroup vimrc
 autocmd!
 
 au BufNewFile,BufRead *.cson    set ft=coffee
+au BufNewFile,BufRead *.groovy    set syntax=Jenkinsfile
 au BufNewFile,BufRead *.glsl    setf glsl
 au BufNewFile,BufRead *.gyp     set ft=python
 au BufNewFile,BufRead *.html    setlocal nocindent smartindent
