@@ -17,8 +17,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " ----- Making Vim look good ------------------------------------------
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tomasr/molokai'
 "Plugin 'bling/vim-airline'
 Plugin 'itchyny/lightline.vim'
 
@@ -42,9 +40,13 @@ Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/a.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
+" colorschemes !
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tomasr/molokai'
 Plugin 'sjl/badwolf'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'morhetz/gruvbox'
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'fatih/vim-go'
@@ -177,7 +179,7 @@ let g:space_vim_dark_background = 233
 
 " Set the colorscheme
 " colorscheme PaperColor
-colorscheme space-vim-dark
+colorscheme gruvbox
 hi Comment cterm=italic
 
 "if exists('$TMUX')
@@ -419,3 +421,4 @@ endfunction
 
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 let g:deoplete#enable_at_startup = 1
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
