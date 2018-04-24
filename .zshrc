@@ -52,7 +52,7 @@ HIST_IGNORE_SPACE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(osx django httpie history mvn python zsh-completions)
+plugins=(osx django httpie history mvn python zsh-completions history-substring-search)
 autoload -U compinit && compinit
 
 
@@ -127,6 +127,7 @@ export FZF_DEFAULT_OPTS='
 '
 
 source $HOME/repos/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/repos/dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # brackets
 ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=blue,bold'
