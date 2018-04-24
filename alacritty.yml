@@ -83,39 +83,62 @@ render_timer: false
 # and cursor.background colors, otherwise invert the colors of the cursor.
 custom_cursor_colors: true
 
-# Colors (Tomorrow Night Bright)
+
 colors:
   # Default colors
   primary:
     background: '0x1e1d1d'
-    foreground: '0xeaeaea'
+    foreground: '0xf7f7f7'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
     text:   '0xf1c1c1'
     cursor: '0xff2600'
 
-  # Normal colors
+  # evilroot theme!
   normal:
-    black:   '0x000000'
-    red:     '0xd54e53'
-    green:   '0xb9ca4a'
-    yellow:  '0xe6c547'
-    blue:    '0x7aa6da'
-    magenta: '0xc397d8'
-    cyan:    '0x70c0ba'
-    white:   '0xffffff'
+    black:   '0x4d4d4d'
+    red:     '0xff005f'
+    green:   '0xa4d32d'
+    yellow:  '0xf6c336'
+    blue:    '0x5496ff'
+    magenta: '0x9e6ffe'
+    cyan:    '0x218693'
+    white:   '0xb0b0b0'
 
   # Bright colors
   bright:
     black:   '0x666666'
-    red:     '0xff3334'
-    green:   '0x9ec400'
-    yellow:  '0xe7c547'
-    blue:    '0x7aa6da'
-    magenta: '0xb77ee0'
-    cyan:    '0x54ced6'
-    white:   '0xffffff'
+    red:     '0xff6767'
+    green:   '0xa0e11e'
+    yellow:  '0xf7d325'
+    blue:    '0x1ca1db'
+    magenta: '0xc48dff'
+    cyan:    '0x77dfd8'
+    white:   '0xf7f7f7'
+
+  # Colors (Tomorrow Night Bright)
+  # Normal colors
+  #  normal:
+  #    black:   '0x000000'
+  #    red:     '0xd54e53'
+  #    green:   '0xb9ca4a'
+  #    yellow:  '0xe6c547'
+  #    blue:    '0x7aa6da'
+  #    magenta: '0xc397d8'
+  #    cyan:    '0x70c0ba'
+  #    white:   '0xffffff'
+  #
+  #  # Bright colors
+  #  bright:
+  #    black:   '0x666666'
+  #    red:     '0xff3334'
+  #    green:   '0x9ec400'
+  #    yellow:  '0xe7c547'
+  #    blue:    '0x7aa6da'
+  #    magenta: '0xb77ee0'
+  #    cyan:    '0x54ced6'
+  #    white:   '0xffffff'
 
   # Dim colors (Optional)
   dim:
@@ -369,6 +392,9 @@ key_bindings:
   - { key: K,        mods: Command,       chars: "\x06\x6b" }
   - { key: L,        mods: Command,       chars: "\x06\x6c" }
   - { key: T,        mods: Command,       chars: "\x06\x63" }
+  - { key: RBracket, mods: Command|Shift, chars: "\x06\x6e" }
+  - { key: LBracket, mods: Command|Shift, chars: "\x06\x70" }
+  - { key: Return,   mods: Command|Shift, chars: "\x06\x7a" }
   - { key: Key1,     mods: Command,       chars: "\x06\x31" }
   - { key: Key2,     mods: Command,       chars: "\x06\x32" }
   - { key: Key3,     mods: Command,       chars: "\x06\x33" }
