@@ -193,7 +193,7 @@ nmap <F9> :bprev<CR>
 nmap <F10> :bnext<CR>
 nmap ; :Buffers<CR>
 nmap <Leader>f :Files<CR>
-nmap <Leader>r :Tags<CR>
+nmap <Leader>q :Tags<CR>
 " To have NERDTree always open on startup
 let g:nerdtree_tabs_open_on_console_startup = 0
 
@@ -225,9 +225,12 @@ nmap <silent> <leader>b :TagbarToggle<CR>
 let g:pymode = 1
 let g:pymode_python = 'python3'
 let g:pymode_lint_checkers = ['pycodestyle']
+let g:pymode_virtualenv = 1
+let g:pymode_lint = 0
+let g:pymode_indent = 0
 
 
-" ----- airblade/vim-gitgutter settings -----
+"req ----- airblade/vim-gitgutter settings -----
 " Required after having changed the colorscheme
 hi clear SignColumn
 " In vim-airline, only display "hunks" if the diff is non-zero
@@ -281,6 +284,9 @@ let g:ale_sign_warning = '▲'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
 highlight SpecialKey ctermfg=124 guifg=#af3a03
+let g:ale_linters = {
+  \ 'python': ['pycodestyle'] ,
+  \ }
 
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
