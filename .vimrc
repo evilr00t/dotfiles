@@ -1,7 +1,7 @@
 " File: .vimrc
 " Original Author: Jake Zimmerman <jake@zimmerman.io>
 " Author: Karol Czeryna <k@e-dot.uk>
-" Update: Mon 12 Mar 14:08:32 2018
+" Update: Tue  1 May 09:40:20 2018
 " How I configure Vim :P
 "
 
@@ -25,6 +25,7 @@ Plugin 'python-mode/python-mode'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'mitsuhiko/vim-python-combined'
+Plugin 'vim-ruby/vim-ruby'
 Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdtree'
@@ -132,13 +133,9 @@ set modeline
 " don't wrap lines automagically... it's pissing me off!
 set nowrap
 
-
 let mapleader = ","
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
-"inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
-"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<C-g>u\<Tab>"
-"map <Leader> <Plug>(easymotion-prefix)
 
 " Vim should reload automatically when config file has been changed
 augroup myvimrc
@@ -155,26 +152,12 @@ set foldmethod=indent   " fold based on indent level
 set colorcolumn=80
 set textwidth=80
 syntax on
-
 set mouse=a
 
-" ----- Plugin-Specific Settings --------------------------------------
-
-" ----- altercation/vim-colors-solarized settings -----
 " Toggle this to "light" for light colorscheme
 set background=dark
 
-" Uncomment the next line if your terminal is not configured for solarized
-"let g:solarized_termcolors=256
 set t_Co=256
-"let g:PaperColor_Theme_Options = {
-"  \   'theme': {
-"  \     'default': {
-"  \       'transparent_background': 1
-"  \     }
-"  \   }
-"  \ }
-
 let g:space_vim_dark_background = 233
 
 " Set the colorscheme
@@ -184,17 +167,6 @@ let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
 hi Comment cterm=italic
 
-
-
-"if exists('$TMUX')
-"      " gui term colours
-"      set termguicolors
-"
-"      " set Vim-specific sequences for RGB colors
-"      let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"      let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-"endif
-
 " ----- bling/vim-airline settings -----
 " Always show statusbar
 set laststatus=2
@@ -203,28 +175,8 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-
-
-
-" ----- ctrlp ------
-"
-"let g:ctrlp_match_window = 'bottom,order:ttb'
-"let g:ctrlp_switch_buffer = 0
-"let g:ctrlp_working_path_mode = 0
-"let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-
-" Fancy arrow symbols, requires a patched font
-" To install a patched font, run over to
-"     https://github.com/abertsch/Menlo-for-Powerline
-" download all the .ttf files, double-click on them and click "Install"
-" Finally, uncomment the next line
-"let g:airline_powerline_fonts = 1
-
-" Show PASTE if in paste mode
-"let g:airline_detect_paste=1
-
-" Show airline for tabs too
-"let g:airline#extensions#tabline#enabled = 1
+" 'hybrid' mode number
+set number relativenumber
 
 " LightLine Preferences
 let g:tmuxline_powerline_separators = 0
@@ -285,10 +237,6 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 let g:goyo_width = "85%"
 
-"let g:UltiSnipsExpandTrigger="<c-l>"
-"let g:UltiSnipsJumpForwardTrigger="<c-k>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-j>"
-
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -310,14 +258,8 @@ inoremap <F5> <C-R>=strftime("%c")<CR>
 
 inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
 " Shell like behavior(not recommended).
 set completeopt=longest,menuone,preview
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " ALE - Error and warning signs.
 let g:ale_sign_error = '✗'
@@ -341,6 +283,13 @@ let g:ackprg = 'ag --vimgrep'
 " Ansible preferences
 let g:ansible_extra_syntaxes = "sh.vim python.vim"
 let g:ansible_extra_keywords_highlight = 1
+
+" Relative number toggle based on focus / mode 
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 
 " ----------------------------------------------------------------------------
 " FILE TYPE TRIGGERS
@@ -391,18 +340,6 @@ au Filetype gitcommit setlocal tw=80
 
 " autoreload file if cursor does not move
 au CursorHold,CursorHoldI * checktime
-
-"python3 << EOF
-"import vim
-"import git
-"def is_git_repo():
-"     try:
-"         _ = git.Repo('.', search_parent_directories=True).git_dir
-"         return "1"
-"     except:
-"         return "0"
-"vim.command("let g:pymode_rope = " + is_git_repo())
-"EOF
 
 function! WrapForTmux(s)
   if !exists('$TMUX')
