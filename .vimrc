@@ -90,8 +90,6 @@ Plugin 't9md/vim-chef'
 "Plugin 'honza/vim-snippets'
 
 " ---- Extras/Advanced plugins ----------------------------------------
-" Highlight and strip trailing whitespace
-Plugin 'ntpeters/vim-better-whitespace'
 " Easily surround chunks of text
 Plugin 'tpope/vim-surround'
 " Align CSV files at commas, align Markdown tables, and more
@@ -193,6 +191,13 @@ nmap <Leader>f :Files<CR>
 nmap <Leader>r :Tags<CR>
 " To have NERDTree always open on startup
 let g:nerdtree_tabs_open_on_console_startup = 0
+
+" Whitespaces... oh gosh, i hate them...
+highlight Trail ctermbg=red guibg=red
+call matchadd('Trail', '\s\+$', 100)
+" Also highlight all tabs
+highlight Tabs ctermbg=darkgreen guibg=darkgreen
+match Tabs /\t/
 
 
 " ----- xolox/vim-easytags settings -----
