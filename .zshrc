@@ -1,7 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 . ~/repos/z/z.sh
-. ~/.zshenv
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -166,3 +165,7 @@ ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=blue'                 # конс�
 # quotes
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow,underline'   # конструкции типа 'text'
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'             # конструкции типа "text"
+
+
+# load at the end...
+. ~/.zshenv
