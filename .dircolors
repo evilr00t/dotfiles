@@ -1,7 +1,8 @@
 # ----------------------------------------
 # file: $HOME/.dir_colors
-# author: jason ryan http:/jasonwryan.com
-# vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:
+# original author: jason ryan http:/jasonwryan.com
+# screwed up by: Karol Czeryna https://e-dot.uk
+# vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:ft=dircolors:
 # ----------------------------------------
 #
 # COLOR needs one of these arguments: 'tty' colorizes output to ttys, but not
@@ -21,16 +22,16 @@ EIGHTBIT 1
 
 # Below are the color init strings for the basic file types. A color init
 # string consists of one or more of the following numeric codes:
-# Attribute codes: 
+# Attribute codes:
 # 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
 # Text color codes:
 # 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
 # Background color codes:
 # 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
- 
+
 NORMAL             00;38;5;15         # global default, although everything should be something.
 FILE               00      # normal file
-DIR                00;35      # directory
+DIR                00;36      # directory
 LINK               01;38;5;111      # symbolic link
 MULTIHARDLINK      00
 FIFO               48;5;240;34;5;136;01      # pipe
@@ -45,7 +46,7 @@ SETGID 48;5;136;38;5;230
 # File with capability
 CAPABILITY 30;41
 # Dir with the sticky bit set (+t) and not other-writable
-STICKY 48;5;33;38;5;230 
+STICKY 48;5;33;38;5;230
 #EXEC              01;31
 # Dir that is other-writable (o+w) and not sticky
 # Dir that is sticky and other-writable (+t,o+w)
@@ -72,6 +73,12 @@ OTHER_WRITABLE 38;5;110
 .tar.gz            00;33
 .tgz               00;33
 .xz                00;33
+.rpm               00;33
+.rar               00;33
+.apk               00;33
+.jar               00;33
+.gem               00;33
+
 
 .jpg               00;36      # image formats (cyan)
 .gif               00;36
@@ -102,6 +109,11 @@ OTHER_WRITABLE 38;5;110
 .smc.gz            00;32
 .fig.gz            00;32
 .sfc.gz            00;32
+.aac 00;32
+.modi 00;32
+.mka 00;32
+.m4a 00;32
+.wav 00;32
 
 .avi               01;35
 .flc               01;35
@@ -114,6 +126,7 @@ OTHER_WRITABLE 38;5;110
 .mpg               01;35     # movies (magenta)
 .mpeg              01;35
 .ogv               01;35
+.webm              01;35
 
 # all of the rest
 .PL                00;36
@@ -130,21 +143,29 @@ OTHER_WRITABLE 38;5;110
 .bash_profile      00;31
 .profile           00;31
 .bak               01;31
-.c                 00;36
+.c                 01;38;5;123
 .calc_history      01;34
 .cfg               00;36
 .cgorc             01;34
 .coffee            00;36
 .conf              00;36
-.cpp               00;36
+.cpp               01;38;5;064
+.go              01;38;5;081
+*_test.go        01;38;5;025
+.rb              00;38;5;160
+.ru              01;38;5;088
+.lua             01;38;5;025
+.js              01;38;5;003
+.sh              01;38;5;067
 .cs                00;36
 .css               00;36
 .csv               00;36
 .curlrc            01;34
 .db                00;32
 .deb               00;36
-.diff              01;33 
+.diff              01;33
 .dir_colors        01;33
+.dircolors         01;33
 .dmenurc           00;32
 .dmenu_cache       00;32
 .dmenu-short       00;32
@@ -180,7 +201,6 @@ OTHER_WRITABLE 38;5;110
 .jhtm              01;34
 .js                01;34
 .jsm               01;34
-.jsm               01;34
 .json              01;34
 .jsp               01;34
 .lisp              01;34
@@ -215,7 +235,7 @@ OTHER_WRITABLE 38;5;110
 .pm                00;31
 .pod               00;31
 .pulse-cookie      00;36
-.py                00;31
+.py                01;38;5;035
 .rc                00;31
 .recently-used     00;35
 .rb                00;31
@@ -239,8 +259,9 @@ OTHER_WRITABLE 38;5;110
 .theme             01;35
 .viminfo           00;32
 .xml               01;35
-.yml               01;35
-.yaml               01;35
+.sqlite3           01;35
+.yml               01;31
+.yaml              01;31
 .zsh               01;35
 .txt               01;35
 .ttytterkey        01;31
@@ -267,6 +288,58 @@ OTHER_WRITABLE 38;5;110
 *.service          00;33
 *.target           01;36
 *.timer            00;36
+
+#Added by evilroot
+*Makefile        0;38;5;243
+*Rakefile        0;38;5;124
+*Gemfile         0;38;5;3
+*Gemfile.lock    0;38;5;239
+.gemspec         0;38;5;3
+*Procfile        0;38;5;244
+*Gopkg.toml      0;38;5;3
+*Gopkg.lock      0;38;5;239
+.gitignore       0;38;5;243
+.gitattributes   0;38;5;243
+*README          01;38;5;200
+*README.md       01;38;5;200
+*README.txt      01;38;5;200
+*readme.txt      01;38;5;200
+*LICENSE         01;38;5;165
+*LICENSE.txt     01;38;5;165
+*AUTHORS         01;38;5;165
+*COPYRIGHT       01;38;5;165
+*CONTRIBUTORS    01;38;5;165
+*CONTRIBUTING.md 01;38;5;165
+*PATENTS         01;38;5;165
+
+# Files of special interest
+.torrent         00;38;5;120
+*rc              01;38;5;141
+.cfg             01;38;5;005
+.conf            01;38;5;005
+
+# "transient" files as logs and backups (dark gray)
+.log             00;38;5;239
+.bak             00;38;5;239
+.aux             00;38;5;239
+.out             00;38;5;239
+.toc             00;38;5;239
+*~               00;38;5;239
+*#               00;38;5;239
+.part            00;38;5;239
+.incomplete      00;38;5;239
+.swp             00;38;5;239
+.tmp             00;38;5;239
+.temp            00;38;5;239
+.o               00;38;5;239
+.pyc             00;38;5;239
+.class           00;38;5;239
+.cache           00;38;5;239
+.rdb             00;38;5;239
+
+# Disk images
+.iso             01;38;5;209
+.dmg             01;38;5;209
 
 # Below, there should be one TERM entry for each termtype that is colorizable
 TERM Eterm
