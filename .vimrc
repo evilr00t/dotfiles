@@ -69,6 +69,7 @@ Plugin 'liuchengxu/space-vim-dark'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'hashivim/vim-terraform'
+Plugin 'juliosueiras/vim-terraform-completion'
 
 " ----- Other text editing features -----------------------------------
 Plugin 'Raimondi/delimitMate'
@@ -147,8 +148,8 @@ set foldnestmax=10      " 10 nested fold max
 " space open/closes folds
 nnoremap <space> za
 set foldmethod=indent   " fold based on indent level
-set colorcolumn=80
-set textwidth=80
+set colorcolumn=120
+set textwidth=120
 syntax on
 set mouse=a
 
