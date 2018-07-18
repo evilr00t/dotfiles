@@ -33,10 +33,14 @@ window:
   decorations: true
 
 # Display tabs using this many cells (changes require restart)
-tabspaces: 4
+tabspaces: 2
 
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
+
+# Whether the cursor should be a hollow block on window focus loss
+unfocused_hollow_cursor: true
+
 
 # Font configuration (changes require restart)
 font:
@@ -74,6 +78,7 @@ font:
   # OS X only: use thin stroke font rendering. Thin strokes are suitable
   # for retina displays, but for non-retina you probably want this set to
   # false.
+  scale_with_dpi: true
   use_thin_strokes: true
 
 # Should display the render timer
@@ -87,8 +92,8 @@ custom_cursor_colors: true
 colors:
   # Default colors
   primary:
-    background: '0x1e1d1d'
-    foreground: '0xf7f7f7'
+    background: '0x323232'
+    foreground: '0xd8d8d8'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
@@ -104,7 +109,7 @@ colors:
     blue:    '0x5496ff'
     magenta: '0x9e6ffe'
     cyan:    '0x218693'
-    white:   '0xb0b0b0'
+    white:   '0xd8d8d8'
 
   # Bright colors
   bright:
@@ -115,7 +120,7 @@ colors:
     blue:    '0x1ca1db'
     magenta: '0xc48dff'
     cyan:    '0x77dfd8'
-    white:   '0xf7f7f7'
+    white:   '0xf2f2f2'
 
   # Colors (Tomorrow Night Bright)
   # Normal colors
@@ -223,7 +228,7 @@ selection:
 
 dynamic_title: true
 
-hide_cursor_when_typing: false
+hide_cursor_when_typing: true
 
 # Style of the cursor
 #
@@ -246,6 +251,8 @@ shell:
   args:
     - --login
 
+
+unfocused_hollow_cursor: true
 
 # Key bindings
 #

@@ -262,6 +262,10 @@ nmap <leader>ne :NERDTree<cr>
 nnoremap <F5> "=strftime("%c")<CR>P
 inoremap <F5> <C-R>=strftime("%c")<CR>
 
+" Remove all whitespaces
+nnoremap <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+
 inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
 " Shell like behavior(not recommended).
