@@ -30,6 +30,12 @@ apb()
   fi
 }
 
+cht() {                                                                                                                                                                                                                                                                     ✹
+    local topic="${1}" ; shift
+
+    curl "cht.sh/${topic}/${*// }"
+  }
+
 
 diff()
 {
