@@ -1,7 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 . ~/repos/z/z.sh
-. ~/.zshenv
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -38,7 +37,7 @@ ENABLE_CORRECTION="true"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -52,7 +51,9 @@ HIST_IGNORE_SPACE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(osx django httpie history mvn python)
+plugins=(osx django httpie history mvn python zsh-completions history-substring-search git-prompt)
+autoload -U compinit && compinit
+
 
 # User configuration
 
@@ -125,6 +126,7 @@ export FZF_DEFAULT_OPTS='
 '
 
 source $HOME/repos/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/repos/dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # brackets
 ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=blue,bold'
@@ -163,3 +165,7 @@ ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=blue'                 # конс�
 # quotes
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow,underline'   # конструкции типа 'text'
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'             # конструкции типа "text"
+
+
+# load at the end...
+. ~/.zshenv

@@ -1,85 +1,95 @@
 [user]
-      name = "Karol Czeryna"
-      email = k@e-dot.uk
+    name = "Karol Czeryna"
+    email = k@e-dot.uk
 
-	[alias]
-      a = add
-      s = show
-	    st = status -s
-      d = diff
-      dc = diff --cached
-	    c = commit
-      cm = commit -m
-	    co = checkout
-	    r = remote -v
-	    t = tag -l
-	    b = branch -v
-	    nb = checkout -b
-      p = pull
-      f = fetch
-	    unstage = reset HEAD
-	    uncommit = reset --soft HEAD^
-	    last = diff HEAD^
-	    lastc = diff HEAD^ --cached
-      recent = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
-      # not used anymore :(
-      #dt = !git --work-tree=$HOME/ --git-dir=$HOME/dane/repos/my-dotfiles/.git/
-	#   l = log --graph --all --oneline --abbrev-commit --relative-date --format='%Cred%h%Cgreen %aN%Cblue %ar %Creset %s'
-	    l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-			ll = log --graph --decorate --oneline --stat --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --date=relative
-      undo = reset --soft HEAD^
-      prune = fetch --prune
+[alias]
+    a = add
+    s = show
+	st = status -s
+    d = diff
+    dc = diff --cached
+	c = commit
+    cm = commit -m
+	co = checkout
+	r = remote -v
+	t = tag -l
+	b = branch -v
+	nb = checkout -b
+    p = pull
+    pnf = pull --no-ff
+	pr = !git p --rebase
+	prnf = !git pnf --rebase
+    f = fetch
+	unstage = reset HEAD
+	uncommit = reset --soft HEAD^
+	last = diff HEAD^
+	lastc = diff HEAD^ --cached
+    recent = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+    # not used anymore :(
+    #dt = !git --work-tree=$HOME/ --git-dir=$HOME/dane/repos/my-dotfiles/.git/
+	#l = log --graph --all --oneline --abbrev-commit --relative-date --format='%Cred%h%Cgreen %aN%Cblue %ar %Creset %s'
+	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	ll = log --graph --decorate --oneline --stat --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --date=relative
+    undo = reset --soft HEAD^
+    prune = fetch --prune
 
 	[color]
-	    ui = true
+	ui = true
 	[color "branch"]
-	    current = yellow reverse
-	    local = yellow
-	    remote = green
+	current = yellow reverse
+	local = yellow
+	remote = green
 	[color "diff"]
-	    meta = yellow bold
-	    frag = magenta bold
-	    old = red italic
-	    new = green bold
+	meta = yellow
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	commit = yellow bold
+	whitespace = red reverse
 	[color "status"]
-	    added = yellow
-	    changed = green
-	    untracked = cyan
-	[core]
-	    editor = vim
-	    excludesfile = ~/.gitignore_global
-      autocrlf = input
-      whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
-  [credential]
-      helper = osxkeychain
-	[diff]
-	    tool = vimdiff
-	[push]
-      default = simple
-      followTags = true
-  [status]
-      showUntrackedFiles = all
-	[merge]
-			ff = only
-      conflictstyle = diff3
-  [transfer]
-      fsckobjects = true
-  [commit]
-      verbose = true
-
-
-[pager]
-    log = diff-so-fancy | less --tabs=4 -RFX
-    show = diff-so-fancy | less --tabs=4 -RFX
-    diff = diff-so-fancy | less --tabs=4 -RFX
+	added = yellow
+	changed = green
+	untracked = cyan
+	[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[core]
+  pager = "if which diff-so-fancy > /dev/null 2>&1; then diff-so-fancy | less --tabs=4 -RFX; else less --tabs=4 -RFX; fi"
+  editor = vim
+  excludesfile = ~/.gitignore_global
+  autocrlf = input
+  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+[credential]
+  helper = osxkeychain
+[diff]
+  tool = vimdiff
+[push]
+  default = simple
+  followTags = true
+[status]
+  showUntrackedFiles = all
+[merge]
+  ff = only
+  conflictstyle = diff3
+[transfer]
+  fsckobjects = false
+[commit]
+  verbose = true
 
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[fsck]
+	zeroPaddedFilemode = ignore
+[diff-so-fancy]
+	stripLeadingSymbols = false
+	useUnicodeRuler = false

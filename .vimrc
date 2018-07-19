@@ -1,6 +1,7 @@
 " File: .vimrc
 " Original Author: Jake Zimmerman <jake@zimmerman.io>
 " Author: Karol Czeryna <k@e-dot.uk>
+" Update: Tue  1 May 09:40:20 2018
 " How I configure Vim :P
 "
 
@@ -16,8 +17,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " ----- Making Vim look good ------------------------------------------
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tomasr/molokai'
 "Plugin 'bling/vim-airline'
 Plugin 'itchyny/lightline.vim'
 
@@ -26,6 +25,7 @@ Plugin 'python-mode/python-mode'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'mitsuhiko/vim-python-combined'
+Plugin 'vim-ruby/vim-ruby'
 Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdtree'
@@ -41,12 +41,21 @@ Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/a.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
+" colorschemes !
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tomasr/molokai'
 Plugin 'sjl/badwolf'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'morhetz/gruvbox'
 "Plugin 'Valloric/YouCompleteMe'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'fatih/vim-go'
-Plugin 'Shougo/neocomplete'
+"Plugin 'Shougo/neocomplete'
+" NeoVim does not have lua support... use proper completion tool!
+Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plugin 'zchee/deoplete-jedi'
+Plugin 'zchee/deoplete-go'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'szw/vim-maximizer'
 "Plugin 'sjl/gundo.vim'
@@ -54,11 +63,13 @@ Plugin 'mbbill/undotree'
 Plugin 'w0rp/ale'
 Plugin 'martinda/Jenkinsfile-vim-syntax'
 Plugin 'auxiliary/vim-layout'
+Plugin 'liuchengxu/space-vim-dark'
 
 " ----- Working with Git ----------------------------------------------
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'hashivim/vim-terraform'
+Plugin 'juliosueiras/vim-terraform-completion'
 
 " ----- Other text editing features -----------------------------------
 Plugin 'Raimondi/delimitMate'
@@ -80,8 +91,6 @@ Plugin 't9md/vim-chef'
 "Plugin 'honza/vim-snippets'
 
 " ---- Extras/Advanced plugins ----------------------------------------
-" Highlight and strip trailing whitespace
-Plugin 'ntpeters/vim-better-whitespace'
 " Easily surround chunks of text
 Plugin 'tpope/vim-surround'
 " Align CSV files at commas, align Markdown tables, and more
@@ -126,9 +135,6 @@ set nowrap
 let mapleader = ","
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
-"inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<C-g>u\<Tab>"
-"map <Leader> <Plug>(easymotion-prefix)
 
 " Vim should reload automatically when config file has been changed
 augroup myvimrc
@@ -142,32 +148,23 @@ set foldnestmax=10      " 10 nested fold max
 " space open/closes folds
 nnoremap <space> za
 set foldmethod=indent   " fold based on indent level
-set colorcolumn=80
-set textwidth=80
+set colorcolumn=120
+set textwidth=120
 syntax on
-
 set mouse=a
 
-" ----- Plugin-Specific Settings --------------------------------------
-
-" ----- altercation/vim-colors-solarized settings -----
 " Toggle this to "light" for light colorscheme
 set background=dark
 
-" Uncomment the next line if your terminal is not configured for solarized
-"let g:solarized_termcolors=256
 set t_Co=256
-let g:PaperColor_Theme_Options = {
-  \   'theme': {
-  \     'default': {
-  \       'transparent_background': 1
-  \     }
-  \   }
-  \ }
+let g:space_vim_dark_background = 233
 
 " Set the colorscheme
-colorscheme PaperColor
+" colorscheme PaperColor
+let g:gruvbox_contrast_dark = 'hard'
 
+colorscheme gruvbox
+hi Comment cterm=italic
 
 " ----- bling/vim-airline settings -----
 " Always show statusbar
@@ -177,32 +174,12 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-
-
-
-" ----- ctrlp ------
-"
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-
-" Fancy arrow symbols, requires a patched font
-" To install a patched font, run over to
-"     https://github.com/abertsch/Menlo-for-Powerline
-" download all the .ttf files, double-click on them and click "Install"
-" Finally, uncomment the next line
-"let g:airline_powerline_fonts = 1
-
-" Show PASTE if in paste mode
-"let g:airline_detect_paste=1
-
-" Show airline for tabs too
-"let g:airline#extensions#tabline#enabled = 1
+" 'hybrid' mode number
+set number relativenumber
 
 " LightLine Preferences
 let g:tmuxline_powerline_separators = 0
-let g:lightline = {'colorscheme': 'Dracula'}
+let g:lightline = {'colorscheme': 'one'}
 
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t
@@ -210,13 +187,23 @@ nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F9> :bprev<CR>
 nmap <F10> :bnext<CR>
+nmap ; :Buffers<CR>
+nmap <Leader>f :Files<CR>
+nmap <Leader>r :Tags<CR>
 " To have NERDTree always open on startup
 let g:nerdtree_tabs_open_on_console_startup = 0
+
+" Whitespaces... oh gosh, i hate them...
+highlight Trail ctermbg=red guibg=red
+call matchadd('Trail', '\s\+$', 100)
+" Also highlight all tabs
+highlight Tabs ctermbg=darkgreen guibg=darkgreen
+match Tabs /\t/
 
 
 " ----- xolox/vim-easytags settings -----
 " Where to look for tags files
-set tags=./tags;,~/.vimtags
+set tags=~/.vimtags
 " Sensible defaults
 let g:easytags_events = ['BufReadPost', 'BufWritePost']
 let g:easytags_async = 1
@@ -240,8 +227,6 @@ let g:pymode_lint_checkers = ['flake8']
 " Required after having changed the colorscheme
 hi clear SignColumn
 " In vim-airline, only display "hunks" if the diff is non-zero
-let g:airline#extensions#hunks#non_zero_only = 1
-
 
 " ----- Raimondi/delimitMate settings -----
 let delimitMate_expand_cr = 1
@@ -257,10 +242,6 @@ let g:vim_markdown_folding_disabled=1
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 let g:goyo_width = "85%"
-
-let g:UltiSnipsExpandTrigger="<c-l>"
-let g:UltiSnipsJumpForwardTrigger="<c-k>"
-let g:UltiSnipsJumpBackwardTrigger="<c-j>"
 
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -281,56 +262,14 @@ nmap <leader>ne :NERDTree<cr>
 nnoremap <F5> "=strftime("%c")<CR>P
 inoremap <F5> <C-R>=strftime("%c")<CR>
 
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+" Remove all whitespaces
+nnoremap <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
 
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
+inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
 " Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+set completeopt=longest,menuone,preview
 
 " ALE - Error and warning signs.
 let g:ale_sign_error = '✗'
@@ -342,10 +281,11 @@ highlight SpecialKey ctermfg=124 guifg=#af3a03
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
 
-
 " SuperTab
 let g:SuperTabLongestEnhanced=1
 let g:SuperTabLongestHighlight=1
+" close the preview window when you're not using it
+let g:SuperTabClosePreviewOnPopupClose = 1
 
 " Tell ack.vim to use ag (the Silver Searcher) instead
 let g:ackprg = 'ag --vimgrep'
@@ -353,6 +293,13 @@ let g:ackprg = 'ag --vimgrep'
 " Ansible preferences
 let g:ansible_extra_syntaxes = "sh.vim python.vim"
 let g:ansible_extra_keywords_highlight = 1
+
+" Relative number toggle based on focus / mode 
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 
 " ----------------------------------------------------------------------------
 " FILE TYPE TRIGGERS
@@ -363,6 +310,7 @@ augroup vimrc
 autocmd!
 
 au BufNewFile,BufRead *.cson    set ft=coffee
+au BufNewFile,BufRead *.groovy    set syntax=Jenkinsfile
 au BufNewFile,BufRead *.glsl    setf glsl
 au BufNewFile,BufRead *.gyp     set ft=python
 au BufNewFile,BufRead *.html    setlocal nocindent smartindent
@@ -391,7 +339,7 @@ au BufNewFile,BufRead .zshlocal setf zsh
 au BufNewFile,BufRead /tmp/crontab* setf crontab
 au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
 au BufNewFile,BufRead Makefile setlocal nolist
-au BufRead,BufNewFile *.yml,*.yaml set filetype=ansible
+au BufRead,BufNewFile *.yml,*.yaml set filetype=yaml.ansible
 
 au BufNewFile,BufRead *.py
     \ setlocal tabstop=2
@@ -425,3 +373,26 @@ au CursorHold,CursorHoldI * checktime
 augroup END
 
 
+function! WrapForTmux(s)
+  if !exists('$TMUX')
+    return a:s
+  endif
+
+  let tmux_start = "\<Esc>Ptmux;"
+  let tmux_end = "\<Esc>\\"
+
+  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+endfunction
+
+let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+let g:deoplete#enable_at_startup = 1
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
