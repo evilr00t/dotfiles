@@ -1,5 +1,13 @@
 # evilroot.zsh-theme
 
+function get_right_prompt() {
+    if git rev-parse --git-dir > /dev/null 2>&1; then
+        echo -n "$(git_prompt_short_sha)%{$reset_color%}"
+    else
+        echo -n "%{$reset_color%}"
+    fi
+}
+
 if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
     #PROMPT='[%{$fg[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}$(git_prompt_info)]
     # %# '
@@ -10,12 +18,14 @@ ${return_code}%{$fg[magenta]%}λ%{$reset_color%} '
     ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
     ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%} ✘"
     ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%} ✔"
+		ZSH_THEME_GIT_PROMPT_SHA_BEFORE=" %{$fg_bold[white]%}[%{$fg_bold[blue]%}"
+		ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$fg_bold[white]%}]"
 
     # display exitcode on the right when >0
     return_code="%(?..%{$fg[red]%}%?（╯°□°）╯︵ ┻━┻ %{$reset_color%})"
 
     #RPROMPT='${return_code}  $(git_prompt_status)%{$reset_color%}'
-    RPROMPT='%{$reset_color%}'
+    RPROMPT='$(get_right_prompt)'
 
     ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}+"
     ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%}!"
