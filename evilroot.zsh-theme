@@ -1,28 +1,32 @@
-# kphoen.zsh-theme
+# evilroot.zsh-theme
 
 if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
-    PROMPT='[%{$fg[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}$(git_prompt_info)]
-%# '
+    #PROMPT='[%{$fg[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}$(git_prompt_info)]
+    # %# '
+    PROMPT='%{$fg[red]%}%n%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%} %{$fg[green]%}[%~]%{$reset_color%}$(git_prompt_info)$(git_prompt_status)
+${return_code}%{$fg[magenta]%}λ%{$reset_color%} '
 
-    ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[green]%}"
+    ZSH_THEME_GIT_PROMPT_PREFIX=" at %{$fg[blue]%}"
     ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-    ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%}⚡ "
-    ZSH_THEME_GIT_PROMPT_CLEAN=""
+    ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%} ✘"
+    ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%} ✔"
 
     # display exitcode on the right when >0
-    return_code="%(?..%{$fg[red]%}%? （╯°□°）╯︵ ┻━┻%{$reset_color%})"
+    return_code="%(?..%{$fg[red]%}%?（╯°□°）╯︵ ┻━┻ %{$reset_color%})"
 
-    RPROMPT='${return_code}$(git_prompt_status)%{$reset_color%}'
+    #RPROMPT='${return_code}  $(git_prompt_status)%{$reset_color%}'
+    RPROMPT='%{$reset_color%}'
 
-    ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%} ✚"
-    ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%} ✹"
-    ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%} ✘"
-    #ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%} ➜"
-    ZSH_THEME_GIT_PROMPT_RENAMED=""
-    #ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%} ═"
-    ZSH_THEME_GIT_PROMPT_UNMERGED=""
-    #ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} ✭"
-    ZSH_THEME_GIT_PROMPT_UNTRACKED=""
+    ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}+"
+    ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%}!"
+    ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}-"
+    ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%}>"
+    #ZSH_THEME_GIT_PROMPT_RENAMED=""
+    ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%}#"
+    #ZSH_THEME_GIT_PROMPT_UNMERGED=""
+    ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}?"
+    #ZSH_THEME_GIT_PROMPT_UNTRACKED=""
+    ZSH_THEME_GIT_PROMPT_AHEAD=" %{$fg_bold[white]%}^"
 else
     PROMPT='[%n@%m:%~$(git_prompt_info)]
 %# '
@@ -35,7 +39,7 @@ else
     # display exitcode on the right when >0
     return_code="%(?..%? （╯°□°）╯︵ ┻━┻)"
 
-    RPROMPT='${return_code}$(git_prompt_status)'
+    RPROMPT='${return_code}  $(git_prompt_status)'
 
     ZSH_THEME_GIT_PROMPT_ADDED=" ✚"
     ZSH_THEME_GIT_PROMPT_MODIFIED=" ✹"
