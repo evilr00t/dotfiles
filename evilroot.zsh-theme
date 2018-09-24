@@ -11,8 +11,8 @@ function get_right_prompt() {
 if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
     #PROMPT='[%{$fg[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}$(git_prompt_info)]
     # %# '
-    PROMPT='%{$fg[red]%}%n%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%} %{$fg[green]%}[%~]%{$reset_color%}$(git_prompt_info)$(git_prompt_status)
-${return_code}%{$fg[magenta]%}λ%{$reset_color%} '
+    PROMPT='%{$fg[cyan]%}%n%{$reset_color%}%{$fg[green]%}[%~]$(git_prompt_info)$(git_prompt_status)
+${return_code}%{$fg[yellow]%}λ%{$reset_color%}: '
 
     ZSH_THEME_GIT_PROMPT_PREFIX=" at %{$fg[blue]%}"
     ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
