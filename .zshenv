@@ -19,6 +19,7 @@ fi
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
 apb()
 {
   if [ ! -z "$ANSIBLE_BECOME_PASS" ]; then
@@ -62,11 +63,9 @@ else
 fi
 }
 
-
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
 # various useful aliases
-
 alias lless='ll -R --color=always | less -r'
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -82,7 +81,6 @@ alias ssh='ssh -C'
 alias lsnew="ls -rl *(D.om[1,10])"     # display the newest files
 alias lsold="ls -rtlh *(D.om[1,10])"   # display the oldest files
 alias lssmall="ls -Srl *(.oL[1,10])"   # display the smallest files
-alias diff='diff -Nuar'
 alias piplist='pip freeze | cut -d = -f 1 | xargs -n 1 pip search | grep -B2 LATEST:'
 alias py="source virt/bin/activate;clear"
 alias grep='ggrep'
