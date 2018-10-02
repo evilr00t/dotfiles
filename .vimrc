@@ -53,6 +53,10 @@ Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'fatih/vim-go'
 "Plugin 'Shougo/neocomplete'
 " NeoVim does not have lua support... use proper completion tool!
+Plugin 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plugin 'zchee/deoplete-jedi'
 Plugin 'zchee/deoplete-go'
@@ -222,8 +226,7 @@ let g:pymode = 1
 let g:pymode_python = 'python3'
 let g:pymode_lint_checkers = ['flake8']
 let g:pymode_virtualenv = 1
-let g:pymode_lint = 0
-
+let g:pymode_lint_checkers = ['pycodestyle']
 let g:pymode_indent = 0
 
 
@@ -403,4 +406,6 @@ endfunction
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 let g:deoplete#enable_at_startup = 1
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:pymode_indent = 0
+let g:LanguageClient_serverCommands = {
+    \'python' : ['pyls']
+    \ }
