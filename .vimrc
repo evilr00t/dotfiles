@@ -17,7 +17,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " ----- Making Vim look good ------------------------------------------
-"Plugin 'bling/vim-airline'
 Plugin 'itchyny/lightline.vim'
 
 " ----- Vim as a programmer's text editor -----------------------------
@@ -164,13 +163,12 @@ set t_Co=256
 let g:space_vim_dark_background = 233
 
 " Set the colorscheme
-" colorscheme PaperColor
-let g:gruvbox_contrast_dark = 'hard'
+" colorscheme badwolf
+let g:gruvbox_contrast_dark = 'soft'
 
 colorscheme gruvbox
 hi Comment cterm=italic
 
-" ----- bling/vim-airline settings -----
 " Always show statusbar
 set laststatus=2
 
@@ -183,7 +181,7 @@ set number relativenumber
 
 " LightLine Preferences
 let g:tmuxline_powerline_separators = 0
-let g:lightline = {'colorscheme': 'one'}
+let g:lightline = {'colorscheme': 'seoul256'}
 
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t
@@ -234,7 +232,6 @@ let g:pymode_virtualenv = 1
 "req ----- airblade/vim-gitgutter settings -----
 " Required after having changed the colorscheme
 hi clear SignColumn
-" In vim-airline, only display "hunks" if the diff is non-zero
 
 " ----- Raimondi/delimitMate settings -----
 let delimitMate_expand_cr = 1
@@ -288,9 +285,6 @@ highlight SpecialKey ctermfg=124 guifg=#af3a03
 let g:ale_linters = {
   \ 'python': ['pycodestyle'] ,
   \ }
-
-" Enable integration with airline.
-let g:airline#extensions#ale#enabled = 1
 
 " SuperTab
 let g:SuperTabLongestEnhanced=1

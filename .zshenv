@@ -5,9 +5,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 # Updated: Thu 22 Feb 16:07:02 2018
-autoload -Uz compinit
-compinit
-source ~/Documents/tab-color.sh
+
+# INCLUDE EXTERNAL FILES
+
 if [ -f ~/.ec2 ]; then
 	source ~/.ec2
 fi
@@ -16,9 +16,13 @@ if [ -f ~/.work ]; then
   source ~/.work
 fi
 
+# EXPORTS
+
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# FUNCTIONS
 
 apb()
 {
@@ -71,6 +75,33 @@ fi
 
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
+fo() {
+  local files
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
+  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+}
+
+# tm [SESSION_NAME | FUZZY PATTERN] - create new tmux session, or switch to existing one.
+# Running `tm` will let you fuzzy-find a session mame
+# Passing an argument to `ftm` will switch to that session if it exists or create it otherwise
+ftm() {
+  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+  if [ $1 ]; then
+    tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
+  fi
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+}
+
+# tm [SESSION_NAME | FUZZY PATTERN] - delete tmux session
+# Running `tm` will let you fuzzy-find a session mame to delete
+# Passing an argument to `ftm` will delete that session if it exists
+ftmk() {
+  if [ $1 ]; then
+    tmux kill-session -t "$1"; return
+  fi
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux kill-session -t "$session" || echo "No session found to delete."
+}
+
 # various useful aliases
 alias lless='ll -R --color=always | less -r'
 alias md='mkdir -p'
@@ -103,3 +134,5 @@ alias cat='bat --paging=never -p'
 
 # ansible - python2 fix
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+# Enabled true color support for terminals
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
