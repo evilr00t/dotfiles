@@ -41,12 +41,9 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 " colorschemes !
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tomasr/molokai'
-Plugin 'sjl/badwolf'
-Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
-Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'morhetz/gruvbox'
+Plugin 'joshdick/onedark.vim'
+
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'fatih/vim-go'
@@ -160,13 +157,15 @@ set mouse=a
 set background=dark
 
 set t_Co=256
-let g:space_vim_dark_background = 233
+" let g:space_vim_dark_background = 233
 
 " Set the colorscheme
-" colorscheme badwolf
-let g:gruvbox_contrast_dark = 'soft'
-
-colorscheme gruvbox
+" let g:gruvbox_contrast_dark = 'medium'
+try
+  colorscheme onedark
+catch
+  colorscheme slate
+endtry
 hi Comment cterm=italic
 
 " Always show statusbar
@@ -181,7 +180,7 @@ set number relativenumber
 
 " LightLine Preferences
 let g:tmuxline_powerline_separators = 0
-let g:lightline = {'colorscheme': 'seoul256'}
+let g:lightline = {'colorscheme': 'onedark'}
 
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t
@@ -192,6 +191,8 @@ nmap <F10> :bnext<CR>
 nmap ; :Buffers<CR>
 nmap <Leader>f :Files<CR>
 nmap <Leader>q :Tags<CR>
+" Allows you to save files you opened without write permissions via sudo
+cmap w!! w !sudo tee %
 " To have NERDTree always open on startup
 let g:nerdtree_tabs_open_on_console_startup = 0
 
@@ -205,7 +206,7 @@ match Tabs /\t/
 
 " ----- xolox/vim-easytags settings -----
 " Where to look for tags files
-set tags=~/.vimtags
+" set tags=~/.vimtags
 " Sensible defaults
 let g:easytags_events = ['BufReadPost', 'BufWritePost']
 let g:easytags_async = 1
