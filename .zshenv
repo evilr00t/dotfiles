@@ -122,7 +122,7 @@ alias bue="brew update && brew upgrade && brew cask outdated|cut -f 1 -d ' '|xar
 alias ls='gls -hovA --indicator-style=file-type --color=always --group-directories-first --time-style="+%b %_d %Y %H:%M:%S"'
 alias ll='gls -ahl --color | more; echo "\e[1;32m --[\e[1;34m Dirs:\e[1;36m `ls -al | egrep \"^drw\" | wc -l` \e[1;32m|\e[1;35m Files: \e[1;31m`ls -al | egrep -v \"^drw\" | grep -v total | wc -l` \e[1;32m]--"'
 alias la='gls -A'
-alias cat='bat --paging=never -p'
+alias cat='bat --paging=never -p --theme="1337"'
 
 # ansible - python2 fix
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
