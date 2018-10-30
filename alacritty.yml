@@ -60,7 +60,7 @@ font:
     style: Regular Italic
 
   # Point size of the font
-  size: 13.0
+  size: 14.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -92,35 +92,35 @@ custom_cursor_colors: true
 colors:
   # Default colors
   primary:
-    background: '0x323232'
-    foreground: '0xd8d8d8'
+    background: '0x202020'
+    foreground: '0xc0b18b'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
     text:   '0xf1c1c1'
-    cursor: '0xff2600'
+    cursor: '0x8fee96'
 
   # evilroot theme!
   normal:
-    black:   '0x4d4d4d'
-    red:     '0xff005f'
-    green:   '0xa4d32d'
-    yellow:  '0xf6c336'
-    blue:    '0x5496ff'
-    magenta: '0x9e6ffe'
-    cyan:    '0x218693'
-    white:   '0xd8d8d8'
+    black:   '0x2d2d2d'
+    red:     '0xd75f5f'
+    green:   '0xd4d232'
+    yellow:  '0xaf865a'
+    blue:    '0x22c3a1'
+    magenta: '0x775759'
+    cyan:    '0x84edb9'
+    white:   '0xc0b18b'
 
   # Bright colors
   bright:
-    black:   '0x666666'
-    red:     '0xff6767'
-    green:   '0xa0e11e'
-    yellow:  '0xf7d325'
-    blue:    '0x1ca1db'
-    magenta: '0xc48dff'
-    cyan:    '0x77dfd8'
-    white:   '0xf2f2f2'
+    black:   '0x555555'
+    red:     '0xd75f5f'
+    green:   '0x8fee96'
+    yellow:  '0xcd950c'
+    blue:    '0x458588'
+    magenta: '0x775759'
+    cyan:    '0x84edb9'
+    white:   '0xd8d8d8'
 
   # Colors (Tomorrow Night Bright)
   # Normal colors
