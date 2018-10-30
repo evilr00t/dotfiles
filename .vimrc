@@ -24,6 +24,7 @@ Plugin 'python-mode/python-mode'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'mitsuhiko/vim-python-combined'
+Plugin 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
