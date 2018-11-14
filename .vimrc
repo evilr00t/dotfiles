@@ -47,7 +47,8 @@ Plugin 'joshdick/onedark.vim'
 
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
-Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+
 "Plugin 'Shougo/neocomplete'
 " NeoVim does not have lua support... use proper completion tool!
 Plugin 'autozimu/LanguageClient-neovim', {
@@ -56,7 +57,7 @@ Plugin 'autozimu/LanguageClient-neovim', {
     \ }
 Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plugin 'zchee/deoplete-jedi'
-Plugin 'zchee/deoplete-go'
+Plugin 'zchee/deoplete-go', { 'do': 'make' }
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'szw/vim-maximizer'
 "Plugin 'sjl/gundo.vim'
@@ -107,7 +108,6 @@ Plugin 'hashivim/vim-vagrant'
 Plugin 'othree/html5.vim'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'nanotech/jellybeans.vim'
-Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 
 call vundle#end()
 
@@ -325,6 +325,7 @@ au BufNewFile,BufRead *.i7x     setf inform7
 au BufNewFile,BufRead *.ini     setf conf
 au BufNewFile,BufRead *.input   setf gnuplot
 au BufNewFile,BufRead *.json    set ft=json tw=0
+au BufNewFile,BufRead *.template    set ft=yaml
 au BufNewFile,BufRead *.less    setlocal ft=less nocindent smartindent
 au BufNewFile,BufRead *.md      setlocal ft=markdown nolist spell
 au BufNewFile,BufRead *.md,*.markdown setlocal foldlevel=999 tw=0 nocin
