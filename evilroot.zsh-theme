@@ -14,12 +14,12 @@ if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
     PROMPT='%{$fg[cyan]%}%n%{$reset_color%}%{$fg[green]%}[%~]$(git_prompt_info)$(git_prompt_status)
 ${return_code}%{$fg[yellow]%}λ%{$reset_color%}: '
 
-    ZSH_THEME_GIT_PROMPT_PREFIX=" at %{$fg[blue]%}"
+    ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%} @ %{$fg[blue]%}"
     ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
     ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%} ✘"
     ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%} ✔"
-		ZSH_THEME_GIT_PROMPT_SHA_BEFORE=" %{$fg_bold[white]%}[%{$fg_bold[blue]%}"
-		ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$fg_bold[white]%}]"
+    ZSH_THEME_GIT_PROMPT_SHA_BEFORE=" %{$fg_bold[white]%}[%{$fg_bold[blue]%}"
+    ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$fg_bold[white]%}]"
 
     # display exitcode on the right when >0
     return_code="%(?..%{$fg[red]%}%?（╯°□°）╯︵ ┻━┻ %{$reset_color%})"
