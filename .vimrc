@@ -132,6 +132,9 @@ set ttyfast
 set modeline
 " don't wrap lines automagically... it's pissing me off!
 set nowrap
+" insensitive search
+set ignorecase
+set smartcase
 
 let mapleader = ","
 " turn off search highlight
