@@ -228,7 +228,6 @@ let g:pymode_lint_checkers = ['flake8']
 let g:pymode_virtualenv = 1
 let g:pymode_lint_checkers = ['pycodestyle']
 let g:pymode_indent = 0
-let g:pymode_virtualenv = 1
 
 
 "req ----- airblade/vim-gitgutter settings -----
