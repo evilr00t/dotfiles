@@ -30,7 +30,7 @@ window:
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
-  decorations: true
+  decorations: buttonless
 
 # Display tabs using this many cells (changes require restart)
 tabspaces: 2
@@ -39,7 +39,7 @@ tabspaces: 2
 draw_bold_text_with_bright_colors: true
 
 # Whether the cursor should be a hollow block on window focus loss
-unfocused_hollow_cursor: true
+
 
 
 # Font configuration (changes require restart)
@@ -64,16 +64,16 @@ font:
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
-  offset:
-    x: 0.0
-    y: 0.0
+  #offset:
+    #  x: 0.0
+    #y: 0.0
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increase the x offset to move the glyph to
   # the right, increase the y offset to move the glyph upward.
-  glyph_offset:
-    x: 0.0
-    y: 0.0
+  #glyph_offset:
+    #x: 0.0
+    #y: 0.0
 
   # OS X only: use thin stroke font rendering. Thin strokes are suitable
   # for retina displays, but for non-retina you probably want this set to
@@ -86,41 +86,36 @@ render_timer: false
 
 # Use custom cursor colors. If true, display the cursor in the cursor.foreground
 # and cursor.background colors, otherwise invert the colors of the cursor.
-custom_cursor_colors: true
+# custom_cursor_colors: true
 
-
+# Colors (Darkside)
 colors:
-  # Default colors
   primary:
-    background: '0x202020'
-    foreground: '0xc0b18b'
+    background: "0x222324"
+    foreground: "0xBABABA"
 
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text:   '0xf1c1c1'
-    cursor: '0x8fee96'
-
-  # evilroot theme!
+  # Normal colors
   normal:
-    black:   '0x2d2d2d'
-    red:     '0xd75f5f'
-    green:   '0xd4d232'
-    yellow:  '0xaf865a'
-    blue:    '0x22c3a1'
-    magenta: '0x775759'
-    cyan:    '0x84edb9'
-    white:   '0xc0b18b'
+    black:    "0x000000"
+    red:      "0xE8341C"
+    green:    "0x68C256"
+    yellow:   "0xF2D42C"
+    blue:     "0x1C98E8"
+    magenta:  "0x8E69C9"
+    cyan:     "0x1C98E8"
+    white:    "0xBABABA"
 
   # Bright colors
   bright:
-    black:   '0x555555'
-    red:     '0xd75f5f'
-    green:   '0x8fee96'
-    yellow:  '0xcd950c'
-    blue:    '0x458588'
-    magenta: '0x775759'
-    cyan:    '0x84edb9'
-    white:   '0xd8d8d8'
+    black:    "0x666666"
+    red:      "0xE05A4F"
+    green:    "0x77B869"
+    yellow:   "0xEFD64B"
+    blue:     "0x387CD3"
+    magenta:  "0x957BBE"
+    cyan:     "0x3D97E2"
+    white:    "0xBABABA"
+
 
   # Colors (Tomorrow Night Bright)
   # Normal colors
@@ -144,18 +139,6 @@ colors:
   #    magenta: '0xb77ee0'
   #    cyan:    '0x54ced6'
   #    white:   '0xffffff'
-
-  # Dim colors (Optional)
-  dim:
-    black:   '0x333333'
-    red:     '0xf2777a'
-    green:   '0x99cc99'
-    yellow:  '0xffcc66'
-    blue:    '0x6699cc'
-    magenta: '0xcc99cc'
-    cyan:    '0x66cccc'
-    white:   '0xdddddd'
-
 
 # Visual Bell
 #
@@ -221,14 +204,14 @@ mouse:
   # scrolling for applications like `man`.
   #
   # To disable this completely, set `faux_scrollback_lines` to 0.
-  faux_scrollback_lines: 1
+  faux_scrolling_lines: 1
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
 dynamic_title: true
 
-hide_cursor_when_typing: true
+
 
 # Style of the cursor
 #
@@ -236,7 +219,10 @@ hide_cursor_when_typing: true
 # - Block
 # - Underline
 # - Beam
-cursor_style: Block
+cursor:
+  style: Block
+  hide_when_typing: true
+  unfocused_hollow_cursor: true
 
 # Live config reload (changes require restart)
 live_config_reload: true
