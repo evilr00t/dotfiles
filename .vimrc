@@ -353,11 +353,11 @@ au BufRead,BufNewFile *.yml,*.yaml set filetype=yaml.ansible
 
 au BufNewFile,BufRead *.py
     \ setlocal tabstop=2
-    \ setlocal softtabstop=2
-    \ setlocal shiftwidth=2
-    \ setlocal textwidth=80
-    \ setlocal smarttab
-    \ setlocal expandtab
+    \ softtabstop=2
+    \ shiftwidth=2
+    \ textwidth=80
+    \ smarttab
+    \ expandtab
 
 au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet
 au FileType inform7 setlocal nolist tw=0 ts=4 sw=4 noet foldlevel=999
