@@ -17,7 +17,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " ----- Making Vim look good ------------------------------------------
-"Plugin 'bling/vim-airline'
 Plugin 'itchyny/lightline.vim'
 
 " ----- Vim as a programmer's text editor -----------------------------
@@ -25,6 +24,7 @@ Plugin 'python-mode/python-mode'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'mitsuhiko/vim-python-combined'
+Plugin 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
@@ -42,20 +42,22 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 " colorschemes !
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tomasr/molokai'
-Plugin 'sjl/badwolf'
-Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
-Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'morhetz/gruvbox'
+Plugin 'joshdick/onedark.vim'
+
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
-Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+
 "Plugin 'Shougo/neocomplete'
 " NeoVim does not have lua support... use proper completion tool!
+Plugin 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plugin 'zchee/deoplete-jedi'
-Plugin 'zchee/deoplete-go'
+Plugin 'zchee/deoplete-go', { 'do': 'make' }
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'szw/vim-maximizer'
 "Plugin 'sjl/gundo.vim'
@@ -84,7 +86,7 @@ Plugin 'jez/vim-ispc'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'reedes/vim-pencil'
 Plugin 'junegunn/goyo.vim'
-Plugin 'tpope/vim-markdown'
+Plugin 'gabrielelana/vim-markdown'
 Plugin 'pearofducks/ansible-vim'
 Plugin 't9md/vim-chef'
 "Plugin 'SirVer/ultisnips'
@@ -106,7 +108,6 @@ Plugin 'hashivim/vim-vagrant'
 Plugin 'othree/html5.vim'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'nanotech/jellybeans.vim'
-Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 
 call vundle#end()
 
@@ -131,6 +132,9 @@ set ttyfast
 set modeline
 " don't wrap lines automagically... it's pissing me off!
 set nowrap
+" insensitive search
+set ignorecase
+set smartcase
 
 let mapleader = ","
 " turn off search highlight
@@ -157,16 +161,17 @@ set mouse=a
 set background=dark
 
 set t_Co=256
-let g:space_vim_dark_background = 233
+" let g:space_vim_dark_background = 233
 
 " Set the colorscheme
-" colorscheme PaperColor
-let g:gruvbox_contrast_dark = 'hard'
-
-colorscheme gruvbox
+" let g:gruvbox_contrast_dark = 'medium'
+try
+  colorscheme onedark
+catch
+  colorscheme slate
+endtry
 hi Comment cterm=italic
 
-" ----- bling/vim-airline settings -----
 " Always show statusbar
 set laststatus=2
 
@@ -179,7 +184,7 @@ set number relativenumber
 
 " LightLine Preferences
 let g:tmuxline_powerline_separators = 0
-let g:lightline = {'colorscheme': 'one'}
+let g:lightline = {'colorscheme': 'onedark'}
 
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t
@@ -190,6 +195,8 @@ nmap <F10> :bnext<CR>
 nmap ; :Buffers<CR>
 nmap <Leader>f :Files<CR>
 nmap <Leader>q :Tags<CR>
+" Allows you to save files you opened without write permissions via sudo
+cmap w!! w !sudo tee %
 " To have NERDTree always open on startup
 let g:nerdtree_tabs_open_on_console_startup = 0
 
@@ -203,7 +210,7 @@ match Tabs /\t/
 
 " ----- xolox/vim-easytags settings -----
 " Where to look for tags files
-set tags=~/.vimtags
+" set tags=~/.vimtags
 " Sensible defaults
 let g:easytags_events = ['BufReadPost', 'BufWritePost']
 let g:easytags_async = 1
@@ -222,15 +229,13 @@ let g:pymode = 1
 let g:pymode_python = 'python3'
 let g:pymode_lint_checkers = ['flake8']
 let g:pymode_virtualenv = 1
-let g:pymode_lint = 0
-
+let g:pymode_lint_checkers = ['pycodestyle']
 let g:pymode_indent = 0
 
 
 "req ----- airblade/vim-gitgutter settings -----
 " Required after having changed the colorscheme
 hi clear SignColumn
-" In vim-airline, only display "hunks" if the diff is non-zero
 
 " ----- Raimondi/delimitMate settings -----
 let delimitMate_expand_cr = 1
@@ -285,9 +290,6 @@ let g:ale_linters = {
   \ 'python': ['pycodestyle'] ,
   \ }
 
-" Enable integration with airline.
-let g:airline#extensions#ale#enabled = 1
-
 " SuperTab
 let g:SuperTabLongestEnhanced=1
 let g:SuperTabLongestHighlight=1
@@ -325,6 +327,7 @@ au BufNewFile,BufRead *.i7x     setf inform7
 au BufNewFile,BufRead *.ini     setf conf
 au BufNewFile,BufRead *.input   setf gnuplot
 au BufNewFile,BufRead *.json    set ft=json tw=0
+au BufNewFile,BufRead *.template    set ft=yaml
 au BufNewFile,BufRead *.less    setlocal ft=less nocindent smartindent
 au BufNewFile,BufRead *.md      setlocal ft=markdown nolist spell
 au BufNewFile,BufRead *.md,*.markdown setlocal foldlevel=999 tw=0 nocin
@@ -350,11 +353,11 @@ au BufRead,BufNewFile *.yml,*.yaml set filetype=yaml.ansible
 
 au BufNewFile,BufRead *.py
     \ setlocal tabstop=2
-    \ setlocal softtabstop=2
-    \ setlocal shiftwidth=2
-    \ setlocal textwidth=80
-    \ setlocal smarttab
-    \ setlocal expandtab
+    \ softtabstop=2
+    \ shiftwidth=2
+    \ textwidth=80
+    \ smarttab
+    \ expandtab
 
 au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet
 au FileType inform7 setlocal nolist tw=0 ts=4 sw=4 noet foldlevel=999
@@ -403,4 +406,6 @@ endfunction
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 let g:deoplete#enable_at_startup = 1
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:pymode_indent = 0
+let g:LanguageClient_serverCommands = {
+    \'python' : ['pyls']
+    \ }

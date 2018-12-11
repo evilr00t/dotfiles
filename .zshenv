@@ -5,7 +5,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 # Updated: Thu 22 Feb 16:07:02 2018
-#source ~/Documents/tab-color.sh
+
+# INCLUDE EXTERNAL FILES
+
 if [ -f ~/.ec2 ]; then
 	source ~/.ec2
 fi
@@ -14,9 +16,14 @@ if [ -f ~/.work ]; then
   source ~/.work
 fi
 
+# EXPORTS
+
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# FUNCTIONS
+
 apb()
 {
   if [ ! -z "$ANSIBLE_BECOME_PASS" ]; then
@@ -66,11 +73,36 @@ else
 fi
 }
 
-
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
-# various useful aliases
+fo() {
+  local files
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
+  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+}
 
+# tm [SESSION_NAME | FUZZY PATTERN] - create new tmux session, or switch to existing one.
+# Running `tm` will let you fuzzy-find a session mame
+# Passing an argument to `ftm` will switch to that session if it exists or create it otherwise
+ftm() {
+  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+  if [ $1 ]; then
+    tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
+  fi
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+}
+
+# tm [SESSION_NAME | FUZZY PATTERN] - delete tmux session
+# Running `tm` will let you fuzzy-find a session mame to delete
+# Passing an argument to `ftm` will delete that session if it exists
+ftmk() {
+  if [ $1 ]; then
+    tmux kill-session -t "$1"; return
+  fi
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux kill-session -t "$session" || echo "No session found to delete."
+}
+
+# various useful aliases
 alias lless='ll -R --color=always | less -r'
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -86,7 +118,6 @@ alias ssh='ssh -C'
 alias lsnew="ls -rl *(D.om[1,10])"     # display the newest files
 alias lsold="ls -rtlh *(D.om[1,10])"   # display the oldest files
 alias lssmall="ls -Srl *(.oL[1,10])"   # display the smallest files
-alias diff='diff -Nuar'
 alias piplist='pip freeze | cut -d = -f 1 | xargs -n 1 pip search | grep -B2 LATEST:'
 alias py="source virt/bin/activate;clear"
 alias grep='ggrep'
@@ -99,3 +130,9 @@ alias nib='ssh 10.50.55.100'
 alias ls='gls -hovA --indicator-style=file-type --color=always --group-directories-first --time-style="+%b %_d %Y %H:%M:%S"'
 alias ll='gls -ahl --color | more; echo "\e[1;32m --[\e[1;34m Dirs:\e[1;36m `ls -al | egrep \"^drw\" | wc -l` \e[1;32m|\e[1;35m Files: \e[1;31m`ls -al | egrep -v \"^drw\" | grep -v total | wc -l` \e[1;32m]--"'
 alias la='gls -A'
+alias cat='bat --paging=never -p --theme="1337"'
+
+# ansible - python2 fix
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+# Enabled true color support for terminals
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
