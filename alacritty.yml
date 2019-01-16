@@ -46,21 +46,22 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    family: Fantasque Sans Mono
+    #family: Fantasque Sans Mono
+    family: PragmataPro
     style: Regular
 
   # The bold font face
   bold:
-    family: Fantasque Sans Mono
+    family: PragmataPro
     style: Bold
 
   # The italic font face
   italic:
-    family: Fantasque Sans Mono
+    family: PragmataPro
     style: Regular Italic
 
   # Point size of the font
-  size: 14.0
+  size: 12.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -89,38 +90,64 @@ render_timer: false
 # custom_cursor_colors: true
 
 # Colors (Darkside)
+# Colors (Pencil Dark)
 colors:
-  primary:
-    background: "0x222324"
-    foreground: "0xBABABA"
-
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text:   '0xf1c1c1'
-    cursor: '0xff2600'
-
-
-  # Normal colors
-  normal:
-    black:    "0x000000"
-    red:      "0xE8341C"
-    green:    "0x68C256"
-    yellow:   "0xF2D42C"
-    blue:     "0x1C98E8"
-    magenta:  "0x8E69C9"
-    cyan:     "0x1C98E8"
-    white:    "0xBABABA"
-
-  # Bright colors
-  bright:
-    black:   '0x666666'
-    red:     '0xff6767'
-    green:   '0xa0e11e'
-    yellow:  '0xf7d325'
-    blue:    '0x1ca1db'
-    magenta: '0xc48dff'
-    cyan:    '0x77dfd8'
-    white:   '0xf2f2f2'
+ # Default Colors
+ primary:
+   background: "0x222324"
+   foreground: "0xBABABA"
+ # Normal colors
+ normal:
+   black:   '0x212121'
+   red:     '0xc30771'
+   green:   '0x10a778'
+   yellow:  '0xa89c14'
+   blue:    '0x008ec4'
+   magenta: '0x523c79'
+   cyan:    '0x20a5ba'
+   white:   '0xe0e0e0'
+ # Bright colors
+ bright:
+   black:   '0x212121'
+   red:     '0xfb007a'
+   green:   '0x5fd7af'
+   yellow:  '0xf3e430'
+   blue:    '0x20bbfc'
+   magenta: '0x6855de'
+   cyan:    '0x4fb8cc'
+   white:   '0xf1f1f1'
+#colors:
+#  primary:
+#    background: "0x222324"
+#    foreground: "0xBABABA"
+#
+#  # Colors the cursor will use if `custom_cursor_colors` is true
+#  cursor:
+#    text:   '0xf1c1c1'
+#    cursor: '0xff2600'
+#
+#
+#  # Normal colors
+#  normal:
+#    black:    "0x000000"
+#    red:      "0xE8341C"
+#    green:    "0x68C256"
+#    yellow:   "0xF2D42C"
+#    blue:     "0x1C98E8"
+#    magenta:  "0x8E69C9"
+#    cyan:     "0x1C98E8"
+#    white:    "0xBABABA"
+#
+#  # Bright colors
+#  bright:
+#    black:   '0x666666'
+#    red:     '0xff6767'
+#    green:   '0xa0e11e'
+#    yellow:  '0xf7d325'
+#    blue:    '0x1ca1db'
+#    magenta: '0xc48dff'
+#    cyan:    '0x77dfd8'
+#    white:   '0xf2f2f2'
 
   # Colors (Tomorrow Night Bright)
   # Normal colors
@@ -249,7 +276,7 @@ dynamic_title: true
 # - Beam
 cursor:
   style: Block
-  hide_when_typing: true
+  hide_when_typing: false
   unfocused_hollow_cursor: true
 
 # Live config reload (changes require restart)
