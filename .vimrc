@@ -227,7 +227,6 @@ nmap <silent> <leader>b :TagbarToggle<CR>
 " ----- pymode -----
 let g:pymode = 1
 let g:pymode_python = 'python3'
-let g:pymode_lint_checkers = ['flake8']
 let g:pymode_virtualenv = 1
 let g:pymode_indent = 0
 
@@ -286,8 +285,14 @@ highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
 highlight SpecialKey ctermfg=124 guifg=#af3a03
 let g:ale_linters = {
-  \ 'python': ['pycodestyle'] ,
+  \ 'python': ['flake8', 'black'] ,
   \ }
+
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_set_highlights = 0
+
 
 " SuperTab
 let g:SuperTabLongestEnhanced=1
