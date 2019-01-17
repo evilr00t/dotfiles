@@ -39,7 +39,7 @@ Plugin 'tpope/vim-endwise'
 Plugin 'majutsushi/tagbar'
 " Plugin 'kien/ctrlp.vim' " since now on - we use ack.vim with fzf.vim
 Plugin 'vim-scripts/a.vim'
-Plugin 'davidhalter/jedi-vim'
+" Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 " colorschemes !
 Plugin 'morhetz/gruvbox'
@@ -56,7 +56,7 @@ Plugin 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plugin 'zchee/deoplete-jedi'
+" Plugin 'zchee/deoplete-jedi'
 Plugin 'zchee/deoplete-go', { 'do': 'make' }
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'szw/vim-maximizer'
@@ -229,7 +229,6 @@ let g:pymode = 1
 let g:pymode_python = 'python3'
 let g:pymode_lint_checkers = ['flake8']
 let g:pymode_virtualenv = 1
-let g:pymode_lint_checkers = ['pycodestyle']
 let g:pymode_indent = 0
 
 
