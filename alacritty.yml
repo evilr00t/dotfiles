@@ -39,9 +39,7 @@ tabspaces: 2
 draw_bold_text_with_bright_colors: true
 
 # Whether the cursor should be a hollow block on window focus loss
-
-
-
+#
 # Font configuration (changes require restart)
 font:
   # The normal (roman) font face to use.
@@ -94,8 +92,13 @@ render_timer: false
 colors:
  # Default Colors
  primary:
-   background: "0x222324"
-   foreground: "0xBABABA"
+   #background: "0x222324"
+   #foreground: "0xBABABA"
+   #
+    # hard contrast: background = '0x1d2021'
+    background: '0x282a36'
+    # soft contrast: background = '0x32302f'
+    foreground: '0xeff0eb'
  # Normal colors
  normal:
    black:   '0x212121'
@@ -108,7 +111,7 @@ colors:
    white:   '0xe0e0e0'
  # Bright colors
  bright:
-   black:   '0x212121'
+   black:   '0x676767'
    red:     '0xfb007a'
    green:   '0x5fd7af'
    yellow:  '0xf3e430'
