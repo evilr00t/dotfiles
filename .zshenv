@@ -4,12 +4,15 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-# Updated: Thu 22 Feb 16:07:02 2018
+# Modified by:
+#   Karol Czeryna <k@e-dot.uk>
+#
+# Updated: Mon 28 Jan 15:30:13 2019
 
 # INCLUDE EXTERNAL FILES
 
 if [ -f ~/.ec2 ]; then
-	source ~/.ec2
+  source ~/.ec2
 fi
 
 if [ -f ~/.work ]; then
@@ -49,6 +52,11 @@ diff()
   colordiff -Nuar $@ | diff-so-fancy
 }
 
+
+cat()
+{
+bat --paging=never -p --theme='TwoDark' $@
+}
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
@@ -75,6 +83,7 @@ fi
 
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
+# file open using fzf and vim!
 fo() {
   local files
   IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
@@ -124,13 +133,9 @@ alias grep='ggrep'
 alias shrug="echo '¯\_(ツ)_/¯' | pbcopy";
 alias vim='nvim'
 alias bue="brew update && brew upgrade && brew cask outdated|cut -f 1 -d ' '|xargs brew cask reinstall"
-alias python='python2' # use python2.7 from brew!
 alias local_svcs='lsof -i -n -P|grep LISTEN'
-alias nib='ssh 10.50.55.100'
 alias ls='gls -hovA --indicator-style=file-type --color=always --group-directories-first --time-style="+%b %_d %Y %H:%M:%S"'
-alias ll='gls -ahl --color | more; echo "\e[1;32m --[\e[1;34m Dirs:\e[1;36m `ls -al | egrep \"^drw\" | wc -l` \e[1;32m|\e[1;35m Files: \e[1;31m`ls -al | egrep -v \"^drw\" | grep -v total | wc -l` \e[1;32m]--"'
 alias la='gls -A'
-alias cat='bat --paging=never -p --theme="1337"'
 
 # ansible - python2 fix
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
