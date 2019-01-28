@@ -412,3 +412,6 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:LanguageClient_serverCommands = {
     \'python' : ['pyls']
     \ }
+
+" use os x clipboard
+set clipboard=unnamed
