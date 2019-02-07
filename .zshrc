@@ -1,6 +1,5 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-. ~/repos/z/z.sh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -51,7 +50,7 @@ HIST_IGNORE_SPACE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(osx django httpie history mvn python zsh-completions history-substring-search git-prompt)
+plugins=(osx django httpie history mvn python zsh-completions history-substring-search git-prompt git z)
 autoload -U compinit && compinit
 
 
