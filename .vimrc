@@ -284,7 +284,7 @@ highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
 highlight SpecialKey ctermfg=124 guifg=#af3a03
 let g:ale_linters = {
-  \ 'python': ['flake8', 'black'] ,
+  \ 'python': ['flake8', 'pylint'],
   \ }
 
 let g:ale_echo_msg_error_str = 'E'
