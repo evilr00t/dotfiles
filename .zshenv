@@ -19,11 +19,15 @@ if [ -f ~/.work ]; then
   source ~/.work
 fi
 
+if [ -f ~/.home ]; then
+  source ~/.home
+fi
+
 # EXPORTS
 
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH
 
 # FUNCTIONS
 
@@ -141,3 +145,4 @@ alias la='gls -A'
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 # Enabled true color support for terminals
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
+
