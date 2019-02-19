@@ -6,17 +6,20 @@ Nowadays I moved to MacBook Pro.
 
 ```sh
 brew install coreutils gnu-sed macvim the_silver_searcher diff-so-fancy ctags \
-reattach-to-user-namespace shellcheck sshpass mosh macvim gnupg2 asciinema fzf \
-grep gawk screenfetch tflint
+reattach-to-user-namespace shellcheck sshpass mosh gnupg2 asciinema fzf \
+grep gawk screenfetch tflint hadolint jsonlint gnu-sed gnu-awk httpie neovim \
+tidy-html5 wrk
 ```
 
 Additional libraries/utilities:
 
 * https://github.com/zsh-users/zsh-completions
+* https://github.com/zsh-users/zsh-autosuggestions
+* https://github.com/zsh-users/zsh-syntax-highlighting
 
 ### ScreenShot
 
-![](https://i.imgur.com/aBeEeWN.png)
+![](https://i.imgur.com/JdwQJh7.png)
 
 # License
 
