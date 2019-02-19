@@ -204,8 +204,8 @@ let g:nerdtree_tabs_open_on_console_startup = 0
 highlight Trail ctermbg=red guibg=red
 call matchadd('Trail', '\s\+$', 100)
 " Also highlight all tabs
-highlight Tabs ctermbg=darkgreen guibg=darkgreen
-match Tabs /\t/
+"highlight Tabs ctermbg=darkgreen guibg=darkgreen
+"match Tabs /\t/
 
 
 " ----- xolox/vim-easytags settings -----
@@ -354,6 +354,7 @@ au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
 au BufNewFile,BufRead Makefile setlocal nolist
 au BufRead,BufNewFile *.yml,*.yaml set filetype=yaml.ansible
 
+
 au BufNewFile,BufRead *.py
     \ setlocal tabstop=2
     \ softtabstop=2
@@ -362,12 +363,11 @@ au BufNewFile,BufRead *.py
     \ smarttab
     \ expandtab
 
-au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet
+au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet textwidth=50
 au FileType inform7 setlocal nolist tw=0 ts=4 sw=4 noet foldlevel=999
 au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
 au FileType make setlocal nolist ts=4 sts=4 sw=4 noet
 au FileType markdown syn sync fromstart
-au Filetype gitcommit setlocal tw=80
 
 " autoreload file if cursor does not move
 au CursorHold,CursorHoldI * checktime
