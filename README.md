@@ -8,7 +8,7 @@ Nowadays I moved to MacBook Pro.
 brew install coreutils gnu-sed macvim the_silver_searcher diff-so-fancy ctags \
 reattach-to-user-namespace shellcheck sshpass mosh gnupg2 asciinema fzf \
 grep gawk screenfetch tflint hadolint jsonlint gnu-sed gnu-awk httpie neovim \
-tidy-html5 wrk
+tidy-html5 wrk bat
 ```
 
 Additional libraries/utilities:
@@ -26,13 +26,13 @@ Additional libraries/utilities:
 |                      |                                          |
 |:---------------------|:-----------------------------------------|
 | **Author:**          | Karol Czeryna (<k@e-dot.uk>)
-| **Copyright:**       | Copyright 2018, e-dot.uk
+| **Copyright:**       | Copyright 2019, e-dot.uk
 | **License:**         | BSD 2-Clause License
 
 ```
 BSD 2-Clause License
 
-Copyright (c) 2018, Karol Czeryna
+Copyright (c) 2019, Karol Czeryna
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
