@@ -44,7 +44,7 @@ apb()
   fi
 }
 
-cht() {                                                                                                                                                                                                                                                                     ✹
+cht() {
     local topic="${1}" ; shift
 
     curl "cht.sh/${topic}/${*// }"
