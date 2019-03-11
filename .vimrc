@@ -1,7 +1,7 @@
 " File: .vimrc
 " Original Author: Jake Zimmerman <jake@zimmerman.io>
 " Author: Karol Czeryna <k@e-dot.uk>
-" Update: Tue  1 May 09:40:20 2018
+" Update: Thu 21 Feb 10:01:52 2019
 " How I configure Vim :P
 "
 
@@ -44,7 +44,7 @@ Plugin 'ervandew/supertab'
 " colorschemes !
 Plugin 'morhetz/gruvbox'
 Plugin 'joshdick/onedark.vim'
-
+Plugin 'nanotech/jellybeans.vim'
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
@@ -107,7 +107,7 @@ Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'hashivim/vim-vagrant'
 Plugin 'othree/html5.vim'
 Plugin 'hail2u/vim-css3-syntax'
-Plugin 'nanotech/jellybeans.vim'
+
 
 call vundle#end()
 
@@ -166,10 +166,12 @@ set t_Co=256
 " Set the colorscheme
 " let g:gruvbox_contrast_dark = 'medium'
 try
-  colorscheme onedark
+  colorscheme jellybeans
+  let g:jellybeans_use_lowcolor_black = 1
 catch
   colorscheme slate
 endtry
+
 hi Comment cterm=italic
 
 " Always show statusbar
@@ -184,7 +186,7 @@ set number relativenumber
 
 " LightLine Preferences
 let g:tmuxline_powerline_separators = 0
-let g:lightline = {'colorscheme': 'onedark'}
+let g:lightline = {'colorscheme': 'one'}
 
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t
