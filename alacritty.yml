@@ -44,19 +44,21 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    #family: Fantasque Sans Mono
-    family: PragmataPro
+    # family: PragmataPro
+    family: Fantasque Sans Mono
     style: Regular
 
   # The bold font face
   bold:
-    family: PragmataPro
+    # family: PragmataPro
+    family: Fantasque Sans Mono
     style: Bold
 
   # The italic font face
   italic:
-    family: PragmataPro
-    style: Regular Italic
+    # family: PragmataPro
+    family: Fantasque Sans Mono
+    style: Italic
 
   # Point size of the font
   size: 12.0
@@ -96,29 +98,29 @@ colors:
    #foreground: "0xBABABA"
    #
     # hard contrast: background = '0x1d2021'
-    background: '0x282a36'
+    background: '0x212632'
     # soft contrast: background = '0x32302f'
-    foreground: '0xeff0eb'
+    foreground: '0xd9d7cd'
  # Normal colors
  normal:
-   black:   '0x231f20'
-   red:     '0xee2e24'
-   green:   '0x00853e'
-   yellow:  '0xffd204'
-   blue:    '0x009ddc'
-   magenta: '0x98005d'
-   cyan:    '0x85cebc'
-   white:   '0xd9d8d8'
+   black:   '0x212632'
+   red:     '0xf07078'
+   green:   '0xbae67d'
+   yellow:  '0xffcb65'
+   blue:    '0x36a3d8'
+   magenta: '0xd4bffe'
+   cyan:    '0x95e6ca'
+   white:   '0xc7c7c7'
  # Bright colors
  bright:
-   black:   '0x737171'
-   red:     '0xee2e24'
-   green:   '0x00853e'
-   yellow:  '0xffd204'
-   blue:    '0x009ddc'
-   magenta: '0x98005d'
-   cyan:    '0x85cebc'
-   white:   '0xffffff'
+   black:   '0x676767'
+   red:     '0xf07078'
+   green:   '0xcbe544'
+   yellow:  '0xffde7f'
+   blue:    '0x6871ff'
+   magenta: '0xff76ff'
+   cyan:    '0xa6fce1'
+   white:   '0xfeffff'
 #colors:
 #  primary:
 #    background: "0x222324"
