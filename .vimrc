@@ -26,6 +26,8 @@ Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'mitsuhiko/vim-python-combined'
 Plugin 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'stephpy/vim-yaml'
+Plugin 'elzr/vim-json'
 Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdtree'
@@ -354,7 +356,7 @@ au BufNewFile,BufRead .zshlocal setf zsh
 au BufNewFile,BufRead /tmp/crontab* setf crontab
 au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
 au BufNewFile,BufRead Makefile setlocal nolist
-au BufRead,BufNewFile *.yml,*.yaml set filetype=yaml.ansible
+" au BufRead,BufNewFile *.yml,*.yaml set filetype=yaml.ansible
 
 
 au BufNewFile,BufRead *.py
