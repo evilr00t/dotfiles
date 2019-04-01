@@ -166,10 +166,11 @@ set t_Co=256
 " let g:space_vim_dark_background = 233
 
 " Set the colorscheme
-" let g:gruvbox_contrast_dark = 'medium'
 try
-  colorscheme jellybeans
+  colorscheme space-vim-dark
   let g:jellybeans_use_lowcolor_black = 1
+  let g:gruvbox_contrast_dark = 'medium'
+  hi Comment cterm=italic
 catch
   colorscheme slate
 endtry
