@@ -19,7 +19,7 @@ Additional libraries/utilities:
 
 ### ScreenShot
 
-![](https://i.imgur.com/JdwQJh7.png)
+![](https://i.imgur.com/2BFuGjB.png)
 
 # License
 
