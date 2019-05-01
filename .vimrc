@@ -34,7 +34,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 " Plugin 'scrooloose/syntastic'
 Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
+Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-endwise'
@@ -45,11 +45,11 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'ervandew/supertab'
 " colorschemes !
 Plugin 'morhetz/gruvbox'
-Plugin 'joshdick/onedark.vim'
-Plugin 'nanotech/jellybeans.vim'
+
 "Plugin 'Valloric/YouCompleteMe'
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
+"
 Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plugin 'AndrewRadev/splitjoin.vim'
 
 "Plugin 'Shougo/neocomplete'
 " NeoVim does not have lua support... use proper completion tool!
@@ -127,6 +127,7 @@ set wildmenu
 set lazyredraw
 set showmatch
 set list
+set listchars=tab:\|\ ,trail:▫
 set hidden
 " auto reloadfile
 set autoread
@@ -154,10 +155,11 @@ set foldnestmax=10      " 10 nested fold max
 " space open/closes folds
 nnoremap <space> za
 set foldmethod=indent   " fold based on indent level
-set colorcolumn=120
-set textwidth=120
+set colorcolumn=81
 syntax on
 set mouse=a
+set formatoptions=tcqronj
+set completeopt-=preview
 
 " Toggle this to "light" for light colorscheme
 set background=dark
@@ -217,11 +219,6 @@ call matchadd('Trail', '\s\+$', 100)
 " Where to look for tags files
 set tags=~/.vimtags
 " Sensible defaults
-let g:easytags_events = ['BufReadPost', 'BufWritePost']
-let g:easytags_async = 1
-let g:easytags_resolve_links = 1
-let g:easytags_suppress_ctags_warning = 1
-
 " ----- majutsushi/tagbar settings -----
 " Open/close tagbar with \b
 nmap <silent> <leader>b :TagbarToggle<CR>
@@ -278,6 +275,9 @@ inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 " Yank without newline...
 nnoremap Y y$
 
+" Remove trailing white spaces on save
+autocmd BufWritePre * :%s/\s\+$//e
+
 
 " Shell like behavior(not recommended).
 set completeopt=longest,menuone,preview
@@ -311,7 +311,7 @@ let g:ackprg = 'ag --vimgrep'
 let g:ansible_extra_syntaxes = "sh.vim python.vim"
 let g:ansible_extra_keywords_highlight = 1
 
-" Relative number toggle based on focus / mode 
+" Relative number toggle based on focus / mode
 augroup numbertoggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
@@ -410,3 +410,4 @@ let g:LanguageClient_serverCommands = {
 
 " use os x clipboard
 set clipboard=unnamed
+
