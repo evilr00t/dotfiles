@@ -33,7 +33,7 @@ window:
   decorations: buttonless
 
 # Display tabs using this many cells (changes require restart)
-tabspaces: 2
+tabspaces: 4
 
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
@@ -63,26 +63,10 @@ font:
   # Point size of the font
   size: 13.0
 
-  # Offset is the extra space around each character. offset.y can be thought of
-  # as modifying the linespacing, and offset.x as modifying the letter spacing.
-  #offset:
-    #  x: 0.0
-    #y: 0.0
-
-  # Glyph offset determines the locations of the glyphs within their cells with
-  # the default being at the bottom. Increase the x offset to move the glyph to
-  # the right, increase the y offset to move the glyph upward.
-  #glyph_offset:
-    #x: 0.0
-    #y: 0.0
-
   # OS X only: use thin stroke font rendering. Thin strokes are suitable
   # for retina displays, but for non-retina you probably want this set to
   # false.
-  use_thin_strokes: false
-
-# Should display the render timer
-render_timer: false
+  # use_thin_strokes: false
 
 # Use custom cursor colors. If true, display the cursor in the cursor.foreground
 # and cursor.background colors, otherwise invert the colors of the cursor.
@@ -227,7 +211,7 @@ visual_bell:
   duration: 0
 
 # Background opacity
-background_opacity: 1.0
+# background_opacity: 1.0
 
 # Mouse bindings
 #
@@ -280,9 +264,9 @@ dynamic_title: true
 # - Underline
 # - Beam
 cursor:
-  style: Block
-  hide_when_typing: false
-  unfocused_hollow_cursor: true
+  style: Beam
+  #hide_when_typing: false
+  #unfocused_hollow_cursor: true
 
 # Live config reload (changes require restart)
 live_config_reload: true
@@ -294,8 +278,8 @@ live_config_reload: true
 #
 shell:
   program: /bin/zsh
-  args:
-    - --login
+  #  args:
+  #  - --login
 
 # Key bindings
 #
