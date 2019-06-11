@@ -58,8 +58,9 @@ Plugin 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plugin 'zchee/deoplete-jedi'
-Plugin 'zchee/deoplete-go', { 'do': 'make' }
+Plugin 'deoplete-plugins/deoplete-jedi'
+Plugin 'deoplete-plugins/deoplete-go', { 'do': 'make' }
+Plugin 'Shougo/neco-syntax'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'szw/vim-maximizer'
 "Plugin 'sjl/gundo.vim'
@@ -67,7 +68,6 @@ Plugin 'mbbill/undotree'
 Plugin 'w0rp/ale'
 Plugin 'martinda/Jenkinsfile-vim-syntax'
 Plugin 'auxiliary/vim-layout'
-Plugin 'liuchengxu/space-vim-dark'
 
 " ----- Working with Git ----------------------------------------------
 Plugin 'airblade/vim-gitgutter'
@@ -88,6 +88,7 @@ Plugin 'jez/vim-ispc'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'reedes/vim-pencil'
 Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
 Plugin 'gabrielelana/vim-markdown'
 Plugin 'pearofducks/ansible-vim'
 Plugin 't9md/vim-chef'
@@ -169,10 +170,9 @@ set t_Co=256
 
 " Set the colorscheme
 try
-  colorscheme space-vim-dark
-  let g:jellybeans_use_lowcolor_black = 1
   let g:gruvbox_contrast_dark = 'medium'
   hi Comment cterm=italic
+  colorscheme gruvbox
 catch
   colorscheme slate
 endtry
@@ -188,6 +188,8 @@ set softtabstop=2
 set expandtab
 " 'hybrid' mode number
 set number relativenumber
+
+set termguicolors
 
 " LightLine Preferences
 let g:tmuxline_powerline_separators = 0
@@ -410,4 +412,5 @@ let g:LanguageClient_serverCommands = {
 
 " use os x clipboard
 set clipboard=unnamed
-
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
