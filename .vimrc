@@ -77,6 +77,7 @@ Plugin 'juliosueiras/vim-terraform-completion'
 
 " ----- Other text editing features -----------------------------------
 Plugin 'Raimondi/delimitMate'
+Plugin 'machakann/vim-highlightedyank'
 
 " ----- man pages, tmux -----------------------------------------------
 Plugin 'jez/vim-superman'
