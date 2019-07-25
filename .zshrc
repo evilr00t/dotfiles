@@ -115,10 +115,7 @@ fi
 export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS='
---color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
---color info:108,prompt:109,spinner:108,pointer:168,marker:168
-'
+export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --min-height=15'
 
 source $HOME/repos/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/repos/dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -132,34 +129,34 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta,bold'
 #ZSH_HIGHLIGHT_STYLES[cursor]='bg=blue'
 # main
 # default
-ZSH_HIGHLIGHT_STYLES[default]='none'                                 # стандартный цвет
+ZSH_HIGHLIGHT_STYLES[default]='none'
 # unknown
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'                         # неизвестная команда
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
 # command
-ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=magenta,bold'                # зарезервированное слово
-ZSH_HIGHLIGHT_STYLES[alias]='fg=yellow,bold'                         # алиас
-ZSH_HIGHLIGHT_STYLES[builtin]='fg=green,bold'                        # built-in функция (например, echo)
-ZSH_HIGHLIGHT_STYLES[function]='fg=green,bold'                       # функция, определенная в шелле
-ZSH_HIGHLIGHT_STYLES[command]='fg=green'                             # обычная команда
-ZSH_HIGHLIGHT_STYLES[precommand]='fg=blue,bold'                      # пре-команда (например, sudo в sudo cp ...)
-ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=yellow'                   # разделитель команд, && || ;
-ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=green'                      # команда, найденная в путях (hashed)
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue,bold'            # флаги типа -*
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue,bold'            # флаги типа --*
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=magenta,bold'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=yellow,bold'
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[function]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[command]='fg=green'
+ZSH_HIGHLIGHT_STYLES[precommand]='fg=blue,bold'
+ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=green'
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue,bold'
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue,bold'
 # path
-ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,bold'                            # станлартный путь
-ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=cyan'                          # префикс пути
-ZSH_HIGHLIGHT_STYLES[path_approx]='fg=cyan'                          # примерный путь
+ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[path_approx]='fg=cyan'
 # shell
-ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'                             # шаблон (например, /dev/sda*)
-ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=blue'                    # подстановка из истории (команда, начинающаяся с !)
-ZSH_HIGHLIGHT_STYLES[assign]='fg=magenta'                            # присвоение
-ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=cyan'        # конструкции типа "$VARIABLE"
-ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=cyan'          # конструкции типа \"
-ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=blue'                 # конструкции типа `command`
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[assign]='fg=magenta'
+ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=blue'
 # quotes
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow,underline'   # конструкции типа 'text'
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'             # конструкции типа "text"
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow,underline'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'
 
 
 # load at the end...
