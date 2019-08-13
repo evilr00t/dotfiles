@@ -59,8 +59,14 @@ diff()
 
 cat()
 {
-bat --paging=never -p --theme='TwoDark' $@
+bat -pp --theme='1337' $@
 }
+
+lcat()
+{
+bat --paging=always -p --theme='1337' $@
+}
+
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
@@ -91,10 +97,10 @@ code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 fo() {
   local files
   IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
-  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+  [[ -n "$files" ]] && ${EDITOR:-nvim} "${files[@]}"
 }
 
-# tm [SESSION_NAME | FUZZY PATTERN] - create new tmux session, or switch to existing one.
+# ftm [SESSION_NAME | FUZZY PATTERN] - create new tmux session, or switch to existing one.
 # Running `tm` will let you fuzzy-find a session mame
 # Passing an argument to `ftm` will switch to that session if it exists or create it otherwise
 ftm() {
@@ -105,7 +111,7 @@ ftm() {
   session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
 }
 
-# tm [SESSION_NAME | FUZZY PATTERN] - delete tmux session
+# ftmk [SESSION_NAME | FUZZY PATTERN] - delete tmux session
 # Running `tm` will let you fuzzy-find a session mame to delete
 # Passing an argument to `ftm` will delete that session if it exists
 ftmk() {
@@ -131,7 +137,7 @@ alias ssh='ssh -C'
 alias lsnew="ls -rl *(D.om[1,10])"     # display the newest files
 alias lsold="ls -rtlh *(D.om[1,10])"   # display the oldest files
 alias lssmall="ls -Srl *(.oL[1,10])"   # display the smallest files
-alias piplist='pip freeze | cut -d = -f 1 | xargs -n 1 pip search | grep -B2 LATEST:'
+alias piplist='pip3 freeze | cut -d = -f 1 | xargs -n 1 pip3 search | grep -B2 LATEST:'
 alias py="source virt/bin/activate;clear"
 alias grep='ggrep'
 alias shrug="echo '¯\_(ツ)_/¯' | pbcopy";
@@ -186,4 +192,14 @@ function ds() {
   cid=$(docker ps | sed 1d | fzf -q "$1" | awk '{print $1}')
 
   [ -n "$cid" ] && docker stop "$cid"
+}
+
+function kp() {
+local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
+
+if [ "x$pid" != "x" ]
+then
+  echo $pid | xargs kill -${1:-9}
+  kp
+fi
 }

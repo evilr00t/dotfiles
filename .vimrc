@@ -1,7 +1,7 @@
 " File: .vimrc
 " Original Author: Jake Zimmerman <jake@zimmerman.io>
 " Author: Karol Czeryna <k@e-dot.uk>
-" Update: Thu 21 Feb 10:01:52 2019
+" Update: Thu 20 Jun 12:12:49 2019
 " How I configure Vim :P
 "
 
@@ -20,6 +20,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'itchyny/lightline.vim'
 
 " ----- Vim as a programmer's text editor -----------------------------
+Plugin 'metalelf0/supertab'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'python-mode/python-mode'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'Glench/Vim-Jinja2-Syntax'
@@ -32,22 +34,17 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
-" Plugin 'scrooloose/syntastic'
 Plugin 'xolox/vim-misc'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-endwise'
 Plugin 'majutsushi/tagbar'
-" Plugin 'kien/ctrlp.vim' " since now on - we use ack.vim with fzf.vim
 Plugin 'vim-scripts/a.vim'
-" Plugin 'davidhalter/jedi-vim'
-Plugin 'ervandew/supertab'
 " colorschemes !
 Plugin 'morhetz/gruvbox'
+Plugin 'sainnhe/gruvbox-material'
 
-"Plugin 'Valloric/YouCompleteMe'
-"
 Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plugin 'AndrewRadev/splitjoin.vim'
 
@@ -73,6 +70,7 @@ Plugin 'auxiliary/vim-layout'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'hashivim/vim-terraform'
+Plugin 'cespare/vim-toml'
 Plugin 'juliosueiras/vim-terraform-completion'
 
 " ----- Other text editing features -----------------------------------
@@ -93,8 +91,6 @@ Plugin 'junegunn/limelight.vim'
 Plugin 'gabrielelana/vim-markdown'
 Plugin 'pearofducks/ansible-vim'
 Plugin 't9md/vim-chef'
-"Plugin 'SirVer/ultisnips'
-"Plugin 'honza/vim-snippets'
 
 " ---- Extras/Advanced plugins ----------------------------------------
 " Easily surround chunks of text
@@ -103,14 +99,17 @@ Plugin 'tpope/vim-surround'
 Plugin 'godlygeek/tabular'
 " Automaticall insert the closing HTML tag
 Plugin 'HTML-AutoCloseTag'
-" Make tmux look like vim-airline (read README for extra instructions)
-"Plugin 'edkolev/tmuxline.vim'
 " All the other syntax plugins I use
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'hashivim/vim-vagrant'
 Plugin 'othree/html5.vim'
 Plugin 'hail2u/vim-css3-syntax'
+Plugin 'mattn/emmet-vim'
+Plugin 'mhartington/oceanic-next'
+Plugin 'agfline/c-syntax.vim'
+Plugin 'segeljakt/vim-silicon'
+
 
 
 call vundle#end()
@@ -135,8 +134,7 @@ set hidden
 set autoread
 set ttyfast
 set modeline
-" don't wrap lines automagically... it's pissing me off!
-set nowrap
+set wrap
 " insensitive search
 set ignorecase
 set smartcase
@@ -161,7 +159,7 @@ set colorcolumn=81
 syntax on
 set mouse=a
 set formatoptions=tcqronj
-set completeopt-=preview
+set termguicolors
 
 " Toggle this to "light" for light colorscheme
 set background=dark
@@ -171,9 +169,11 @@ set t_Co=256
 
 " Set the colorscheme
 try
-  let g:gruvbox_contrast_dark = 'medium'
-  hi Comment cterm=italic
-  colorscheme gruvbox
+  " let g:gruvbox_contrast_dark = 'medium'
+  " hi Comment cterm=italic
+  " let g:oceanic_next_terminal_bold = 1
+  " let g:oceanic_next_terminal_italic = 1
+  colorscheme gruvbox-material-soft
 catch
   colorscheme slate
 endtry
@@ -190,7 +190,7 @@ set expandtab
 " 'hybrid' mode number
 set number relativenumber
 
-set termguicolors
+
 
 " LightLine Preferences
 let g:tmuxline_powerline_separators = 0
@@ -274,7 +274,9 @@ nnoremap <F5> "=strftime("%c")<CR>P
 inoremap <F5> <C-R>=strftime("%c")<CR>
 " Remove all whitespaces
 nnoremap <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+" inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " Yank without newline...
 nnoremap Y y$
 
@@ -283,7 +285,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 
 " Shell like behavior(not recommended).
-set completeopt=longest,menuone,preview
+set completeopt=longest,menuone,noinsert
 
 " ALE - Error and warning signs.
 let g:ale_sign_error = '✗'
@@ -292,7 +294,7 @@ highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
 highlight SpecialKey ctermfg=124 guifg=#af3a03
 let g:ale_linters = {
-  \ 'python': ['flake8', 'pylint'],
+  \ 'python': ['flake8'],
   \ }
 
 let g:ale_echo_msg_error_str = 'E'
@@ -302,10 +304,10 @@ let g:ale_set_highlights = 0
 
 
 " SuperTab
-let g:SuperTabLongestEnhanced=1
-let g:SuperTabLongestHighlight=1
+"let g:SuperTabLongestEnhanced=1
+"let g:SuperTabLongestHighlight=1
 " close the preview window when you're not using it
-let g:SuperTabClosePreviewOnPopupClose = 1
+"let g:SuperTabClosePreviewOnPopupClose = 1
 
 " Tell ack.vim to use ag (the Silver Searcher) instead
 let g:ackprg = 'ag --vimgrep'
@@ -369,6 +371,7 @@ au FileType markdown syn sync fromstart
 
 " autoreload file if cursor does not move
 au CursorHold,CursorHoldI * checktime
+augroup END
 
 "python3 << EOF
 "import vim
@@ -381,7 +384,7 @@ au CursorHold,CursorHoldI * checktime
 "         return "0"
 "vim.command("let g:pymode_rope = " + is_git_repo())
 "EOF
-augroup END
+
 
 
 function! WrapForTmux(s)
@@ -405,7 +408,9 @@ function! XTermPasteBegin()
 endfunction
 
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
 let g:deoplete#enable_at_startup = 1
+
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:LanguageClient_serverCommands = {
     \'python' : ['pyls']
@@ -415,3 +420,36 @@ let g:LanguageClient_serverCommands = {
 set clipboard=unnamed
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+let g:user_emmet_mode='a'    "enable all function in all mode.
+augroup EmmetSettings
+  autocmd! FileType html imap <tab> <plug>(emmet-expand-abbr)
+augroup END
+
+let g:gutentags_enabled = 0
+let g:deoplete#sources#jedi#show_docstring = 1
+
+let g:python3_host_prog  = '/usr/local/bin/python3'
+
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+
+set completeopt+=noinsert
+" deoplete.nvim recommend
+set completeopt+=noselect
+let g:terraform_align=1
+
+let g:silicon = {
+      \ 'theme':              'Dracula',
+      \ 'font':                  'PragmataPro',
+      \ 'background':         '#aaaaff',
+      \ 'shadow-color':       '#555555',
+      \ 'line-pad':                   2,
+      \ 'pad-horiz':                 0,
+      \ 'pad-vert':                 0,
+      \ 'shadow-blur-radius':         0,
+      \ 'shadow-offset-x':            0,
+      \ 'shadow-offset-y':            0,
+      \ 'line-number':           v:true,
+      \ 'round-corner':          v:true,
+      \ 'window-controls':       v:true,
+      \ }

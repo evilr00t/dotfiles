@@ -25,8 +25,8 @@ window:
   # Units are physical pixels; this is not DPI aware.
   # (change requires restart)
   padding:
-    x: 5
-    y: 5
+    x: 4
+    y: 4
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
@@ -44,20 +44,24 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    # family: PragmataPro
-    family: Fantasque Sans Mono
+    #family: PragmataPro
+    family: Iosevka Custom
     style: Regular
 
   # The bold font face
   bold:
-    # family: PragmataPro
-    family: Fantasque Sans Mono
+    #family: PragmataPro
+    family: Iosevka Custom
+    #family: Hack
+    # family: Inconsolata Nerd Font
     style: Bold
 
   # The italic font face
   italic:
-    # family: PragmataPro
-    family: Fantasque Sans Mono
+    #family: PragmataPro
+    family: Iosevka Custom
+    #family: Hack
+    # family: Inconsolata Nerd Font
     style: Italic
 
   # Point size of the font
@@ -66,7 +70,7 @@ font:
   # OS X only: use thin stroke font rendering. Thin strokes are suitable
   # for retina displays, but for non-retina you probably want this set to
   # false.
-  # use_thin_strokes: false
+  use_thin_strokes: true
 
 # Use custom cursor colors. If true, display the cursor in the cursor.foreground
 # and cursor.background colors, otherwise invert the colors of the cursor.
@@ -76,36 +80,60 @@ font:
 # Colors (Darkside)
 # Colors (Pencil Dark)
 colors:
+  primary:
+    background: '0x282828'
+    foreground: '0xdfbf8e'
+
+  normal:
+    black:   '0x665c54'
+    red:     '0xea6962'
+    green:   '0xa9b665'
+    yellow:  '0xe78a4e'
+    blue:    '0x7daea3'
+    magenta: '0xd3869b'
+    cyan:    '0x89b482'
+    white:   '0xdfbf8e'
+
+  bright:
+    black:   '0x928374'
+    red:     '0xea6962'
+    green:   '0xa9b665'
+    yellow:  '0xe3a84e'
+    blue:    '0x7daea3'
+    magenta: '0xd3869b'
+    cyan:    '0x89b482'
+    white:   '0xdfbf8e'
  # Default Colors
- primary:
-   #background: "0x222324"
-   #foreground: "0xBABABA"
+ # primary:
+   # background: "0x222324"
+   # foreground: "0xBABABA"
    #
     # hard contrast: background = '0x1d2021'
-    background: '0x212632'
+    # background: '0x212632'
     # soft contrast: background = '0x32302f'
-    foreground: '0xd9d7cd'
+    # foreground: '0xd9d7cd'
+    #
  # Normal colors
- normal:
-   black:   '0x212632'
-   red:     '0xf07078'
-   green:   '0xbae67d'
-   yellow:  '0xffcb65'
-   blue:    '0x36a3d8'
-   magenta: '0xd4bffe'
-   cyan:    '0x95e6ca'
-   white:   '0xc7c7c7'
- # Bright colors
- bright:
-   black:   '0x676767'
-   red:     '0xf07078'
-   green:   '0xcbe544'
-   yellow:  '0xffde7f'
-   blue:    '0x6871ff'
-   magenta: '0xff76ff'
-   cyan:    '0xa6fce1'
-   white:   '0xfeffff'
-#colors:
+ #  normal:
+ #    black:   '0x212632'
+ #    red:     '0xf07078'
+ #    green:   '0xbae67d'
+ #    yellow:  '0xffcb65'
+ #    blue:    '0x36a3d8'
+ #    magenta: '0xd4bffe'
+ #    cyan:    '0x95e6ca'
+ #    white:   '0xc7c7c7'
+ #  # Bright colors
+ #  bright:
+ #    black:   '0x676767'
+ #    red:     '0xf07078'
+ #    green:   '0xcbe544'
+ #    yellow:  '0xffde7f'
+ #    blue:    '0x6871ff'
+ #    magenta: '0xff76ff'
+ #    cyan:    '0xa6fce1'
+ #    white:   '0xfeffff'
+# colors:
 #  primary:
 #    background: "0x222324"
 #    foreground: "0xBABABA"
@@ -249,14 +277,12 @@ mouse:
   #
   # To disable this completely, set `faux_scrollback_lines` to 0.
   faux_scrolling_lines: 1
+  url:
+    launcher: open
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
-
-dynamic_title: true
-
-
-
+  save_to_clipboard: true
 # Style of the cursor
 #
 # Values for 'cursor_style':
@@ -265,8 +291,7 @@ dynamic_title: true
 # - Beam
 cursor:
   style: Beam
-  #hide_when_typing: false
-  #unfocused_hollow_cursor: true
+  unfocused_hollow: false
 
 # Live config reload (changes require restart)
 live_config_reload: true
@@ -319,6 +344,8 @@ shell:
 key_bindings:
   - { key: V,        mods: Command, action: Paste                        }
   - { key: C,        mods: Command, action: Copy                         }
+  - { key: Paste,                   action: Paste                        }
+  - { key: Copy,                    action: Copy                         }
   - { key: H,        mods: Command, action: Hide                         }
   - { key: Q,        mods: Command, action: Quit                         }
   - { key: W,        mods: Command, action: Quit                         }
@@ -331,8 +358,6 @@ key_bindings:
   - { key: Minus,    mods: Command, action: DecreaseFontSize             }
   - { key: K,        mods: Command, action: ClearHistory                 }
   - { key: K,        mods: Command, chars: "\x0c"                        }
-  - { key: L,        mods: Control, action: ClearLogNotice               }
-  - { key: L,        mods: Control, chars: "\x0c"                        }
   - { key: PageUp,   mods: Shift,   chars: "\x1b[5;2~"                   }
   - { key: PageUp,   mods: Control, chars: "\x1b[5;5~"                   }
   - { key: PageUp,                  chars: "\x1b[5~"                     }
@@ -423,28 +448,11 @@ key_bindings:
   - { key: F9,       mods: Command, chars: "\x1b[20;3~"                  }
   - { key: F10,      mods: Command, chars: "\x1b[21;3~"                  }
   - { key: F11,      mods: Command, chars: "\x1b[23;3~"                  }
+  - { key: B,        mods: Alt,     chars: "\x1bb"                       }
+  - { key: F,        mods: Alt,     chars: "\x1bf"                       }
   - { key: F12,      mods: Command, chars: "\x1b[24;3~"                  }
-  - { key: D,        mods: Command,       chars: "\x06\x76" }
-  - { key: D,        mods: Command|Shift, chars: "\x06\x73" }
-  - { key: W,        mods: Command,       chars: "\x06\x78" }
-  - { key: H,        mods: Command,       chars: "\x06\x68" }
-  - { key: J,        mods: Command,       chars: "\x06\x6a" }
-  - { key: K,        mods: Command,       chars: "\x06\x6b" }
-  - { key: L,        mods: Command,       chars: "\x06\x6c" }
-  - { key: T,        mods: Command,       chars: "\x06\x63" }
-  - { key: RBracket, mods: Command|Shift, chars: "\x06\x6e" }
-  - { key: LBracket, mods: Command|Shift, chars: "\x06\x70" }
-  - { key: Return,   mods: Command|Shift, chars: "\x06\x7a" }
-  - { key: Key1,     mods: Command,       chars: "\x06\x31" }
-  - { key: Key2,     mods: Command,       chars: "\x06\x32" }
-  - { key: Key3,     mods: Command,       chars: "\x06\x33" }
-  - { key: Key4,     mods: Command,       chars: "\x06\x34" }
-  - { key: Key5,     mods: Command,       chars: "\x06\x35" }
-  - { key: Key6,     mods: Command,       chars: "\x06\x36" }
-  - { key: Key7,     mods: Command,       chars: "\x06\x37" }
-  - { key: Key8,     mods: Command,       chars: "\x06\x38" }
-  - { key: Key9,     mods: Command,       chars: "\x06\x39" }
-  - { key: Left,     mods: Command,       chars: "\x06\x48" }
-  - { key: Down,     mods: Command,       chars: "\x06\x4a" }
-  - { key: Up,       mods: Command,       chars: "\x06\x4b" }
-  - { key: Right,    mods: Command,       chars: "\x06\x4c" }
+  - { key: LBracket, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-pane", "-L"] } }
+  - { key: RBracket, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-pane", "-R"] } }
+  - { key: LBracket, mods: Command|Shift, command: { program: "/usr/local/bin/tmux", args: ["prev"] } }
+  - { key: RBracket, mods: Command|Shift, command: { program: "/usr/local/bin/tmux", args: ["next"] } }
+  - { key: NumpadEnter,             chars: "\n"                          }
