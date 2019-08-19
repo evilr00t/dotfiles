@@ -1,7 +1,7 @@
 " File: .vimrc
 " Original Author: Jake Zimmerman <jake@zimmerman.io>
 " Author: Karol Czeryna <k@e-dot.uk>
-" Update: Thu 20 Jun 12:12:49 2019
+" Update: 2019-08-19T10:44:36+0100
 " How I configure Vim :P
 "
 
@@ -202,8 +202,10 @@ nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F9> :bprev<CR>
 nmap <F10> :bnext<CR>
-nmap ; :Buffers<CR>
-nmap <Leader>f :Files<CR>
+nmap <Leader>b :Buffers<CR>
+nmap <Leader>h :History<CR>
+nmap <Leader>f :GFiles<CR>
+nmap <Leader>F :Files<CR>
 nmap <Leader>q :Tags<CR>
 " Allows you to save files you opened without write permissions via sudo
 cmap w!! w !sudo tee %
@@ -224,7 +226,7 @@ set tags=~/.vimtags
 " Sensible defaults
 " ----- majutsushi/tagbar settings -----
 " Open/close tagbar with \b
-nmap <silent> <leader>b :TagbarToggle<CR>
+" nmap <silent> <leader>T :TagbarToggle<CR>
 " Uncomment to open tagbar automatically whenever possible
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
 
@@ -270,8 +272,8 @@ let g:go_fmt_command = "gofmt"
 
 nmap <leader>ne :NERDTree<cr>
 
-nnoremap <F5> "=strftime("%c")<CR>P
-inoremap <F5> <C-R>=strftime("%c")<CR>
+nnoremap <F5> "=strftime("%FT%T%z")<CR>P
+inoremap <F5> <C-R>=strftime("%FT%T%z")<CR>
 " Remove all whitespaces
 nnoremap <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 " inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
@@ -280,12 +282,33 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " Yank without newline...
 nnoremap Y y$
 
+""" FROM https://routley.io/posts/nine-months-with-vim/
+
+" Open new splits to right and bottom
+set splitbelow
+set splitright
+
+" Open the current file in a new vertial split with '='
+nnoremap = :vsplit<cr>
+
+" Easy split navigation
+map <C-j> <C-w>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Simplify using tabs using alt+<h/l> (Polish Pro)
+nnoremap ł gT
+nnoremap ķ gt
+nnoremap T :tabnew<cr>
+
 " Remove trailing white spaces on save
 autocmd BufWritePre * :%s/\s\+$//e
 
 
 " Shell like behavior(not recommended).
-set completeopt=longest,menuone,noinsert
+" set completeopt=longest,menuone,noinsert
+set wildmode=longest,list,full
 
 " ALE - Error and warning signs.
 let g:ale_sign_error = '✗'
@@ -295,6 +318,15 @@ highlight link ALEErrorSign Title
 highlight SpecialKey ctermfg=124 guifg=#af3a03
 let g:ale_linters = {
   \ 'python': ['flake8'],
+  \ 'go': ['goimports', 'go build'],
+  \ 'markdown': []
+  \ }
+
+" Custom ALE fixers
+let g:ale_fixers = {
+  \ 'go': ['goimports'],
+  \ 'python': ['yapf'],
+  \ 'javascript': ['prettier']
   \ }
 
 let g:ale_echo_msg_error_str = 'E'
@@ -440,12 +472,12 @@ let g:terraform_align=1
 
 let g:silicon = {
       \ 'theme':              'Dracula',
-      \ 'font':                  'PragmataPro',
+      \ 'font':               'PragmataPro',
       \ 'background':         '#aaaaff',
       \ 'shadow-color':       '#555555',
       \ 'line-pad':                   2,
-      \ 'pad-horiz':                 0,
-      \ 'pad-vert':                 0,
+      \ 'pad-horiz':                  0,
+      \ 'pad-vert':                   0,
       \ 'shadow-blur-radius':         0,
       \ 'shadow-offset-x':            0,
       \ 'shadow-offset-y':            0,
@@ -453,3 +485,7 @@ let g:silicon = {
       \ 'round-corner':          v:true,
       \ 'window-controls':       v:true,
       \ }
+
+" Ctrl + _ for toggling comments
+nmap <C-_>   <Plug>NERDCommenterToggle
+vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
