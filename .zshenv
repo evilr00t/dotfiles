@@ -147,6 +147,10 @@ alias local_svcs='lsof -i -n -P|grep LISTEN'
 alias ls='gls -hovA --indicator-style=file-type --color=always --group-directories-first --time-style="+%b %_d %Y %H:%M:%S"'
 alias la='gls -A'
 
+
+# k8s related
+alias kube-bash='kubectl run --rm -i --tty $(whoami)-shell --image=evilroot/k8s-debug-pod --restart=Never'
+
 # TODO: based on variable use exa or GNU ls
 unalias ls
 alias ls='exa --long -g --git -a -s modified'
