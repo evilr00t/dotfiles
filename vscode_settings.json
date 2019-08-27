@@ -1,21 +1,28 @@
 // Place your settings in this file to overwrite the default settings
 {
-        "files.associations": {
-          "*.yml": "ansible",
-          "Vagrantfile": "ruby"
-        },
-        "editor.fontFamily": "Fira Code,PragmataPro,Ubuntu Mono",
-        "editor.fontSize": 12,
-        "editor.fontLigatures": true,
-        "editor.cursorBlinking": "solid",
-         # https://github.com/Microsoft/vscode/issues/22900
-        "editor.minimap.enabled": true,
-        "typescript.check.tscVersion": false,
-        "editor.wordWrap": true,
-        "workbench.colorTheme": "1337",
-        "workbench.iconTheme": "file-icons",
-        "python.pythonPath": "/Users/evilroot/py-env/bin/python",
-        "editor.autoClosingBrackets": false,
-        "editor.renderWhitespace": "all",
-        "diffEditor.ignoreTrimWhitespace": false
+"files.associations":
+  {
+  "*.yml": "ansible",
+  "Vagrantfile": "ruby",
+  },
+"python.venvPath": "~/py-env3",
+"editor.fontFamily": "Hack,PragmataPro,Ubuntu Mono",
+"editor.fontSize": 12,
+"editor.fontLigatures": true,
+"editor.minimap.enabled": false,
+"typescript.check.tscVersion": false,
+"editor.wordWrap": "on",
+"editor.autoClosingBrackets": false,
+"editor.renderWhitespace": "all",
+"workbench.iconTheme": "vscode-great-icons",
+"window.zoomLevel": 0,
+"explorer.confirmDelete": false,
+"workbench.colorTheme": "One Monokai",
+"editor.wordWrapColumn": 80,
+"breadcrumbs.enabled": true,
+"explorer.confirmDragAndDrop": false,
+"workbench.startupEditor": "newUntitledFile",
+"editor.tabSize": 2,
+"sqltools.useNodeRuntime": true,
+"python.formatting.provider": "yapf"
 }
