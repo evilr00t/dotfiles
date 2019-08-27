@@ -11,7 +11,7 @@ function get_short_sha() {
 if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
     #PROMPT='%{$fg[cyan]%}%n%{$reset_color%}%{$fg[green]%}[%{$fg[red]%}%~%{$fg[green]%}]$(git_prompt_info)$(git_prompt_status)
 #${return_code}%{$fg[yellow]%}λ%{$reset_color%}: '
-    PROMPT='%{$fg[cyan]%}%{$reset_color%}%{$fg[green]%}[%{$fg[red]%}%~%{$fg[green]%}]$(git_prompt_info)$(get_short_sha)$(git_prompt_status)
+    PROMPT='%{$fg[cyan]%}%{$reset_color%}%{$fg[green]%}[%{$fg[red]%}%~%{$fg[green]%}]$(git_prompt_info)$(get_short_sha)$(git_prompt_status) $(kube_ps1)
 ${return_code}%{$fg[yellow]%}λ%{$reset_color%}: '
 
     ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%} @ %{$fg[blue]%}"

@@ -47,8 +47,13 @@ apb()
 cht() {
     local topic="${1}" ; shift
 
-    curl "cht.sh/${topic}/${*// }"
+    curl -s "cht.sh/${topic}/${*// }"
   }
+
+
+events() {
+  curl -s https://raw.githubusercontent.com/droctothorpe/kubecolor/master/bin/events | sh /dev/stdin
+}
 
 
 diff()

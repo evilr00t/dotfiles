@@ -11,7 +11,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 HIST_STAMPS="dd.mm.yyyy"
 HIST_IGNORE_SPACE="true"
-plugins=(osx django httpie history mvn python history-substring-search git-prompt git z)
+plugins=(osx history history-substring-search git-prompt git z kube-ps1 colored-man-pages)
 autoload -U compinit && compinit
 
 source $ZSH/oh-my-zsh.sh
