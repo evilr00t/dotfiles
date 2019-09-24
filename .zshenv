@@ -25,8 +25,10 @@ fi
 
 # EXPORTS
 
+# GOLANG
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
+# ADD RUST BINARIES
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH
 
 # FUNCTIONS
@@ -42,6 +44,12 @@ apb()
     echo -e "[\e[1;31m\xE2\x9C\x98\e[0m] Oh, yes... you do!"
 
   fi
+}
+
+k8env() {
+  local ke
+  ke=$(cat ~/.work | grep env | tr -d '() {' | awk '{print $1}' | fzf)
+  $ke
 }
 
 cht() {
@@ -97,6 +105,7 @@ fi
 }
 
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+alias mate='/Applications/TextMate.app/Contents/Resources/mate'
 
 # file open using fzf and vim!
 fo() {
@@ -205,7 +214,6 @@ function ds() {
 
 function kp() {
 local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
-
 if [ "x$pid" != "x" ]
 then
   echo $pid | xargs kill -${1:-9}

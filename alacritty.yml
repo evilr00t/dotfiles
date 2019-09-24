@@ -45,13 +45,13 @@ font:
   # The normal (roman) font face to use.
   normal:
     #family: PragmataPro
-    family: Iosevka Custom
+    family: Iosevka evilroot
     style: Regular
 
   # The bold font face
   bold:
     #family: PragmataPro
-    family: Iosevka Custom
+    family: Iosevka evilroot
     #family: Hack
     # family: Inconsolata Nerd Font
     style: Bold
@@ -59,7 +59,7 @@ font:
   # The italic font face
   italic:
     #family: PragmataPro
-    family: Iosevka Custom
+    family: Iosevka evilroot
     #family: Hack
     # family: Inconsolata Nerd Font
     style: Italic

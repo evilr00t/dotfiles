@@ -173,7 +173,7 @@ try
   " hi Comment cterm=italic
   " let g:oceanic_next_terminal_bold = 1
   " let g:oceanic_next_terminal_italic = 1
-  colorscheme gruvbox-material-soft
+  colorscheme gruvbox-material
 catch
   colorscheme slate
 endtry
@@ -195,6 +195,7 @@ set number relativenumber
 " LightLine Preferences
 let g:tmuxline_powerline_separators = 0
 let g:lightline = {'colorscheme': 'one'}
+"let g:lightline = {'colorscheme' : 'gruvbox_material'}
 
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t
@@ -472,7 +473,7 @@ let g:terraform_align=1
 
 let g:silicon = {
       \ 'theme':              'Dracula',
-      \ 'font':               'PragmataPro',
+      \ 'font':               'Iosevka evilroot',
       \ 'background':         '#aaaaff',
       \ 'shadow-color':       '#555555',
       \ 'line-pad':                   2,
