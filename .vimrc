@@ -91,6 +91,7 @@ Plugin 'junegunn/limelight.vim'
 Plugin 'gabrielelana/vim-markdown'
 Plugin 'pearofducks/ansible-vim'
 Plugin 't9md/vim-chef'
+Plugin 'rodjek/vim-puppet'
 
 " ---- Extras/Advanced plugins ----------------------------------------
 " Easily surround chunks of text
@@ -169,6 +170,7 @@ set t_Co=256
 
 " Set the colorscheme
 try
+    let g:gruvbox_material_transparent_background = 1
   " let g:gruvbox_contrast_dark = 'medium'
   " hi Comment cterm=italic
   " let g:oceanic_next_terminal_bold = 1
@@ -177,6 +179,8 @@ try
 catch
   colorscheme slate
 endtry
+
+
 
 hi Comment cterm=italic
 
