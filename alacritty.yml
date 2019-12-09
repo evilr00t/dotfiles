@@ -1,61 +1,29 @@
 ---
-# Configuration for Alacritty, the GPU enhanced terminal emulator
-
-# Any items in the `env` entry below will be added as
-# environment variables. Some entries may override variables
-# set by alacritty it self.
 env:
-  # TERM env customization.
-  #
-  # If this property is not set, alacritty will set it to xterm-256color.
-  #
-  # Note that some xterm terminfo databases don't declare support for italics.
-  # You can verify this by checking for the presence of `smso` and `sitm` in
-  # `infocmp xterm-256color`.
   TERM: xterm-256color
 
 window:
-  # Window dimensions in character columns and lines
-  # (changes require restart)
   dimensions:
     columns: 140
     lines: 35
-
-  # Adds this many blank pixels of padding around the window
-  # Units are physical pixels; this is not DPI aware.
-  # (change requires restart)
   padding:
     x: 4
     y: 4
-
-  # Window decorations
-  # Setting this to false will result in window without borders and title bar.
   decorations: buttonless
 
-# Display tabs using this many cells (changes require restart)
-tabspaces: 4
-
-# When true, bold text is drawn using the bright variant of colors.
+tabspaces: 2
 draw_bold_text_with_bright_colors: true
-
-# Whether the cursor should be a hollow block on window focus loss
-#
-# Font configuration (changes require restart)
 font:
-  # The normal (roman) font face to use.
   normal:
     #family: PragmataPro
     family: Iosevka evilroot
     style: Regular
-
-  # The bold font face
   bold:
     #family: PragmataPro
     family: Iosevka evilroot
     #family: Hack
     # family: Inconsolata Nerd Font
     style: Bold
-
   # The italic font face
   italic:
     #family: PragmataPro
@@ -70,7 +38,7 @@ font:
   # OS X only: use thin stroke font rendering. Thin strokes are suitable
   # for retina displays, but for non-retina you probably want this set to
   # false.
-  use_thin_strokes: true
+  use_thin_strokes: false
 
 # Use custom cursor colors. If true, display the cursor in the cursor.foreground
 # and cursor.background colors, otherwise invert the colors of the cursor.
@@ -81,38 +49,60 @@ font:
 # Colors (Pencil Dark)
 colors:
   primary:
-    background: '0x282828'
-    foreground: '0xdfbf8e'
+    background: '0x222e35'
+    foreground: '0xdcd9c5'
+
+  #normal:
+    #black:   '0x0F161E'
+    #red:     '0x32504E'
+    #green:   '0x595A58'
+    #yellow:  '0xBB4F50'
+    #blue:    '0x2AAB57'
+    #magenta: '0xB7A73C'
+    #cyan:    '0x933E9E'
+    #white:   '0x87e3c2'
+
+  #bright:
+    #black:   '0x5e9e87'
+    #red:     '0x32504E'
+    #green:   '0x595A58'
+    #yellow:  '0xBB4F50'
+    #blue:    '0x2AAB57'
+    #magenta: '0xB7A73C'
+    #cyan:    '0x933E9E'
+    #white:   '0x87e3c2'
+    # --
+  #primary:
+    #background: '0x282828'
+    #foreground: '0xdfbf8e'
 
   normal:
-    black:   '0x665c54'
-    red:     '0xea6962'
-    green:   '0xa9b665'
-    yellow:  '0xe78a4e'
-    blue:    '0x7daea3'
-    magenta: '0xd3869b'
-    cyan:    '0x89b482'
-    white:   '0xdfbf8e'
+    black:   '0x32373e'
+    red:     '0xa02a32'
+    green:   '0xa09e13'
+    yellow:  '0xdf9d1f'
+    blue:    '0x41878a'
+    magenta: '0x902a50'
+    cyan:    '0x578b76'
+    white:   '0xdcd8c0'
 
   bright:
-    black:   '0x928374'
-    red:     '0xea6962'
-    green:   '0xa9b665'
-    yellow:  '0xe3a84e'
-    blue:    '0x7daea3'
-    magenta: '0xd3869b'
-    cyan:    '0x89b482'
-    white:   '0xdfbf8e'
+    black:   '0x464b52'
+    red:     '0xb43e46'
+    green:   '0xb4b227'
+    yellow:  '0xf3b133'
+    blue:    '0x559b9e'
+    magenta: '0xa43e64'
+    cyan:    '0x6b9f8a'
+    white:   '0xf0ecd4'
  # Default Colors
  # primary:
    # background: "0x222324"
    # foreground: "0xBABABA"
    #
-    # hard contrast: background = '0x1d2021'
-    # background: '0x212632'
-    # soft contrast: background = '0x32302f'
-    # foreground: '0xd9d7cd'
-    #
+   # background: '0x212632'
+   # foreground: '0xd9d7cd'
+   #
  # Normal colors
  #  normal:
  #    black:   '0x212632'
@@ -138,80 +128,6 @@ colors:
 #    background: "0x222324"
 #    foreground: "0xBABABA"
 #
-#  # Colors the cursor will use if `custom_cursor_colors` is true
-#  cursor:
-#    text:   '0xf1c1c1'
-#    cursor: '0xff2600'
-#
-#
-#  # Normal colors
-#  normal:
-#    black:    "0x000000"
-#    red:      "0xE8341C"
-#    green:    "0x68C256"
-#    yellow:   "0xF2D42C"
-#    blue:     "0x1C98E8"
-#    magenta:  "0x8E69C9"
-#    cyan:     "0x1C98E8"
-#    white:    "0xBABABA"
-#
-#  # Bright colors
-#  bright:
-#    black:   '0x666666'
-#    red:     '0xff6767'
-#    green:   '0xa0e11e'
-#    yellow:  '0xf7d325'
-#    blue:    '0x1ca1db'
-#    magenta: '0xc48dff'
-#    cyan:    '0x77dfd8'
-#    white:   '0xf2f2f2'
-
-  # Colors (Tomorrow Night Bright)
-  # Normal colors
-  #  normal:
-  #    black:   '0x000000'
-  #    red:     '0xd54e53'
-  #    green:   '0xb9ca4a'
-  #    yellow:  '0xe6c547'
-  #    blue:    '0x7aa6da'
-  #    magenta: '0xc397d8'
-  #    cyan:    '0x70c0ba'
-  #    white:   '0xffffff'
-  #
-  #  # Bright colors
-  #  bright:
-  #    black:   '0x666666'
-  #    red:     '0xff3334'
-  #    green:   '0x9ec400'
-  #    yellow:  '0xe7c547'
-  #    blue:    '0x7aa6da'
-  #    magenta: '0xb77ee0'
-  #    cyan:    '0x54ced6'
-  #    white:   '0xffffff'
-
-  # Colors (Tomorrow Night Bright)
-  # Normal colors
-  #  normal:
-  #    black:   '0x000000'
-  #    red:     '0xd54e53'
-  #    green:   '0xb9ca4a'
-  #    yellow:  '0xe6c547'
-  #    blue:    '0x7aa6da'
-  #    magenta: '0xc397d8'
-  #    cyan:    '0x70c0ba'
-  #    white:   '0xffffff'
-  #
-  #  # Bright colors
-  #  bright:
-  #    black:   '0x666666'
-  #    red:     '0xff3334'
-  #    green:   '0x9ec400'
-  #    yellow:  '0xe7c547'
-  #    blue:    '0x7aa6da'
-  #    magenta: '0xb77ee0'
-  #    cyan:    '0x54ced6'
-  #    white:   '0xffffff'
-
 # Visual Bell
 #
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
@@ -346,9 +262,10 @@ key_bindings:
   - { key: C,        mods: Command, action: Copy                         }
   - { key: Paste,                   action: Paste                        }
   - { key: Copy,                    action: Copy                         }
-  - { key: H,        mods: Command, action: Hide                         }
+    #- { key: H,        mods: Command, action: Hide                         }
   - { key: Q,        mods: Command, action: Quit                         }
   - { key: W,        mods: Command, action: Quit                         }
+  - { key: N,        mods: Command,    action: SpawnNewInstance    }
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
   - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
   - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }
