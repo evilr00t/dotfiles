@@ -48,7 +48,7 @@ apb()
 
 k8env() {
   local ke
-  ke=$(cat ~/.work | grep env | tr -d '() {' | awk '{print $1}' | fzf)
+  ke=$(cat ~/.work | grep -v '^#' | grep env | tr -d '() {' | awk '{print $1}' | fzf)
   $ke
 }
 
@@ -72,12 +72,12 @@ diff()
 
 cat()
 {
-bat -pp --theme='1337' $@
+  bat -pp --theme='1337' $@
 }
 
 lcat()
 {
-bat --paging=always -p --theme='1337' $@
+  bat --paging=always -p --theme='1337' $@
 }
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
@@ -86,23 +86,23 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
 fi
 
 # Old function... now I'm using KeePass...
-pass() {
-if which gpg >/dev/null 2>&1;
-then
-  BIN=gpg
-elif which gpg2 >/dev/null 2>&1;
-then
-  BIN=gpg2
-else
-  echo 'No gnupg installed... exiting'
-  exit 1;
-fi
-if [ -z "$1" ]; then
-  $BIN --quiet -d ~/Dropbox/pass.gpg 2> /dev/null
-else
-  $BIN --quiet -d ~/Dropbox/pass.gpg 2> /dev/null|grep -iA5 $1
-fi
-}
+#pass() {
+#if which gpg >/dev/null 2>&1;
+#then
+  #BIN=gpg
+#elif which gpg2 >/dev/null 2>&1;
+#then
+  #BIN=gpg2
+#else
+  #echo 'No gnupg installed... exiting'
+  #exit 1;
+#fi
+#if [ -z "$1" ]; then
+  #$BIN --quiet -d ~/Dropbox/pass.gpg 2> /dev/null
+#else
+  #$BIN --quiet -d ~/Dropbox/pass.gpg 2> /dev/null|grep -iA5 $1
+#fi
+#}
 
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 alias mate='/Applications/TextMate.app/Contents/Resources/mate'
@@ -213,10 +213,19 @@ function ds() {
 }
 
 function kp() {
-local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
-if [ "x$pid" != "x" ]
-then
-  echo $pid | xargs kill -${1:-9}
-  kp
-fi
+  local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
+  if [ "x$pid" != "x" ]
+  then
+    echo $pid | xargs kill -${1:-9}
+    kp
+  fi
+}
+
+# Helper for temp files
+function td {
+  cd $(mktemp -d /tmp/$1.XXXX)
+}
+
+function t {
+  cd $(mktemp /tmp/$1.XXXX)
 }
