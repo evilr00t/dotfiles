@@ -494,3 +494,8 @@ let g:silicon = {
 " Ctrl + _ for toggling comments
 nmap <C-_>   <Plug>NERDCommenterToggle
 vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
+if exists('$TMUX')
+  autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " . expand("%:t"))
+  autocmd VimLeave * call system("tmux setw automatic-rename")
+endif
+
