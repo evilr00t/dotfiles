@@ -1,0 +1,23 @@
+diff --git a/font/src/darwin/mod.rs b/font/src/darwin/mod.rs
+index f95802f..249ad4d 100644
+--- a/font/src/darwin/mod.rs
++++ b/font/src/darwin/mod.rs
+@@ -502,12 +502,12 @@ impl Font {
+             cg_context.set_font_smoothing_style(16);
+         }
+ 
+-        cg_context.set_allows_font_smoothing(true);
+-        cg_context.set_should_smooth_fonts(true);
+-        cg_context.set_allows_font_subpixel_quantization(true);
+-        cg_context.set_should_subpixel_quantize_fonts(true);
+-        cg_context.set_allows_font_subpixel_positioning(true);
+-        cg_context.set_should_subpixel_position_fonts(true);
++        cg_context.set_allows_font_smoothing(false);
++        cg_context.set_should_smooth_fonts(false);
++        cg_context.set_allows_font_subpixel_quantization(false);
++        cg_context.set_should_subpixel_quantize_fonts(false);
++        cg_context.set_allows_font_subpixel_positioning(false);
++        cg_context.set_should_subpixel_position_fonts(false);
+         cg_context.set_allows_antialiasing(true);
+         cg_context.set_should_antialias(true);
+ 
