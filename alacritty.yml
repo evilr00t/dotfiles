@@ -12,22 +12,16 @@ window:
   decorations: buttonless
 
 tabspaces: 2
-draw_bold_text_with_bright_colors: true
+draw_bold_text_with_bright_colors: false
 font:
   normal:
-    family: Victor Mono
-    #family: Iosevka evilroot
+    family: IBM Plex Mono
     style: Regular
   bold:
-    family: Victor Mono
-    #family: Iosevka evilroot
-    # family: Inconsolata Nerd Font
+    family: IBM Plex Mono
     style: Bold
-  # The italic font face
   italic:
-    family: Victor Mono
-    #family: Iosevka evilroot
-    # family: Inconsolata Nerd Font
+    family: IBM Plex Mono
     style: Italic
 
   # Point size of the font
@@ -36,7 +30,7 @@ font:
   # OS X only: use thin stroke font rendering. Thin strokes are suitable
   # for retina displays, but for non-retina you probably want this set to
   # false.
-  use_thin_strokes: false
+  use_thin_strokes: true
 
 # Use custom cursor colors. If true, display the cursor in the cursor.foreground
 # and cursor.background colors, otherwise invert the colors of the cursor.
@@ -47,84 +41,26 @@ font:
 # Colors (Pencil Dark)
 colors:
   primary:
-    background: '0x222e35'
-    foreground: '0xdcd9c5'
-
-  #normal:
-    #black:   '0x0F161E'
-    #red:     '0x32504E'
-    #green:   '0x595A58'
-    #yellow:  '0xBB4F50'
-    #blue:    '0x2AAB57'
-    #magenta: '0xB7A73C'
-    #cyan:    '0x933E9E'
-    #white:   '0x87e3c2'
-
-  #bright:
-    #black:   '0x5e9e87'
-    #red:     '0x32504E'
-    #green:   '0x595A58'
-    #yellow:  '0xBB4F50'
-    #blue:    '0x2AAB57'
-    #magenta: '0xB7A73C'
-    #cyan:    '0x933E9E'
-    #white:   '0x87e3c2'
-    # --
-  #primary:
-    #background: '0x282828'
-    #foreground: '0xdfbf8e'
-
+    background: '0x323232'
+    foreground: '0xd8d8d8'
   normal:
-    black:   '0x32373e'
-    red:     '0xa02a32'
-    green:   '0xa09e13'
-    yellow:  '0xdf9d1f'
-    blue:    '0x41878a'
-    magenta: '0x902a50'
-    cyan:    '0x578b76'
-    white:   '0xdcd8c0'
-
+    black:   '0x4c4c4c'
+    red:     '0xff005f'
+    green:   '0xa4d32d'
+    yellow:  '0xf6c336'
+    blue:    '0x5496ff'
+    magenta: '0x9e6ffe'
+    cyan:    '0x218693'
+    white:   '0xd8d8d8'
   bright:
-    black:   '0x464b52'
-    red:     '0xb43e46'
-    green:   '0xb4b227'
-    yellow:  '0xf3b133'
-    blue:    '0x559b9e'
-    magenta: '0xa43e64'
-    cyan:    '0x6b9f8a'
-    white:   '0xf0ecd4'
- # Default Colors
- # primary:
-   # background: "0x222324"
-   # foreground: "0xBABABA"
-   #
-   # background: '0x212632'
-   # foreground: '0xd9d7cd'
-   #
- # Normal colors
- #  normal:
- #    black:   '0x212632'
- #    red:     '0xf07078'
- #    green:   '0xbae67d'
- #    yellow:  '0xffcb65'
- #    blue:    '0x36a3d8'
- #    magenta: '0xd4bffe'
- #    cyan:    '0x95e6ca'
- #    white:   '0xc7c7c7'
- #  # Bright colors
- #  bright:
- #    black:   '0x676767'
- #    red:     '0xf07078'
- #    green:   '0xcbe544'
- #    yellow:  '0xffde7f'
- #    blue:    '0x6871ff'
- #    magenta: '0xff76ff'
- #    cyan:    '0xa6fce1'
- #    white:   '0xfeffff'
-# colors:
-#  primary:
-#    background: "0x222324"
-#    foreground: "0xBABABA"
+    black:   '0x666666'
+    red:     '0xff6767'
+    green:   '0xa0e11e'
+    yellow:  '0xf7d325'
+    blue:    '0x1ca1db'
+    magenta: '0xc48dff'
+    cyan:    '0x77dfd8'
+    white:   '0xf2f2f2'
 #
 # Visual Bell
 #
@@ -192,10 +128,12 @@ mouse:
   # To disable this completely, set `faux_scrollback_lines` to 0.
   faux_scrolling_lines: 1
   url:
-    launcher: open
+    launcher:
+      program: open
+      args: []
 
 selection:
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
   save_to_clipboard: true
 # Style of the cursor
 #
@@ -216,7 +154,7 @@ live_config_reload: true
 # Entries in shell.args are passed unmodified as arguments to the shell.
 #
 shell:
-  program: /bin/zsh
+  program: /usr/local/bin/zsh
   #  args:
   #  - --login
 
@@ -264,6 +202,9 @@ key_bindings:
   - { key: Q,        mods: Command, action: Quit                         }
   - { key: W,        mods: Command, action: Quit                         }
   - { key: N,        mods: Command,    action: SpawnNewInstance    }
+  - { key: Space,     mods: Alt,          chars: " "                     }
+  - { key: Comma,     mods: Command,      command:
+      {program: "open", args: ["~/.config/alacritty/alacritty.yml"]}     }
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
   - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
   - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }
