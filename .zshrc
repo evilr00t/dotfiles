@@ -38,7 +38,7 @@ if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
 fi
 
 # fzf + ag configuration
-export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
+export FZF_DEFAULT_COMMAND='ag -u --nocolor -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --min-height=15'
