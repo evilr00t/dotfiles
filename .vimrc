@@ -44,6 +44,8 @@ Plugin 'vim-scripts/a.vim'
 " colorschemes !
 Plugin 'morhetz/gruvbox'
 Plugin 'sainnhe/gruvbox-material'
+Plugin 'dracula/vim' " Dracula
+
 
 Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plugin 'AndrewRadev/splitjoin.vim'
@@ -175,7 +177,8 @@ try
   " hi Comment cterm=italic
   " let g:oceanic_next_terminal_bold = 1
   " let g:oceanic_next_terminal_italic = 1
-  colorscheme gruvbox-material
+  colorscheme dracula
+  hi Normal guibg=NONE ctermbg=NONE
 catch
   colorscheme slate
 endtry
@@ -267,12 +270,13 @@ let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_auto_sameids = 1
 
-let g:go_fmt_command = "gofmt"
+let g:go_fmt_command = "goimports"
 
 
 nmap <leader>ne :NERDTree<cr>
@@ -323,7 +327,7 @@ highlight link ALEErrorSign Title
 highlight SpecialKey ctermfg=124 guifg=#af3a03
 let g:ale_linters = {
   \ 'python': ['flake8'],
-  \ 'go': ['goimports', 'go build'],
+  \ 'go': ['goimports'],
   \ 'markdown': []
   \ }
 
@@ -338,13 +342,6 @@ let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_set_highlights = 0
-
-
-" SuperTab
-"let g:SuperTabLongestEnhanced=1
-"let g:SuperTabLongestHighlight=1
-" close the preview window when you're not using it
-"let g:SuperTabClosePreviewOnPopupClose = 1
 
 " Tell ack.vim to use ag (the Silver Searcher) instead
 let g:ackprg = 'ag --vimgrep'
@@ -369,6 +366,7 @@ augroup vimrc
 autocmd!
 
 au BufNewFile,BufRead *.cson    set ft=coffee
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 au BufNewFile,BufRead *.groovy    set syntax=Jenkinsfile
 au BufNewFile,BufRead *.glsl    setf glsl
 au BufNewFile,BufRead *.gyp     set ft=python
@@ -409,20 +407,6 @@ au FileType markdown syn sync fromstart
 " autoreload file if cursor does not move
 au CursorHold,CursorHoldI * checktime
 augroup END
-
-"python3 << EOF
-"import vim
-"import git
-"def is_git_repo():
-"     try:
-"         _ = git.Repo('.', search_parent_directories=True).git_dir
-"         return "1"
-"     except:
-"         return "0"
-"vim.command("let g:pymode_rope = " + is_git_repo())
-"EOF
-
-
 
 function! WrapForTmux(s)
   if !exists('$TMUX')
@@ -467,8 +451,8 @@ let g:deoplete#sources#jedi#show_docstring = 1
 
 let g:python3_host_prog  = '/usr/local/bin/python3'
 
-let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+" let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+" let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 
 set completeopt+=noinsert
 " deoplete.nvim recommend
@@ -477,7 +461,7 @@ let g:terraform_align=1
 
 let g:silicon = {
       \ 'theme':              'Dracula',
-      \ 'font':               'Iosevka evilroot',
+      \ 'font':               'IBM Plex Mono',
       \ 'background':         '#aaaaff',
       \ 'shadow-color':       '#555555',
       \ 'line-pad':                   2,
@@ -498,4 +482,17 @@ if exists('$TMUX')
   autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " . expand("%:t"))
   autocmd VimLeave * call system("tmux setw automatic-rename")
 endif
+
+autocmd FileType go nmap <leader>t <Plug>(go-test)
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
 
