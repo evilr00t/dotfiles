@@ -10,6 +10,7 @@
 # Updated: Mon 28 Jan 15:30:13 2019
 
 # INCLUDE EXTERNAL FILES
+export PROMPT_EOL_MARK='%K{red} '
 
 if [ -f ~/.ec2 ]; then
   source ~/.ec2
