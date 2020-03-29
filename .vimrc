@@ -45,6 +45,7 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'sainnhe/gruvbox-material'
 Plugin 'dracula/vim' " Dracula
+Plugin 'drewtempelmeyer/palenight.vim'
 
 
 Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
@@ -90,7 +91,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'reedes/vim-pencil'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
-Plugin 'gabrielelana/vim-markdown'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'pearofducks/ansible-vim'
 Plugin 't9md/vim-chef'
 Plugin 'rodjek/vim-puppet'
@@ -141,6 +142,9 @@ set wrap
 " insensitive search
 set ignorecase
 set smartcase
+set fileformats+=dos
+set nofixendofline
+set ffs=unix
 
 let mapleader = ","
 " turn off search highlight
@@ -168,17 +172,18 @@ set termguicolors
 set background=dark
 
 set t_Co=256
-" let g:space_vim_dark_background = 233
 
 " Set the colorscheme
 try
-    let g:gruvbox_material_transparent_background = 1
+  " let g:space_vim_dark_background = 233
+  "  let g:gruvbox_material_transparent_background = 1
   " let g:gruvbox_contrast_dark = 'medium'
   " hi Comment cterm=italic
   " let g:oceanic_next_terminal_bold = 1
   " let g:oceanic_next_terminal_italic = 1
-  colorscheme dracula
+  colorscheme palenight
   hi Normal guibg=NONE ctermbg=NONE
+  let g:palenight_terminal_italics=1
 catch
   colorscheme slate
 endtry
@@ -201,7 +206,8 @@ set number relativenumber
 
 " LightLine Preferences
 let g:tmuxline_powerline_separators = 0
-let g:lightline = {'colorscheme': 'one'}
+let g:lightline = { 'colorscheme': 'palenight' }
+" let g:lightline = {'colorscheme': 'one'}
 "let g:lightline = {'colorscheme' : 'gruvbox_material'}
 
 " ----- jistr/vim-nerdtree-tabs -----
@@ -259,7 +265,7 @@ augroup mydelimitMate
   au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
 augroup END
 
-let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_frontmatter = 1
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 let g:goyo_width = "85%"
@@ -439,6 +445,9 @@ let g:LanguageClient_serverCommands = {
 
 " use os x clipboard
 set clipboard=unnamed
+let g:limelight_conceal_ctermfg = 233
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_paragraph_span = 1
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 let g:user_emmet_mode='a'    "enable all function in all mode.
@@ -495,4 +504,3 @@ function! s:build_go_files()
 endfunction
 autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
-
