@@ -24,6 +24,7 @@ Plugin 'metalelf0/supertab'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'python-mode/python-mode'
 Plugin 'Vimjas/vim-python-pep8-indent'
+Plugin 'Yggdroot/indentLine'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'mitsuhiko/vim-python-combined'
 Plugin 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
@@ -60,6 +61,7 @@ Plugin 'autozimu/LanguageClient-neovim', {
 Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plugin 'deoplete-plugins/deoplete-jedi'
 Plugin 'deoplete-plugins/deoplete-go', { 'do': 'make' }
+Plugin 'davidhalter/jedi-vim'
 Plugin 'Shougo/neco-syntax'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'szw/vim-maximizer'
@@ -326,21 +328,24 @@ autocmd BufWritePre * :%s/\s\+$//e
 set wildmode=longest,list,full
 
 " ALE - Error and warning signs.
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '▲'
+let g:ale_lint_on_enter = 0
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
 highlight SpecialKey ctermfg=124 guifg=#af3a03
 let g:ale_linters = {
   \ 'python': ['flake8'],
   \ 'go': ['goimports'],
-  \ 'markdown': []
+  \ 'markdown': ['markdownlint']
   \ }
 
 " Custom ALE fixers
 let g:ale_fixers = {
   \ 'go': ['goimports'],
-  \ 'python': ['yapf'],
+  \ 'python': ['black'],
   \ 'javascript': ['prettier']
   \ }
 
@@ -457,6 +462,12 @@ augroup END
 
 let g:gutentags_enabled = 0
 let g:deoplete#sources#jedi#show_docstring = 1
+" disable autocompletion, cause we use deoplete for completion
+let g:jedi#completions_enabled = 0
+
+" open the go-to function in split, not another buffer
+let g:jedi#use_splits_not_buffers = "right"
+
 
 let g:python3_host_prog  = '/usr/local/bin/python3'
 
