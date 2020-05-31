@@ -159,20 +159,17 @@ alias shrug="echo '¯\_(ツ)_/¯' | pbcopy";
 alias vim='nvim'
 alias bue="brew update && brew upgrade && brew cask outdated|cut -f 1 -d ' '|xargs brew cask reinstall"
 alias local_svcs='lsof -i -n -P|grep LISTEN'
-alias ls='gls -hovA --indicator-style=file-type --color=always --group-directories-first --time-style="+%b %_d %Y %H:%M:%S"'
-alias la='gls -A'
+alias ols='gls -hovA --indicator-style=file-type --color=always --group-directories-first --time-style="+%b %_d %Y %H:%M:%S"'
+alias ola='gls -A'
+alias ls='exa --long -g --git -a -s modified'
+alias lsd='exa --long -g -D --git -a -s modified'
 alias ag='ag -u'
-
-
 # k8s related
 alias kube-bash='kubectl run --rm -i --tty $(whoami)-shell --image=evilroot/k8s-debug-pod --restart=Never'
 
-# TODO: based on variable use exa or GNU ls
-unalias ls
-alias ls='exa --long -g --git -a -s modified'
-
 # ansible - python2 fix
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
 # Enabled true color support for terminals
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
