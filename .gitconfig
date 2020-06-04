@@ -1,36 +1,37 @@
 [user]
 	name = Karol Czeryna
 	email = k@e-dot.uk
-	
+	signingkey = 02180B48E7B405DA289652E6AB6CE450F5F7D4BC
+
 [alias]
-  a = add -p
-  s = show
+    a = add -p
+    s = show
 	st = status -s -b
-  d = diff
-  dc = diff --cached
+    d = diff
+    dc = diff --cached
 	c = commit
-  cm = commit -m
+    cm = commit -m
 	co = checkout
 	r = remote -v
 	t = tag -l
 	b = branch -v
 	nb = checkout -b
-  p = pull
-  pnf = pull --no-ff
+    p = pull
+    pnf = pull --no-ff
 	pr = !git p --rebase
 	prnf = !git pnf --rebase
-  f = fetch
+    f = fetch
 	unstage = reset HEAD
 	uncommit = reset --soft HEAD^
 	last = diff HEAD^
 	lastc = diff HEAD^ --cached
-  recent = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+    recent = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	ll = log --graph --decorate --oneline --stat --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --date=relative
-  undo = reset HEAD~1 --mixed
+    undo = reset HEAD~1 --mixed
 	save = !git add -A && git commit -m 'SAVEPOINT'
 	wip = commit -am "WIP"
-  prune = fetch --prune
+    prune = fetch --prune
 	wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
 	rank = shortlog -sn --no-merges
 	# Remove all merged branches
@@ -43,23 +44,24 @@
 	local = yellow
 	remote = green
 [color "diff"]
-	meta = yellow
+	meta = 11
 	frag = magenta bold
 	old = red bold
 	new = green bold
 	commit = yellow bold
 	whitespace = red reverse
 [color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
+	added = yellow
+	changed = green
+	untracked = cyan
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52
 	newNormal = green bold
 	newHighlight = green bold 22
 [core]
-	pager = "if which diff-so-fancy > /dev/null 2>&1; then diff-so-fancy | less --tabs=4 -RFX; else less --tabs=4 -RFX; fi"
+	#pager = "if which diff-so-fancy > /dev/null 2>&1; then diff-so-fancy | less --tabs=4 -RFX; else less --tabs=4 -RFX; fi"
+	pager = "if which delta > /dev/null 2>&1; then delta --theme='Dracula' --color-only; else less --tabs=4 -RFX; fi"
 	editor = vim
 	excludesfile = ~/.gitignore_global
 	# autocrlf = input
@@ -80,6 +82,7 @@
 	fsckobjects = false
 [commit]
 	verbose = true
+	gpgsign = true
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
