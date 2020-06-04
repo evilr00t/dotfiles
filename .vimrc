@@ -93,7 +93,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'reedes/vim-pencil'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
-Plugin 'plasticboy/vim-markdown'
+Plugin 'gabrielelana/vim-markdown'
 Plugin 'pearofducks/ansible-vim'
 Plugin 't9md/vim-chef'
 Plugin 'rodjek/vim-puppet'
@@ -268,6 +268,7 @@ augroup mydelimitMate
 augroup END
 
 let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_conceal = 0
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 let g:goyo_width = "85%"
