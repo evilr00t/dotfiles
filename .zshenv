@@ -67,18 +67,18 @@ events() {
 
 diff()
 {
-  colordiff -Nuar $@ | diff-so-fancy
+  colordiff -Nuar $@ | delta --color-only
 }
 
 
 cat()
 {
-  bat -pp --theme='1337' $@
+  bat -pp --theme='Dracula' $@
 }
 
 lcat()
 {
-  bat --paging=always -p --theme='1337' $@
+  bat --paging=always -p --theme='Dracula' $@
 }
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
