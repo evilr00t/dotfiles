@@ -2,13 +2,8 @@
 # Defines environment variables.
 #
 # Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-# Modified by:
 #   Karol Czeryna <k@e-dot.uk>
 #
-# Updated: Mon 28 Jan 15:30:13 2019
-
 # INCLUDE EXTERNAL FILES
 export PROMPT_EOL_MARK='%K{red} '
 
@@ -73,12 +68,12 @@ diff()
 
 cat()
 {
-  bat -pp --theme='Dracula' $@
+  bat -pp --theme='OneHalfDark' $@
 }
 
 lcat()
 {
-  bat --paging=always -p --theme='Dracula' $@
+  bat --paging=always -p --theme='OneHalfDark' $@
 }
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
@@ -149,9 +144,9 @@ alias wgetm='wget -c -r -l 0 -k --no-parent'
 alias cp='cp -av'
 alias mv='mv -v'
 alias ssh='ssh -C'
-alias lsnew="ls -rl *(D.om[1,10])"     # display the newest files
-alias lsold="ls -rtlh *(D.om[1,10])"   # display the oldest files
-alias lssmall="ls -Srl *(.oL[1,10])"   # display the smallest files
+alias lsnew="\ls -rl *(D.om[1,10])"     # display the newest files
+alias lsold="\ls -rtlh *(D.om[1,10])"   # display the oldest files
+alias lssmall="\ls -Srl *(.oL[1,10])"   # display the smallest files
 alias piplist='pip3 freeze | cut -d = -f 1 | xargs -n 1 pip3 search | grep -B2 LATEST:'
 alias py="source virt/bin/activate;clear"
 alias grep='ggrep'
@@ -228,3 +223,6 @@ function td {
 function t {
   cd $(mktemp /tmp/$1.XXXX)
 }
+
+# use bat to colorize man pages
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
