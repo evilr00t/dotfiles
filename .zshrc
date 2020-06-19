@@ -22,14 +22,10 @@ eval $( dircolors -b $HOME/.dircolors )
 export LC_CTYPE=en_GB.UTF-8
 export LANG=en_GB.UTF-8
 set umask 022
+unsetopt nomatch
 
 # ignore duplicate entries
 setopt hist_ignore_all_dups
-setopt hist_ignore_space
-
-#Auto Escape URLS
-autoload -U url-quote-magic
-zle -N self-insert url-quote-magic
 
 # fzf via Homebrew
 if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
@@ -84,7 +80,6 @@ ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=blue'
 # quotes
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow,underline'
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'
-
 
 # load at the end...
 . ~/.zshenv
