@@ -22,21 +22,14 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'Yggdroot/indentLine'
 Plugin 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plugin 'junegunn/fzf.vim'
-Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/a.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'sainnhe/gruvbox-material'
 Plugin 'dracula/vim' " Dracula
 Plugin 'drewtempelmeyer/palenight.vim'
-Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plugin 'deoplete-plugins/deoplete-jedi'
-Plugin 'deoplete-plugins/deoplete-go', { 'do': 'make' }
-Plugin 'visualfc/gocode'
-Plugin 'davidhalter/jedi-vim'
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'mbbill/undotree'
-Plugin 'dense-analysis/ale'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
@@ -49,7 +42,7 @@ Plugin 'rking/ag.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim' " <- Used by goyo to highlight current paragraph.
 Plugin 'mhinz/vim-startify'
-
+Plugin 'easymotion/vim-easymotion'
 
 call vundle#end()
 
@@ -134,16 +127,7 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
-" 'hybrid' mode number
 set number relativenumber
-
-
-
-" LightLine Preferences
-let g:tmuxline_powerline_separators = 0
-let g:lightline = { 'colorscheme': 'palenight' }
-" let g:lightline = {'colorscheme': 'one'}
-"let g:lightline = {'colorscheme' : 'gruvbox_material'}
 
 " nmap <F8> :TagbarToggle<CR>
 " nmap <F9> :bprev<CR>
@@ -155,14 +139,6 @@ nmap <Leader>F :Files<CR>
 nmap <Leader>q :Tags<CR>
 " Allows you to save files you opened without write permissions via sudo
 cmap w!! w !sudo tee %
-
-" Whitespaces... oh gosh, i hate them...
-highlight Trail ctermbg=red guibg=red
-call matchadd('Trail', '\s\+$', 100)
-" Also highlight all tabs
-"highlight Tabs ctermbg=darkgreen guibg=darkgreen
-"match Tabs /\t/
-
 
 " ----- xolox/vim-easytags settings -----
 " Where to look for tags files
@@ -202,14 +178,22 @@ let g:go_highlight_types = 1
 let g:go_auto_sameids = 1
 let g:go_fmt_command = "goimports"
 
-nmap <leader>ne :NERDTree<cr>
 nnoremap <F5> "=strftime("%FT%T%z")<CR>P
 inoremap <F5> <C-R>=strftime("%FT%T%z")<CR>
 " Remove all whitespaces
 nnoremap <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-" inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-" deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" coc
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 " Yank without newline...
 nnoremap Y y$
 
@@ -344,8 +328,6 @@ endfunction
 
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
-let g:deoplete#enable_at_startup = 1
-
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " use os x clipboard
@@ -359,14 +341,6 @@ let g:user_emmet_mode='a'    "enable all function in all mode.
 augroup EmmetSettings
   autocmd! FileType html imap <tab> <plug>(emmet-expand-abbr)
 augroup END
-
-" disable autocompletion, cause we use deoplete for completion
-let g:jedi#completions_enabled = 0
-let g:python3_host_prog  = '/usr/local/bin/python3'
-
-set completeopt+=noinsert
-" deoplete.nvim recommend
-set completeopt+=noselect
 
 let g:silicon = {
       \ 'theme':              'Dracula',
@@ -420,3 +394,52 @@ noremap <Right> <Nop>
 " Because I want to see raw markdown when editing
 let g:vim_markdown_conceal = 0
 
+"start a search query by pressing \
+nnoremap \  :Ag<space>
+"search for word under cursor by pressing |
+nnoremap \| :Ag <C-R><C-W><cr>:cw<cr>
+
+" GoTo code navigation.
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gy <Plug>(coc-type-definition)
+nmap <leader>gi <Plug>(coc-implementation)
+nmap <leader>gr <Plug>(coc-references)
+nmap <leader>rr <Plug>(coc-rename)
+nmap <leader>g[ <Plug>(coc-diagnostic-prev)
+nmap <leader>g] <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
+nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
+nnoremap <leader>cr :CocRestart
+
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'currentfunction', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead',
+      \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction'
+      \ },
+      \ }
+
+" --- vim go (polyglot) settings.
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_auto_sameids = 1
