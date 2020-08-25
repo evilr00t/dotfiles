@@ -22,15 +22,12 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'Yggdroot/indentLine'
 Plugin 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plugin 'junegunn/fzf.vim'
-Plugin 'majutsushi/tagbar'
+Plugin 'liuchengxu/vista.vim'
 Plugin 'vim-scripts/a.vim'
-Plugin 'morhetz/gruvbox'
 Plugin 'sainnhe/gruvbox-material'
-Plugin 'dracula/vim' " Dracula
-Plugin 'drewtempelmeyer/palenight.vim'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'mbbill/undotree'
-Plugin 'airblade/vim-gitgutter'
+Plugin 'mhinz/vim-signify'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
 Plugin 'machakann/vim-highlightedyank'
@@ -55,25 +52,21 @@ set number
 set showcmd
 set incsearch
 set hlsearch
-set cursorline
 set wildmenu
-set lazyredraw
 set showmatch
 set list
 set listchars=tab:\|\ ,trail:▫
 set hidden
 " auto reloadfile
 set autoread
-set ttyfast
 set modeline
 set wrap
 " insensitive search
 set ignorecase
 set smartcase
 set fileformats+=dos
-set nofixendofline
 set ffs=unix
-set updatetime=50
+set updatetime=100
 set cmdheight=2
 set scrolloff=8
 
@@ -96,7 +89,7 @@ set foldmethod=indent   " fold based on indent level
 set colorcolumn=81
 syntax on
 " set mouse=a
-set formatoptions=tcqronj
+"set formatoptions=tcqronj
 set termguicolors
 
 " Toggle this to "light" for light colorscheme
@@ -106,12 +99,12 @@ set t_Co=256
 
 " Set the colorscheme
 try
-    let g:gruvbox_material_transparent_background = 1
-    let g:gruvbox_contrast_dark = 'medium'
-    hi Comment cterm=italic
+    "let g:gruvbox_material_transparent_background = 1
+    let g:gruvbox_material_background = 'hard'
+    "let g:gruvbox_contrast_dark = 'medium'
+    "hi Comment cterm=italic
     colorscheme gruvbox-material
-    hi Normal guibg=NONE ctermbg=NONE
-    let g:palenight_terminal_italics=1
+    "hi Normal guibg=NONE ctermbg=NONE
 catch
     colorscheme slate
 endtry
@@ -182,17 +175,25 @@ nnoremap <F5> "=strftime("%FT%T%z")<CR>P
 inoremap <F5> <C-R>=strftime("%FT%T%z")<CR>
 " Remove all whitespaces
 nnoremap <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-" coc
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 
 inoremap <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>" :
             \ <SID>check_back_space() ? "\<TAB>" :
             \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" coc
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Yank without newline...
 nnoremap Y y$
@@ -382,8 +383,13 @@ autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
 let g:pymode_run_bind = "<leader>R"
 
-let g:poetv_auto_activate = 0
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path="0;33"', <bang>0)
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
+
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+endif
 
 " Temporary just to get used to proper vim navigation
 noremap <Up> <Nop>
@@ -404,7 +410,10 @@ nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
+" rename variable
 nmap <leader>rr <Plug>(coc-rename)
+" project rename world
+nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>g[ <Plug>(coc-diagnostic-prev)
 nmap <leader>g] <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
