@@ -100,7 +100,7 @@ fi
 #fi
 #}
 
-code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+alias code='codium'
 alias mate='/Applications/TextMate.app/Contents/Resources/mate'
 
 # file open using fzf and vim!
@@ -137,7 +137,6 @@ alias md='mkdir -p'
 alias rd='rmdir'
 alias h='history'
 alias c='clear'
-alias vim='vim -i NONE'
 alias fetch='fetch -ApRr'
 alias wget='wget -c -t 0'
 alias wgetm='wget -c -r -l 0 -k --no-parent'
@@ -152,6 +151,7 @@ alias py="source virt/bin/activate;clear"
 alias grep='ggrep'
 alias shrug="echo '¯\_(ツ)_/¯' | pbcopy";
 alias vim='nvim'
+alias penvi='poetry run nvim'
 alias bue="brew update && brew upgrade && brew cask outdated|cut -f 1 -d ' '|xargs brew cask reinstall"
 alias local_svcs='lsof -i -n -P|grep LISTEN'
 alias ols='gls -hovA --indicator-style=file-type --color=always --group-directories-first --time-style="+%b %_d %Y %H:%M:%S"'
