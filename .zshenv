@@ -152,7 +152,7 @@ alias grep='ggrep'
 alias shrug="echo '¯\_(ツ)_/¯' | pbcopy";
 alias vim='nvim'
 alias penvi='poetry run nvim'
-alias bue="brew update && brew upgrade && brew cask outdated|cut -f 1 -d ' '|xargs brew cask reinstall"
+alias bue="brew update && brew upgrade && brew outdated --cask|cut -f 1 -d ' '|xargs brew cask reinstall"
 alias local_svcs='lsof -i -n -P|grep LISTEN'
 alias ols='gls -hovA --indicator-style=file-type --color=always --group-directories-first --time-style="+%b %_d %Y %H:%M:%S"'
 alias ola='gls -A'
