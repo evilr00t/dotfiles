@@ -39,7 +39,7 @@ fi
 export FZF_DEFAULT_COMMAND='ag -u --nocolor -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --min-height=15'
+export FZF_DEFAULT_OPTS='--height 80% --layout=reverse'
 source $HOME/repos/dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Custom things
