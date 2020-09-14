@@ -36,6 +36,7 @@
 	rank = shortlog -sn --no-merges
 	# Remove all merged branches
 	bdm = "!git branch --merged | grep -v '*' | xargs -n 1 git branch -d"
+	stunt = !git stash --include-untracked --keep-index
 
 [color]
 	ui = true
@@ -61,7 +62,7 @@
 	newHighlight = green bold 22
 [core]
 	#pager = "if which diff-so-fancy > /dev/null 2>&1; then diff-so-fancy | less --tabs=4 -RFX; else less --tabs=4 -RFX; fi"
-	pager = "if which delta > /dev/null 2>&1; then delta --theme='Dracula' --color-only; else less --tabs=4 -RFX; fi"
+	pager = "if which delta > /dev/null 2>&1; then delta --theme='OneHalfDark' --color-only; else less --tabs=4 -RFX; fi"
 	editor = vim
 	excludesfile = ~/.gitignore_global
 	# autocrlf = input
@@ -70,6 +71,7 @@
 	helper = osxkeychain
 [diff]
 	tool = vimdiff
+	colorMoved = default
 [push]
 	default = current
 	followTags = true
