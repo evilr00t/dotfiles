@@ -1,4 +1,4 @@
-" File: .vimrc
+":AirlineTheme gruvbox_material File: .vimrc
 " Original Author: Jake Zimmerman <jake@zimmerman.io>
 " Author: Karol Czeryna <k@e-dot.uk>
 " Update: 2020-06-07T17:13:28+0100
@@ -99,8 +99,9 @@ set t_Co=256
 
 " Set the colorscheme
 try
-    "let g:gruvbox_material_transparent_background = 1
-    let g:gruvbox_material_background = 'hard'
+    let g:gruvbox_material_transparent_background = 1
+    let g:gruvbox_material_background = 'soft'
+    let g:gruvbox_material_palette = 'mix'
     "let g:gruvbox_contrast_dark = 'medium'
     "hi Comment cterm=italic
     colorscheme gruvbox-material
@@ -141,16 +142,9 @@ nmap <silent> <leader>T :TagbarToggle<CR>
 " Uncomment to open tagbar automatically whenever possible
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
 
-" ----- pymode -----
-let g:pymode = 1
-let g:pymode_python = 'python3'
-let g:pymode_virtualenv = 1
-let g:pymode_indent = 0
-
-
 "req ----- airblade/vim-gitgutter settings -----
 " Required after having changed the colorscheme
-hi clear SignColumn
+"hi clear SignColumn
 
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_conceal = 0
@@ -338,11 +332,6 @@ let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_paragraph_span = 1
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
-let g:user_emmet_mode='a'    "enable all function in all mode.
-augroup EmmetSettings
-  autocmd! FileType html imap <tab> <plug>(emmet-expand-abbr)
-augroup END
-
 let g:silicon = {
       \ 'theme':              'Dracula',
       \ 'font':               'Fantasque Sans Mono',
@@ -381,7 +370,6 @@ endfunction
 autocmd FileType go nmap <leader>t <Plug>(go-test)
 autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
-let g:pymode_run_bind = "<leader>R"
 
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path="0;33"', <bang>0)
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
