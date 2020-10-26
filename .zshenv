@@ -20,12 +20,13 @@ if [ -f ~/.home ]; then
 fi
 
 # EXPORTS
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
 # GOLANG
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
 # ADD RUST BINARIES
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH
+export PATH=$GOROOT/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH
 
 # FUNCTIONS
 
