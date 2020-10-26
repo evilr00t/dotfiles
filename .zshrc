@@ -19,7 +19,7 @@ autoload -U compinit && compinit
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+
 eval $( dircolors -b $HOME/.dircolors )
 export LC_CTYPE=en_GB.UTF-8
 export LANG=en_GB.UTF-8
