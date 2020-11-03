@@ -1,7 +1,7 @@
 ":AirlineTheme gruvbox_material File: .vimrc
 " Original Author: Jake Zimmerman <jake@zimmerman.io>
 " Author: Karol Czeryna <k@e-dot.uk>
-" Update: 2020-06-07T17:13:28+0100
+" Update: 2020-11-03T10:27:08+0000
 " How I configure Vim :P
 "
 
@@ -17,8 +17,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'metalelf0/supertab'
 Plugin 'scrooloose/nerdcommenter'
-" Plugin 'python-mode/python-mode'
-" Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'Yggdroot/indentLine'
 Plugin 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plugin 'junegunn/fzf.vim'
@@ -117,9 +115,9 @@ hi Comment cterm=italic
 " Always show statusbar
 set laststatus=2
 
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 set number relativenumber
 
@@ -292,6 +290,7 @@ au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
 au BufNewFile,BufRead Makefile setlocal nolist
 " au BufRead,BufNewFile *.yml,*.yaml set filetype=yaml.ansible
 au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet textwidth=62
+au FileType python setlocal nolist ts=4 sts=4 sw=4 noet textwidth=62
 au FileType inform7 setlocal nolist tw=0 ts=4 sw=4 noet foldlevel=999
 au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
 au FileType make setlocal nolist ts=4 sts=4 sw=4 noet
@@ -326,7 +325,7 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " use os x clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 let g:limelight_conceal_ctermfg = 233
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_paragraph_span = 1
@@ -398,8 +397,10 @@ nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
+
 " rename variable
 nmap <leader>rr <Plug>(coc-rename)
+
 " project rename world
 nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>g[ <Plug>(coc-diagnostic-prev)

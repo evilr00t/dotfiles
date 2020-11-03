@@ -50,10 +50,18 @@ k8env() {
 }
 
 cht() {
-    local topic="${1}" ; shift
+  local topic="${1}" ; shift
+  curl -s "cht.sh/${topic}/${*// }"
+}
 
-    curl -s "cht.sh/${topic}/${*// }"
-  }
+# Make a reverse proxy tunnel using:
+# ssh_rev_proxy [PORT] [HOST]
+# service will be available at: localhost:[PORT]
+ssh_rev_proxy() {
+  local port="${1}"
+  local host="${2}"
+  ssh -fNg -L ${port}:127.0.0.1:${port} ${host}
+}
 
 
 events() {
