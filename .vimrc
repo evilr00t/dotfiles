@@ -290,7 +290,7 @@ au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
 au BufNewFile,BufRead Makefile setlocal nolist
 " au BufRead,BufNewFile *.yml,*.yaml set filetype=yaml.ansible
 au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet textwidth=62
-au FileType python setlocal nolist ts=4 sts=4 sw=4 noet textwidth=62
+au FileType python setlocal nolist ts=4 sts=4 sw=4 textwidth=120
 au FileType inform7 setlocal nolist tw=0 ts=4 sw=4 noet foldlevel=999
 au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
 au FileType make setlocal nolist ts=4 sts=4 sw=4 noet
