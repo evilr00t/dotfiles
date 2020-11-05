@@ -15,6 +15,7 @@ set rtp+=/usr/local/opt/fzf
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'itchyny/lightline.vim'
+Plugin 'mengelbrecht/lightline-bufferline'
 Plugin 'metalelf0/supertab'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Yggdroot/indentLine'
@@ -107,8 +108,6 @@ try
 catch
     colorscheme slate
 endtry
-
-
 
 hi Comment cterm=italic
 
@@ -413,6 +412,9 @@ function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
 
+set showtabline=1
+let g:lightline#bufferline#min_buffer_count = 2
+let g:lightline#bufferline#show_number = 1
 let g:lightline = {
       \ 'colorscheme': 'one',
       \ 'active': {
@@ -424,7 +426,43 @@ let g:lightline = {
       \   'cocstatus': 'coc#status',
       \   'currentfunction': 'CocCurrentFunction'
       \ },
+      \ 'tabline': {
+      \   'left': [ ['buffers'] ],
+      \   'right': [ ]
+      \ },
+      \ 'component_expand': {
+      \   'buffers': 'lightline#bufferline#buffers'
+      \ },
+      \ 'component_type': {
+      \   'buffers': 'tabsel'
       \ }
+      \ }
+
+autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
+
+" move around buffer using <leader>[NUMBER]
+nmap <Leader>1 <Plug>lightline#bufferline#go(1)
+nmap <Leader>2 <Plug>lightline#bufferline#go(2)
+nmap <Leader>3 <Plug>lightline#bufferline#go(3)
+nmap <Leader>4 <Plug>lightline#bufferline#go(4)
+nmap <Leader>5 <Plug>lightline#bufferline#go(5)
+nmap <Leader>6 <Plug>lightline#bufferline#go(6)
+nmap <Leader>7 <Plug>lightline#bufferline#go(7)
+nmap <Leader>8 <Plug>lightline#bufferline#go(8)
+nmap <Leader>9 <Plug>lightline#bufferline#go(9)
+nmap <Leader>0 <Plug>lightline#bufferline#go(10)
+
+" close buffer using <leader>c[NUMBER]
+nmap <Leader>c1 <Plug>lightline#bufferline#delete(1)
+nmap <Leader>c2 <Plug>lightline#bufferline#delete(2)
+nmap <Leader>c3 <Plug>lightline#bufferline#delete(3)
+nmap <Leader>c4 <Plug>lightline#bufferline#delete(4)
+nmap <Leader>c5 <Plug>lightline#bufferline#delete(5)
+nmap <Leader>c6 <Plug>lightline#bufferline#delete(6)
+nmap <Leader>c7 <Plug>lightline#bufferline#delete(7)
+nmap <Leader>c8 <Plug>lightline#bufferline#delete(8)
+nmap <Leader>c9 <Plug>lightline#bufferline#delete(9)
+nmap <Leader>c0 <Plug>lightline#bufferline#delete(10)
 
 " --- vim go (polyglot) settings.
 let g:go_highlight_build_constraints = 1
