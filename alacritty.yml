@@ -11,44 +11,37 @@ window:
     y: 5
   decorations: buttonless
 
-# draw_bold_text_with_bright_colors: true
 font:
   normal:
     family: Iosevka evilroot
     #family: Fantasque Sans Mono
     #family: PragmataPro Mono
 
-  size: 12
-  offset:
-    x: 1
-    y: 1
+  size: 13
 
 colors:
   primary:
-    background: '0x323232'
-    foreground: '0xd8d8d8'
+    background: '#1e2127'
+    foreground: '#abb2bf'
+    bright_foreground: '#e6efff'
   normal:
-    black:   '0x4c4c4c'
-    red:     '0xff005f'
-    green:   '0xa4d32d'
-    yellow:  '0xf6c336'
-    blue:    '0x5496ff'
-    magenta: '0x9e6ffe'
-    cyan:    '0x218693'
-    white:   '0xd8d8d8'
+    black:   '#4c4c4c'
+    red:     '#f43753'
+    green:   '#a4d55d'
+    yellow:  '#ffc24b'
+    blue:    '#5496ff'
+    magenta: '#C574DD'
+    cyan:    '#73cef4'
+    white:   '#d8d8dd'
   bright:
-    black:   '0x666666'
-    red:     '0xff6767'
-    green:   '0xa0e11e'
-    yellow:  '0xf7d325'
-    blue:    '0x1ca1db'
-    magenta: '0xc48dff'
-    cyan:    '0x77dfd8'
-    white:   '0xf2f2f2'
-
-bell:
-  animation: EaseOutExpo
-  duration: 0
+    black:   '#666666'
+    red:     '#f34242'
+    green:   '#a0e11e'
+    yellow:  '#ffc24b'
+    blue:    '#b3deef'
+    magenta: '#556FFF'
+    cyan:    '#79E6F3'
+    white:   '#f2f2f2'
 
 background_opacity: 0.99
 
