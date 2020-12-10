@@ -1,9 +1,4 @@
-":AirlineTheme gruvbox_material File: .vimrc
-" Original Author: Jake Zimmerman <jake@zimmerman.io>
-" Author: Karol Czeryna <k@e-dot.uk>
-" Update: 2020-11-03T10:27:08+0000
-" How I configure Vim :P
-"
+" File: ~/.vimrc
 
 " Gotta be first
 set nocompatible
@@ -24,7 +19,9 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'liuchengxu/vista.vim'
 Plugin 'vim-scripts/a.vim'
 Plugin 'sainnhe/gruvbox-material'
+Plugin 'christianchiarulli/nvcode-color-schemes.vim'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plugin 'mbbill/undotree'
 Plugin 'mhinz/vim-signify'
 Plugin 'tpope/vim-fugitive'
@@ -65,9 +62,11 @@ set ignorecase
 set smartcase
 set fileformats+=dos
 set ffs=unix
-set updatetime=100
+set updatetime=50
 set cmdheight=2
 set scrolloff=8
+set ttimeout        " time out for key codes
+set ttimeoutlen=100 " wait up to 100ms after Esc for special key
 
 let mapleader = ","
 " turn off search highlight
@@ -103,7 +102,8 @@ try
     let g:gruvbox_material_palette = 'mix'
     "let g:gruvbox_contrast_dark = 'medium'
     "hi Comment cterm=italic
-    colorscheme gruvbox-material
+    let g:nvcode_termcolors=256
+    colorscheme onedark
     "hi Normal guibg=NONE ctermbg=NONE
 catch
     colorscheme slate
@@ -136,12 +136,6 @@ cmap w!! w !sudo tee %
 set tags=~/.vimtags
 " Open/close tagbar with \b
 nmap <silent> <leader>T :TagbarToggle<CR>
-" Uncomment to open tagbar automatically whenever possible
-"autocmd BufEnter * nested :call tagbar#autoopen(0)
-
-"req ----- airblade/vim-gitgutter settings -----
-" Required after having changed the colorscheme
-"hi clear SignColumn
 
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_conceal = 0
@@ -406,7 +400,21 @@ nmap <leader>g[ <Plug>(coc-diagnostic-prev)
 nmap <leader>g] <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
 nnoremap <leader>cr :CocRestart
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
@@ -479,3 +487,14 @@ let g:go_highlight_generate_tags = 1
 let g:go_highlight_format_strings = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_auto_sameids = 1
+
+" tree-sitter configuration
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = {},  -- list of language that will be disabled
+  },
+}
+EOF
