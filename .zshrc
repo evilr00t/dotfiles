@@ -4,6 +4,9 @@ export ZSH=$HOME/.oh-my-zsh
 # https://github.com/ohmyzsh/ohmyzsh/issues/6338
 DISABLE_MAGIC_FUNCTIONS=true
 
+HISTSIZE=10000000
+SAVEHIST=10000000
+
 ZSH_THEME="evilroot"
 
 CASE_SENSITIVE="false"
@@ -15,10 +18,16 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="dd.mm.yyyy"
 HIST_IGNORE_SPACE="true"
 plugins=(osx history history-substring-search git-prompt git z kube-ps1 colored-man-pages vi-mode extract fast-syntax-highlighting)
-autoload -U compinit && compinit
+autoload -Uz compinit
 
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+
+#compinit -C
 source $ZSH/oh-my-zsh.sh
 
+# from: https://gist.github.com/15cm/88e320d71fe7fe5a4bb24b99da6b93f0
 
 eval $( dircolors -b $HOME/.dircolors )
 export LC_CTYPE=en_GB.UTF-8
