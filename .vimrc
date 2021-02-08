@@ -14,12 +14,11 @@ Plugin 'mengelbrecht/lightline-bufferline'
 Plugin 'metalelf0/supertab'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Yggdroot/indentLine'
-Plugin 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plugin 'junegunn/fzf.vim'
 Plugin 'liuchengxu/vista.vim'
 Plugin 'vim-scripts/a.vim'
-Plugin 'sainnhe/gruvbox-material'
 Plugin 'christianchiarulli/nvcode-color-schemes.vim'
+Plugin 'phanviet/vim-monokai-pro'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plugin 'mbbill/undotree'
@@ -97,14 +96,16 @@ set t_Co=256
 
 " Set the colorscheme
 try
-    let g:gruvbox_material_transparent_background = 1
-    let g:gruvbox_material_background = 'soft'
-    let g:gruvbox_material_palette = 'mix'
+    "let g:gruvbox_material_transparent_background = 1
+    "let g:gruvbox_material_background = 'soft'
+    "let g:gruvbox_material_palette = 'mix'
     "let g:gruvbox_contrast_dark = 'medium'
-    "hi Comment cterm=italic
-    let g:nvcode_termcolors=256
-    colorscheme onedark
-    "hi Normal guibg=NONE ctermbg=NONE
+    "let g:nvcode_termcolors=256
+    colorscheme monokai_pro
+    " Comments should be in italic style
+    hi Comment cterm=italic
+    " Transparent background - use terminal background colour
+    hi Normal guibg=NONE ctermbg=NONE
 catch
     colorscheme slate
 endtry
@@ -160,6 +161,9 @@ nnoremap <F5> "=strftime("%FT%T%z")<CR>P
 inoremap <F5> <C-R>=strftime("%FT%T%z")<CR>
 " Remove all whitespaces
 nnoremap <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+" Undotree
+nnoremap <F7> :UndotreeToggle<CR>
 
 inoremap <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>" :
@@ -496,5 +500,16 @@ require'nvim-treesitter.configs'.setup {
     enable = true,              -- false will disable the whole extension
     disable = {},  -- list of language that will be disabled
   },
+  indent = {
+    enable = true,
+    disable = {"python"}
+  }
 }
 EOF
+
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_fzf_preview = ['right:50%']
+
+if !exists('g:undotree_WindowLayout')
+    let g:undotree_WindowLayout = 2
+endif
