@@ -164,6 +164,11 @@ nnoremap <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 " Undotree
 nnoremap <F7> :UndotreeToggle<CR>
+" Go back to terminal
+nnoremap <leader>t :stop<CR>
+" Run Python code
+nmap <buffer> <leader>r <Esc>:w<CR>:!clear;python %<CR>
+
 
 inoremap <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>" :
@@ -193,7 +198,11 @@ set splitbelow
 set splitright
 
 " Open the current file in a new vertial split with '='
-nnoremap = :vsplit<cr>
+" nnoremap = :vsplit<cr>
+"
+
+" Format code
+nmap <leader>ai mzgg=G`z
 
 " Easy split navigation
 map <C-j> <C-w>j
@@ -263,7 +272,7 @@ au BufNewFile,BufRead *.i7x     setf inform7
 au BufNewFile,BufRead *.ini     setf conf
 au BufNewFile,BufRead *.input   setf gnuplot
 au BufNewFile,BufRead *.json    set ft=json tw=0
-au BufNewFile,BufRead *.template    set ft=yaml
+au BufNewFile,BufRead *.template,*.yml,*.yaml    set ft=yaml ts=2 sw=2
 au BufNewFile,BufRead *.less    setlocal ft=less nocindent smartindent
 au BufNewFile,BufRead *.md      setlocal ft=markdown nolist spell
 au BufNewFile,BufRead *.md,*.markdown setlocal foldlevel=999 tw=0 nocin
