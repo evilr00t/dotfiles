@@ -11,13 +11,14 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'mengelbrecht/lightline-bufferline'
-Plugin 'metalelf0/supertab'
+"Plugin 'metalelf0/supertab'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Yggdroot/indentLine'
 Plugin 'junegunn/fzf.vim'
 Plugin 'liuchengxu/vista.vim'
 Plugin 'vim-scripts/a.vim'
 Plugin 'christianchiarulli/nvcode-color-schemes.vim'
+Plugin 'folke/tokyonight.nvim'
 Plugin 'phanviet/vim-monokai-pro'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
@@ -32,9 +33,14 @@ Plugin 'godlygeek/tabular'
 Plugin 'segeljakt/vim-silicon'
 Plugin 'rking/ag.vim'
 Plugin 'junegunn/goyo.vim'
+Plugin 'kdav5758/TrueZen.nvim'
 Plugin 'junegunn/limelight.vim' " <- Used by goyo to highlight current paragraph.
 Plugin 'mhinz/vim-startify'
-Plugin 'easymotion/vim-easymotion'
+" Plugin 'easymotion/vim-easymotion'
+Plugin 'phaazon/hop.nvim'
+Plugin 'norcalli/nvim-colorizer.lua'
+Plugin 'scrooloose/nerdtree'
+Plugin 'yuttie/comfortable-motion.vim'
 
 call vundle#end()
 
@@ -101,11 +107,11 @@ try
     "let g:gruvbox_material_palette = 'mix'
     "let g:gruvbox_contrast_dark = 'medium'
     "let g:nvcode_termcolors=256
-    colorscheme monokai_pro
+    colorscheme tokyonight
     " Comments should be in italic style
     hi Comment cterm=italic
     " Transparent background - use terminal background colour
-    hi Normal guibg=NONE ctermbg=NONE
+    " hi Normal guibg=NONE ctermbg=NONE
 catch
     colorscheme slate
 endtry
@@ -129,77 +135,67 @@ nmap <Leader>h :History<CR>
 nmap <Leader>f :GFiles<CR>
 nmap <Leader>F :Files<CR>
 nmap <Leader>q :Tags<CR>
-" Allows you to save files you opened without write permissions via sudo
-cmap w!! w !sudo tee %
-
-" ----- xolox/vim-easytags settings -----
-" Where to look for tags files
-set tags=~/.vimtags
 " Open/close tagbar with \b
 nmap <silent> <leader>T :TagbarToggle<CR>
 
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_conceal = 0
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-
-let g:goyo_width = "85%"
-
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_interfaces = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-let g:go_auto_sameids = 1
-let g:go_fmt_command = "goimports"
-
-nnoremap <F5> "=strftime("%FT%T%z")<CR>P
-inoremap <F5> <C-R>=strftime("%FT%T%z")<CR>
-" Remove all whitespaces
-nnoremap <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-
-" Undotree
-nnoremap <F7> :UndotreeToggle<CR>
-" Go back to terminal
-nnoremap <leader>t :stop<CR>
-" Run Python code
-nmap <buffer> <leader>r <Esc>:w<CR>:!clear;python %<CR>
-
-
-inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" coc
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
+" https://stackoverflow.com/questions/33465357/one-mapping-to-toggle-nerdtree-and-open-to-current-file-when-toggling-on
+function MyNerdToggle()
+    if &filetype == 'nerdtree' || exists("g:NERDTree") && g:NERDTree.IsOpen()
+        :NERDTreeToggle
+    else
+        :NERDTreeFind
+    endif
 endfunction
+nmap <leader>r :call MyNerdToggle()<cr>
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+" move around buffer using <leader>[NUMBER]
+nmap <Leader>1 <Plug>lightline#bufferline#go(1)
+nmap <Leader>2 <Plug>lightline#bufferline#go(2)
+nmap <Leader>3 <Plug>lightline#bufferline#go(3)
+nmap <Leader>4 <Plug>lightline#bufferline#go(4)
+nmap <Leader>5 <Plug>lightline#bufferline#go(5)
+nmap <Leader>6 <Plug>lightline#bufferline#go(6)
+nmap <Leader>7 <Plug>lightline#bufferline#go(7)
+nmap <Leader>8 <Plug>lightline#bufferline#go(8)
+nmap <Leader>9 <Plug>lightline#bufferline#go(9)
+nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" close buffer using <leader>c[NUMBER]
+nmap <Leader>c1 <Plug>lightline#bufferline#delete(1)
+nmap <Leader>c2 <Plug>lightline#bufferline#delete(2)
+nmap <Leader>c3 <Plug>lightline#bufferline#delete(3)
+nmap <Leader>c4 <Plug>lightline#bufferline#delete(4)
+nmap <Leader>c5 <Plug>lightline#bufferline#delete(5)
+nmap <Leader>c6 <Plug>lightline#bufferline#delete(6)
+nmap <Leader>c7 <Plug>lightline#bufferline#delete(7)
+nmap <Leader>c8 <Plug>lightline#bufferline#delete(8)
+nmap <Leader>c9 <Plug>lightline#bufferline#delete(9)
+nmap <Leader>c0 <Plug>lightline#bufferline#delete(10)
 
-" Yank without newline...
-nnoremap Y y$
+" GoTo code navigation.
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gy <Plug>(coc-type-definition)
+nmap <leader>gi <Plug>(coc-implementation)
+nmap <leader>gr <Plug>(coc-references)
 
-""" FROM https://routley.io/posts/nine-months-with-vim/
-" Open new splits to right and bottom
-set splitbelow
-set splitright
+" rename variable
+nmap <leader>rr <Plug>(coc-rename)
 
-" Open the current file in a new vertial split with '='
-" nnoremap = :vsplit<cr>
-"
+" project rename world
+nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>g[ <Plug>(coc-diagnostic-prev)
+nmap <leader>g] <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
+nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+nnoremap <leader>cr :CocRestart
+
+" Ctrl + _ for toggling comments
+nmap <C-_>   <Plug>NERDCommenterToggle
+vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
+" Allows you to save files you opened without write permissions via sudo
+cmap w!! w !sudo tee %
 
 " Format code
 nmap <leader>ai mzgg=G`z
@@ -214,6 +210,80 @@ map <C-l> <C-W>l
 nnoremap ł gT
 nnoremap ķ gt
 nnoremap T :tabnew<cr>
+
+nnoremap <F5> "=strftime("%FT%T%z")<CR>P
+inoremap <F5> <C-R>=strftime("%FT%T%z")<CR>
+" Remove all whitespaces
+nnoremap <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+lua vim.api.nvim_set_keymap('n', '<leader>e', "<cmd>lua require'hop'.hint_words()<cr>", {})
+
+" Undotree
+nnoremap <F7> :UndotreeToggle<CR>
+" Go back to terminal
+nnoremap <leader>t :stop<CR>
+" Run Python code
+" nmap <buffer> <leader>r <Esc>:w<CR>:!clear;python %<CR>
+
+
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Yank without newline...
+nnoremap Y y$
+
+" Temporary just to get used to proper vim navigation
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+"start a search query by pressing \
+nnoremap \  :Ag<space>
+"search for word under cursor by pressing |
+nnoremap \| :Ag <C-R><C-W><cr>:cw<cr>
+
+" ----- xolox/vim-easytags settings -----
+" Where to look for tags files
+set tags=~/.vimtags
+
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_conceal = 0
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+let g:goyo_width = "85%"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_auto_sameids = 1
+let g:go_fmt_command = "goimports"
+
+" coc
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+""" FROM https://routley.io/posts/nine-months-with-vim/
+" Open new splits to right and bottom
+set splitbelow
+set splitright
 
 " Remove trailing white spaces on save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -286,7 +356,6 @@ au BufNewFile,BufRead *.vert,*.frag set ft=glsl
 au BufNewFile,BufRead *.xml     setlocal ft=xml  ts=2 sw=2 et
 au BufNewFile,BufRead *.zone    setlocal nolist ts=4 sw=4 noet
 au BufNewFile,BufRead *.zsh     setf zsh
-au BufNewFile,BufRead *templates/*.html setf htmldjango
 au BufNewFile,BufRead .git/config setlocal ft=gitconfig nolist ts=4 sw=4 noet
 au BufNewFile,BufRead .gitconfig* setlocal ft=gitconfig nolist ts=4 sw=4 noet
 au BufNewFile,BufRead .vimlocal,.gvimlocal setf vim
@@ -353,9 +422,7 @@ let g:silicon = {
       \ 'window-controls':       v:true,
       \ }
 
-" Ctrl + _ for toggling comments
-nmap <C-_>   <Plug>NERDCommenterToggle
-vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
+
 
 if exists('$TMUX')
   autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " . expand("%:t"))
@@ -384,38 +451,8 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 endif
 
-" Temporary just to get used to proper vim navigation
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-
 " Because I want to see raw markdown when editing
 let g:vim_markdown_conceal = 0
-
-"start a search query by pressing \
-nnoremap \  :Ag<space>
-"search for word under cursor by pressing |
-nnoremap \| :Ag <C-R><C-W><cr>:cw<cr>
-
-" GoTo code navigation.
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gy <Plug>(coc-type-definition)
-nmap <leader>gi <Plug>(coc-implementation)
-nmap <leader>gr <Plug>(coc-references)
-
-" rename variable
-nmap <leader>rr <Plug>(coc-rename)
-
-" project rename world
-nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>g[ <Plug>(coc-diagnostic-prev)
-nmap <leader>g] <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
-nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-nnoremap <leader>cr :CocRestart
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -461,30 +498,6 @@ let g:lightline = {
 
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
-" move around buffer using <leader>[NUMBER]
-nmap <Leader>1 <Plug>lightline#bufferline#go(1)
-nmap <Leader>2 <Plug>lightline#bufferline#go(2)
-nmap <Leader>3 <Plug>lightline#bufferline#go(3)
-nmap <Leader>4 <Plug>lightline#bufferline#go(4)
-nmap <Leader>5 <Plug>lightline#bufferline#go(5)
-nmap <Leader>6 <Plug>lightline#bufferline#go(6)
-nmap <Leader>7 <Plug>lightline#bufferline#go(7)
-nmap <Leader>8 <Plug>lightline#bufferline#go(8)
-nmap <Leader>9 <Plug>lightline#bufferline#go(9)
-nmap <Leader>0 <Plug>lightline#bufferline#go(10)
-
-" close buffer using <leader>c[NUMBER]
-nmap <Leader>c1 <Plug>lightline#bufferline#delete(1)
-nmap <Leader>c2 <Plug>lightline#bufferline#delete(2)
-nmap <Leader>c3 <Plug>lightline#bufferline#delete(3)
-nmap <Leader>c4 <Plug>lightline#bufferline#delete(4)
-nmap <Leader>c5 <Plug>lightline#bufferline#delete(5)
-nmap <Leader>c6 <Plug>lightline#bufferline#delete(6)
-nmap <Leader>c7 <Plug>lightline#bufferline#delete(7)
-nmap <Leader>c8 <Plug>lightline#bufferline#delete(8)
-nmap <Leader>c9 <Plug>lightline#bufferline#delete(9)
-nmap <Leader>c0 <Plug>lightline#bufferline#delete(10)
-
 " --- vim go (polyglot) settings.
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
@@ -522,3 +535,8 @@ let g:vista_fzf_preview = ['right:50%']
 if !exists('g:undotree_WindowLayout')
     let g:undotree_WindowLayout = 2
 endif
+
+let g:comfortable_motion_scroll_down_key = "j"
+let g:comfortable_motion_scroll_up_key = "k"
+lua require'colorizer'.setup()
+let NERDTreeShowHidden=1
