@@ -16,35 +16,120 @@ font:
     #family: Iosevka evilroot
     family: Fantasque Sans Mono
     #family: PragmataPro Mono
+  use_thin_strokes: false
 
-  size: 13.0
+  size: 12
   offset:
     x: 1
     y: 1
 
+#colors:
+  #primary:
+    #background: '#1e2127'
+    #foreground: '#abb2bf'
+    #bright_foreground: '#e6efff'
+  #normal:
+    #black:   '#4c4c4c'
+    #red:     '#f43753'
+    #green:   '#a4d55d'
+    #yellow:  '#ffc24b'
+    #blue:    '#5496ff'
+    #magenta: '#C574DD'
+    #cyan:    '#73cef4'
+    #white:   '#d8d8dd'
+  #bright:
+    #black:   '#666666'
+    #red:     '#f34242'
+    #green:   '#a0e11e'
+    #yellow:  '#ffc24b'
+    #blue:    '#b3deef'
+    #magenta: '#556FFF'
+    #cyan:    '#79E6F3'
+    #white:   '#f2f2f2'
+#
 colors:
+  # Default colors
   primary:
-    background: '#1e2127'
-    foreground: '#abb2bf'
-    bright_foreground: '#e6efff'
+    background: '#24283b'
+    foreground: '#c0caf5'
+  #primary:
+    #background: '#2c2c2c'
+    #foreground: '#d6d6d6'
+
+    #dim_foreground:    '#dbdbdb'
+    #bright_foreground: '#d9d9d9'
+    #dim_background:    '#202020' # not sure
+    #bright_background: '#3a3a3a' # not sure
+
+  # Cursor colors
+  cursor:
+    text:   '#24283b'
+    cursor: '#c0caf5'
+
+  # Normal colors
   normal:
-    black:   '#4c4c4c'
-    red:     '#f43753'
-    green:   '#a4d55d'
-    yellow:  '#ffc24b'
-    blue:    '#5496ff'
-    magenta: '#C574DD'
-    cyan:    '#73cef4'
-    white:   '#d8d8dd'
+    black:   '#1c1c1c'
+    red:     '#bc5653'
+    green:   '#909d63'
+    yellow:  '#ebc17a'
+    blue:    '#7eaac7'
+    magenta: '#aa6292'
+    cyan:    '#86d3ce'
+    white:   '#cacaca'
+
+  # Bright colors
   bright:
-    black:   '#666666'
-    red:     '#f34242'
-    green:   '#a0e11e'
-    yellow:  '#ffc24b'
-    blue:    '#b3deef'
-    magenta: '#556FFF'
-    cyan:    '#79E6F3'
-    white:   '#f2f2f2'
+    black:   '#636363'
+    red:     '#bc5653'
+    green:   '#909d63'
+    yellow:  '#ebc17a'
+    blue:    '#7eaac7'
+    magenta: '#aa6292'
+    cyan:    '#86d3ce'
+    white:   '#f7f7f7'
+
+  # Dim colors
+  dim:
+    black:   '#232323'
+    red:     '#74423f'
+    green:   '#5e6547'
+    yellow:  '#8b7653'
+    blue:    '#556b79'
+    magenta: '#6e4962'
+    cyan:    '#5c8482'
+    white:   '#828282'
+
+ #TokyoNight Alacritty Colors
+#colors:
+   #Default colors
+  #primary:
+    #background: '#24283b'
+    #foreground: '#c0caf5'
+
+   #Normal colors
+  #normal:
+    #black:   '#1D202F'
+    #red:     '#f7768e'
+    #green:   '#9ece6a'
+    #yellow:  '#e0af68'
+    #blue:    '#7aa2f7'
+    #magenta: '#bb9af7'
+    #cyan:    '#7dcfff'
+    #white:   '#a9b1d6'
+
+   #Bright colors
+  #bright:
+    #black:   '#414868'
+    #red:     '#f7768e'
+    #green:   '#9ece6a'
+    #yellow:  '#e0af68'
+    #blue:    '#7aa2f7'
+    #magenta: '#bb9af7'
+    #cyan:    '#7dcfff'
+    #white:   '#c0caf5'
+  #indexed_colors:
+    #- { index: 16, color: '#ff9e64' }
+    #- { index: 17, color: '#db4b4b' }
 
 background_opacity: 0.97
 
@@ -66,13 +151,13 @@ key_bindings:
   - { key: Copy,                    action: Copy                         }
   - { key: Q,        mods: Command, action: Quit                         }
   - { key: W,        mods: Command, action: Quit                         }
-  - { key: N,        mods: Command,    action: SpawnNewInstance    }
-  - { key: Space,     mods: Alt,          chars: " "                     }
+  - { key: N,        mods: Command,    action: SpawnNewInstance          }
+  #- { key: Space,     mods: Alt,          chars: " "                     }
   - { key: Key0,     mods: Command, action: ResetFontSize                }
   - { key: Equals,   mods: Command, action: IncreaseFontSize             }
-  - { key: Minus,    mods: Command, action: DecreaseFontSize   ,          }
-  - { key: K,        mods: Command, action: ClearHistory                 }
-  - { key: LBracket, mods: Command, command: { program: "tmux", args: ["select-pane", "-L"] } }
-  - { key: RBracket, mods: Command, command: { program: "tmux", args: ["select-pane", "-R"] } }
-  - { key: LBracket, mods: Command|Shift, command: { program: "tmux", args: ["prev"] } }
-  - { key: RBracket, mods: Command|Shift, command: { program: "tmux", args: ["next"] } }
+  - { key: Minus,    mods: Command, action: DecreaseFontSize             }
+  #- { key: K,        mods: Command, action: ClearHistory                 }
+  #- { key: LBracket, mods: Command, command: { program: "tmux", args: ["select-pane", "-L"] } }
+  #- { key: RBracket, mods: Command, command: { program: "tmux", args: ["select-pane", "-R"] } }
+  #- { key: LBracket, mods: Command|Shift, command: { program: "tmux", args: ["prev"] } }
+  #- { key: RBracket, mods: Command|Shift, command: { program: "tmux", args: ["next"] } }
