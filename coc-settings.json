@@ -7,12 +7,14 @@
     "python.upgradePythonLanguageServer": true,
     "languageserver": {
         "terraform": {
-            "command": "terraform-lsp",
+            "command": "terraform-ls",
+            "args": ["serve"],
             "filetypes": [
                 "terraform",
                 "tf"
             ],
-            "initializationOptions": {}
+            "initializationOptions": {},
+            "settings": {}
         },
         "ccls": {
             "command": "ccls",
