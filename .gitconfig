@@ -1,7 +1,7 @@
 [user]
 	name = Karol Czeryna
 	email = k@e-dot.uk
-	signingkey = 02180B48E7B405DA289652E6AB6CE450F5F7D4BC
+	signingkey = EA4471E98C0F1E03BB1CDDA231D91F31DE7B040D
 
 [alias]
     a = add -p
@@ -60,13 +60,17 @@
 	oldHighlight = red bold 52
 	newNormal = green bold
 	newHighlight = green bold 22
+[interactive]
+    diffFilter = delta --color-only
 [core]
 	#pager = "if which diff-so-fancy > /dev/null 2>&1; then diff-so-fancy | less --tabs=4 -RFX; else less --tabs=4 -RFX; fi"
-	pager = "if which delta > /dev/null 2>&1; then delta --theme='OneHalfDark' --color-only; else less --tabs=4 -RFX; fi"
-	editor = vim
+	pager = "if which delta > /dev/null 2>&1; then delta ;else less --tabs=4 -RFX; fi"
+	editor = nvim
 	excludesfile = ~/.gitignore_global
 	# autocrlf = input
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	quotepath = false
+	commitGraph = true
 [credential]
 	helper = osxkeychain
 [diff]
@@ -94,3 +98,11 @@
 [diff-so-fancy]
 	stripLeadingSymbols = false
 	useUnicodeRuler = false
+[gc]
+	writeCommitGraph = true
+[receive]
+	advertisePushOptions = true
+
+[delta]
+	features = color-only
+	syntax-theme = Sublime Snazzy

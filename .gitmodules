@@ -1,6 +1,0 @@
-[submodule "tmux-battery-osx"]
-	path = tmux-battery-osx
-	url = https://github.com/tmux-plugins/tmux-battery-osx
-[submodule "zsh-autosuggestions"]
-	path = zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions
