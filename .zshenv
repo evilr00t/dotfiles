@@ -171,7 +171,10 @@ alias ls='exa --long -g --git -a -s modified'
 alias lsd='exa --long -g -D --git -a -s modified'
 alias ag='ag -u'
 # k8s related
-alias kube-bash='kubectl run --rm -i --tty $(whoami)-shell --image=evilroot/k8s-debug-pod --restart=Never'
+alias k="kubecolor"
+alias kubectl="kubecolor"
+alias kube-bash='k run --rm -i --tty $(whoami)-shell --image=evilroot/k8s-debug-pod --restart=Never'
+alias kube-dns='k run dnsutils --image=gcr.io/kubernetes-e2e-test-images/dnsutils:latest -- sleep 3600'
 alias radios='vlc -I ncurses https://gist.githubusercontent.com/evilr00t/23cd50fbceed255fb5330d484c5a8273/raw/internet_radios_playlist.m3u'
 
 # ansible - python2 fix
@@ -238,4 +241,6 @@ function t {
 
 # use bat to colorize man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
+export MCFLY_KEY_SCHEME=vim
+export MCFLY_FUZZY=true
+export MCFLY_RESULTS=25
