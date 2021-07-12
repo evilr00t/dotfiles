@@ -5,13 +5,13 @@ set nocompatible
 
 filetype off
 
+" TODO: Get rid of FZF
 set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=/usr/local/opt/fzf
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'mengelbrecht/lightline-bufferline'
-"Plugin 'metalelf0/supertab'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Yggdroot/indentLine'
 Plugin 'junegunn/fzf.vim'
@@ -20,10 +20,8 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'christianchiarulli/nvcode-color-schemes.vim'
 Plugin 'folke/tokyonight.nvim'
 Plugin 'phanviet/vim-monokai-pro'
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plugin 'mbbill/undotree'
-Plugin 'mhinz/vim-signify'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
 Plugin 'machakann/vim-highlightedyank'
@@ -40,6 +38,15 @@ Plugin 'phaazon/hop.nvim'
 Plugin 'norcalli/nvim-colorizer.lua'
 Plugin 'scrooloose/nerdtree'
 Plugin 'yuttie/comfortable-motion.vim'
+Plugin 'nvim-lua/popup.nvim'
+Plugin 'nvim-lua/plenary.nvim'
+Plugin 'nvim-telescope/telescope.nvim'
+Plugin 'hrsh7th/nvim-compe'
+
+Plugin 'neovim/nvim-lspconfig'
+Plugin 'kabouzeid/nvim-lspinstall'
+
+Plugin 'lewis6991/gitsigns.nvim'
 
 call vundle#end()
 
@@ -129,11 +136,15 @@ set number relativenumber
 " nmap <F8> :TagbarToggle<CR>
 " nmap <F9> :bprev<CR>
 " nmap <F10> :bnext<CR>
-nmap <Leader>B :Buffers<CR>
-nmap <Leader>h :History<CR>
-nmap <Leader>f :GFiles<CR>
-nmap <Leader>F :Files<CR>
-nmap <Leader>q :Tags<CR>
+"nmap <Leader>B :Buffers<CR>
+"nmap <Leader>h :History<CR>
+"nmap <Leader>f :GFiles<CR>
+"nmap <Leader>F :Files<CR>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+"nmap <Leader>q :Tags<CR>
 " Open/close tagbar with \b
 nmap <silent> <leader>T :TagbarToggle<CR>
 
@@ -172,23 +183,23 @@ nmap <Leader>c9 <Plug>lightline#bufferline#delete(9)
 nmap <Leader>c0 <Plug>lightline#bufferline#delete(10)
 
 " GoTo code navigation.
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gy <Plug>(coc-type-definition)
-nmap <leader>gi <Plug>(coc-implementation)
-nmap <leader>gr <Plug>(coc-references)
+"nmap <leader>gd <Plug>(coc-definition)
+"nmap <leader>gy <Plug>(coc-type-definition)
+"nmap <leader>gi <Plug>(coc-implementation)
+"nmap <leader>gr <Plug>(coc-references)
 
-" rename variable
-nmap <leader>rr <Plug>(coc-rename)
+"" rename variable
+"nmap <leader>rr <Plug>(coc-rename)
 
-" project rename world
-nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>g[ <Plug>(coc-diagnostic-prev)
-nmap <leader>g] <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
-nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+"" project rename world
+"nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
+"nmap <leader>g[ <Plug>(coc-diagnostic-prev)
+"nmap <leader>g] <Plug>(coc-diagnostic-next)
+"nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
+"nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
+"nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-nnoremap <leader>cr :CocRestart
+"nnoremap <leader>cr :CocRestart
 
 " Ctrl + _ for toggling comments
 nmap <C-_>   <Plug>NERDCommenterToggle
@@ -223,19 +234,8 @@ nnoremap <leader>t :stop<CR>
 " Run Python code
 " nmap <buffer> <leader>r <Esc>:w<CR>:!clear;python %<CR>
 
-
-inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Yank without newline...
 nnoremap Y y$
@@ -273,12 +273,6 @@ let g:go_highlight_types = 1
 let g:go_auto_sameids = 1
 let g:go_fmt_command = "goimports"
 
-" coc
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
 """ FROM https://routley.io/posts/nine-months-with-vim/
 " Open new splits to right and bottom
 set splitbelow
@@ -288,7 +282,7 @@ set splitright
 autocmd BufWritePre * :%s/\s\+$//e
 
 " Shell like behavior(not recommended).
-" set completeopt=longest,menuone,noinsert
+set completeopt=menuone,noselect
 set wildmode=longest,list,full
 
 " ALE - Error and warning signs.
@@ -453,21 +447,21 @@ endif
 " Because I want to see raw markdown when editing
 let g:vim_markdown_conceal = 0
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
+"function! s:show_documentation()
+  "if (index(['vim','help'], &filetype) >= 0)
+    "execute 'h '.expand('<cword>')
+  "elseif (coc#rpc#ready())
+    "call CocActionAsync('doHover')
+  "else
+    "execute '!' . &keywordprg . " " . expand('<cword>')
+  "endif
+"endfunction
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
+"autocmd CursorHold * silent call CocActionAsync('highlight')
 
-function! CocCurrentFunction()
-    return get(b:, 'coc_current_function', '')
-endfunction
+"function! CocCurrentFunction()
+    "return get(b:, 'coc_current_function', '')
+"endfunction
 
 set showtabline=1
 let g:lightline#bufferline#min_buffer_count = 2
@@ -476,12 +470,10 @@ let g:lightline = {
       \ 'colorscheme': 'one',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'currentfunction', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead',
-      \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction'
       \ },
       \ 'tabline': {
       \   'left': [ ['buffers'] ],
@@ -539,3 +531,96 @@ let g:comfortable_motion_scroll_down_key = "j"
 let g:comfortable_motion_scroll_up_key = "k"
 lua require'colorizer'.setup()
 let NERDTreeShowHidden=1
+
+let g:compe = {}
+let g:compe.enabled = v:true
+let g:compe.autocomplete = v:true
+let g:compe.debug = v:false
+let g:compe.min_length = 1
+let g:compe.preselect = 'enable'
+let g:compe.throttle_time = 80
+let g:compe.source_timeout = 200
+let g:compe.incomplete_delay = 400
+let g:compe.max_abbr_width = 100
+let g:compe.max_kind_width = 100
+let g:compe.max_menu_width = 100
+let g:compe.documentation = v:true
+
+let g:compe.source = {}
+let g:compe.source.path = v:true
+let g:compe.source.buffer = v:true
+let g:compe.source.calc = v:true
+let g:compe.source.nvim_lsp = v:true
+let g:compe.source.nvim_lua = v:true
+
+lua << EOF
+require'lspconfig'.pyright.setup{}
+EOF
+
+lua << EOF
+local nvim_lsp = require('lspconfig')
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { "pyright", "rust_analyzer", "tsserver" }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup { on_attach = on_attach }
+end
+
+local function setup_servers()
+  require'lspinstall'.setup()
+  local servers = require'lspinstall'.installed_servers()
+  for _, server in pairs(servers) do
+    require'lspconfig'[server].setup{}
+  end
+end
+
+setup_servers()
+
+-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+require'lspinstall'.post_install_hook = function ()
+  setup_servers() -- reload installed servers
+  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+end
+require('gitsigns').setup {
+  signs = {
+      add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+      change       = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+      delete       = {hl = 'GitSignsDelete', text = '-', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'}
+    }
+}
+EOF
+
