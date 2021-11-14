@@ -17,7 +17,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 HIST_STAMPS="dd.mm.yyyy"
 HIST_IGNORE_SPACE="true"
-plugins=(osx history history-substring-search git-prompt kube-ps1 colored-man-pages vi-mode extract fast-syntax-highlighting)
+plugins=(macos history history-substring-search git-prompt kube-ps1 colored-man-pages vi-mode extract fast-syntax-highlighting ssh-agent gpg-agent)
 autoload -Uz compinit
 
 for dump in ~/.zcompdump(N.mh+24); do
@@ -53,5 +53,4 @@ source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Custom things
 . ~/.zshenv
-eval "$(mcfly init zsh)"
 eval "$(zoxide init zsh)"
