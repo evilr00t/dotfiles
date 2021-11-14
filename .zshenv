@@ -6,7 +6,7 @@
 #
 # INCLUDE EXTERNAL FILES
 export PROMPT_EOL_MARK='%K{red} '
-
+export EDITOR=nvim
 export GPG_TTY=`tty`
 
 if [ -f ~/.ec2 ]; then
@@ -49,6 +49,14 @@ k8env() {
   local ke
   ke=$(cat ~/.work | grep -v '^#' | grep env | tr -d '() {' | awk '{print $1}' | fzf)
   $ke
+}
+
+k8sdecode() {
+kubectl get secret $1 -o jsonpath="{.data.$2}" | base64 --decode
+}
+
+k8sgetsec() {
+kubectl get secret $1 -o jsonpath="{.data}"
 }
 
 cht() {
@@ -111,7 +119,7 @@ fi
 #fi
 #}
 
-alias code='codium'
+alias code='code-insiders'
 alias mate='/Applications/TextMate.app/Contents/Resources/mate'
 
 # file open using fzf and vim!
@@ -176,6 +184,7 @@ alias kubectl="kubecolor"
 alias kube-bash='k run --rm -i --tty $(whoami)-shell --image=evilroot/k8s-debug-pod --restart=Never'
 alias kube-dns='k run dnsutils --image=gcr.io/kubernetes-e2e-test-images/dnsutils:latest -- sleep 3600'
 alias radios='vlc -I ncurses https://gist.githubusercontent.com/evilr00t/23cd50fbceed255fb5330d484c5a8273/raw/internet_radios_playlist.m3u'
+alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 
 # ansible - python2 fix
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
