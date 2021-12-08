@@ -52,11 +52,11 @@ k8env() {
 }
 
 k8sdecode() {
-kubectl get secret $1 -o jsonpath="{.data.$2}" | base64 --decode
+  kubectl get secret $1 -o jsonpath="{.data.$2}" | base64 --decode
 }
 
 k8sgetsec() {
-kubectl get secret $1 -o jsonpath="{.data}"
+  kubectl get secret $1 -o jsonpath="{.data}"
 }
 
 cht() {
@@ -119,8 +119,6 @@ fi
 #fi
 #}
 
-alias code='code-insiders'
-alias mate='/Applications/TextMate.app/Contents/Resources/mate'
 
 # file open using fzf and vim!
 fo() {
@@ -185,6 +183,10 @@ alias kube-bash='k run --rm -i --tty $(whoami)-shell --image=evilroot/k8s-debug-
 alias kube-dns='k run dnsutils --image=gcr.io/kubernetes-e2e-test-images/dnsutils:latest -- sleep 3600'
 alias radios='vlc -I ncurses https://gist.githubusercontent.com/evilr00t/23cd50fbceed255fb5330d484c5a8273/raw/internet_radios_playlist.m3u'
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+alias code='code-insiders'
+alias mate='/Applications/TextMate.app/Contents/Resources/mate'
+alias python=python3
+alias pip=pip3
 
 # ansible - python2 fix
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
@@ -214,22 +216,6 @@ alias ls='exa -l --git -a -s modified'
 alias j=z
 alias jj=zz
 
-# Select a docker container to start and attach to
-function da() {
-  local cid
-  cid=$(docker ps -a | sed 1d | fzf -1 -q "$1" | awk '{print $1}')
-
-  [ -n "$cid" ] && docker start "$cid" && docker attach "$cid"
-}
-
-# Select a running docker container to stop
-function ds() {
-  local cid
-  cid=$(docker ps | sed 1d | fzf -q "$1" | awk '{print $1}')
-
-  [ -n "$cid" ] && docker stop "$cid"
-}
-
 function kp() {
   local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
   if [ "x$pid" != "x" ]
@@ -241,15 +227,16 @@ function kp() {
 
 # Helper for temp files
 function td {
-  cd $(mktemp -d /tmp/$1.XXXX)
+  cd $(mktemp -d /tmp/${1}.XXXX)
 }
 
 function t {
-  cd $(mktemp /tmp/$1.XXXX)
+  cd $(mktemp /tmp/${1}.XXXX)
+}
+
+function showcrt {
+  openssl x509 -in ${1} -text -noout
 }
 
 # use bat to colorize man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export MCFLY_KEY_SCHEME=vim
-export MCFLY_FUZZY=true
-export MCFLY_RESULTS=25
