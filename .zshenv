@@ -1,8 +1,7 @@
 #
 # Defines environment variables.
 #
-# Authors:
-#   Karol Czeryna <k@e-dot.uk>
+# Author: Karol Czeryna <k@e-dot.uk>
 #
 # INCLUDE EXTERNAL FILES
 export PROMPT_EOL_MARK='%K{red} '
@@ -32,18 +31,18 @@ export PATH=$GOROOT/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH
 
 # FUNCTIONS
 
-apb()
-{
-  if [ ! -z "$ANSIBLE_BECOME_PASS" ]; then
-    ansible-playbook -e "ansible_become_pass=$ANSIBLE_BECOME_PASS" $@
-  else
-    # \xE2\x9D\x98 is a cross mark ;-)
-    echo -e "[\e[1;31m\xE2\x9C\x98\e[0m] Did you forget about: "
-    echo -e "\e[31mexport ANSIBLE_BECOME_PASS=XXX\e[0m"
-    echo -e "[\e[1;31m\xE2\x9C\x98\e[0m] Oh, yes... you do!"
+#apb()
+#{
+  #if [ ! -z "$ANSIBLE_BECOME_PASS" ]; then
+    #ansible-playbook -e "ansible_become_pass=$ANSIBLE_BECOME_PASS" $@
+  #else
+    ## \xE2\x9D\x98 is a cross mark ;-)
+    #echo -e "[\e[1;31m\xE2\x9C\x98\e[0m] Did you forget about: "
+    #echo -e "\e[31mexport ANSIBLE_BECOME_PASS=XXX\e[0m"
+    #echo -e "[\e[1;31m\xE2\x9C\x98\e[0m] Oh, yes... you do!"
 
-  fi
-}
+  #fi
+#}
 
 k8env() {
   local ke
@@ -51,12 +50,13 @@ k8env() {
   $ke
 }
 
-k8sdecode() {
-  kubectl get secret $1 -o jsonpath="{.data.$2}" | base64 --decode
+k8sgetsec() {
+  kubectl get secret $1 -o json | jq '.data'
+#base64 --decode
 }
 
-k8sgetsec() {
-  kubectl get secret $1 -o jsonpath="{.data}"
+k8sdecode() {
+  kubectl get secret $1 -o json | jq '.data | map_values(@base64d)'
 }
 
 cht() {
@@ -123,8 +123,14 @@ fi
 # file open using fzf and vim!
 fo() {
   local files
-  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
+  IFS=$'\n'
+  files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
   [[ -n "$files" ]] && ${EDITOR:-nvim} "${files[@]}"
+}
+
+# tf_config
+tf_config() {
+  TF_CLI_CONFIG_FILE=$(ls -alh ~/.terraform.d/credentials-*.tfrc.json -1 2>/dev/null | fzf --exit-0) && export TF_CLI_CONFIG_FILE=$TF_CLI_CONFIG_FILE || echo "No TF credentials files found."
 }
 
 # ftm [SESSION_NAME | FUZZY PATTERN] - create new tmux session, or switch to existing one.
@@ -183,10 +189,13 @@ alias kube-bash='k run --rm -i --tty $(whoami)-shell --image=evilroot/k8s-debug-
 alias kube-dns='k run dnsutils --image=gcr.io/kubernetes-e2e-test-images/dnsutils:latest -- sleep 3600'
 alias radios='vlc -I ncurses https://gist.githubusercontent.com/evilr00t/23cd50fbceed255fb5330d484c5a8273/raw/internet_radios_playlist.m3u'
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+alias idea="open -a 'IntelliJ IDEA'"
 alias code='code-insiders'
 alias mate='/Applications/TextMate.app/Contents/Resources/mate'
 alias python=python3
 alias pip=pip3
+alias tp='terraform validate && terraform plan'
+alias mtr='sudo $(brew --prefix mtr)/sbin/mtr'
 
 # ansible - python2 fix
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
@@ -213,9 +222,6 @@ zz() {
 unalias ls 2>/dev/null
 alias ls='exa -l --git -a -s modified'
 
-alias j=z
-alias jj=zz
-
 function kp() {
   local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
   if [ "x$pid" != "x" ]
@@ -236,6 +242,15 @@ function t {
 
 function showcrt {
   openssl x509 -in ${1} -text -noout
+}
+
+function vg() {
+  # from https://github.com/vrothberg/vgrep
+  INITIAL_QUERY="$1"
+  VGREP_PREFIX="$(brew --prefix vgrep)/bin/vgrep --no-header "
+  FZF_DEFAULT_COMMAND="$VGREP_PREFIX '$INITIAL_QUERY'" \
+  fzf --bind "change:reload:$VGREP_PREFIX {q} || true" --ansi --phony --tac --query "$INITIAL_QUERY" \
+  | gawk '{print $1}' | xargs -I{} -o vgrep --show {}
 }
 
 # use bat to colorize man pages

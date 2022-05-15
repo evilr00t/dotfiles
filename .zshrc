@@ -17,7 +17,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 HIST_STAMPS="dd.mm.yyyy"
 HIST_IGNORE_SPACE="true"
-plugins=(macos history history-substring-search git-prompt kube-ps1 colored-man-pages vi-mode extract fast-syntax-highlighting ssh-agent gpg-agent)
+plugins=(macos history history-substring-search git-prompt colored-man-pages vi-mode extract fast-syntax-highlighting ssh-agent gpg-agent autoswitch_virtualenv)
 autoload -Uz compinit
 
 for dump in ~/.zcompdump(N.mh+24); do
@@ -54,3 +54,7 @@ source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Custom things
 . ~/.zshenv
 eval "$(zoxide init zsh)"
+
+# Scaleway CLI autocomplete initialization.
+eval "$(scw autocomplete script shell=zsh)"
+export DOCKER_HOST='unix:///Users/evilroot/.local/share/containers/podman/machine/podman-machine-default/podman.sock'
