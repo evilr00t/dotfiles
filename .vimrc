@@ -13,13 +13,12 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'mengelbrecht/lightline-bufferline'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'jbgutierrez/vim-better-comments'
 Plugin 'Yggdroot/indentLine'
 Plugin 'junegunn/fzf.vim'
 Plugin 'liuchengxu/vista.vim'
 Plugin 'vim-scripts/a.vim'
-Plugin 'christianchiarulli/nvcode-color-schemes.vim'
 Plugin 'folke/tokyonight.nvim'
-Plugin 'phanviet/vim-monokai-pro'
 Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-fugitive'
@@ -41,12 +40,18 @@ Plugin 'yuttie/comfortable-motion.vim'
 Plugin 'nvim-lua/popup.nvim'
 Plugin 'nvim-lua/plenary.nvim'
 Plugin 'nvim-telescope/telescope.nvim'
-Plugin 'hrsh7th/nvim-compe'
-
+Plugin 'williamboman/nvim-lsp-installer'
 Plugin 'neovim/nvim-lspconfig'
-Plugin 'kabouzeid/nvim-lspinstall'
-
+Plugin 'hrsh7th/nvim-cmp'
+Plugin 'hrsh7th/cmp-buffer'
+Plugin 'hrsh7th/cmp-path'
+Plugin 'hrsh7th/cmp-nvim-lsp'
+Plugin 'hrsh7th/cmp-nvim-lua'
+Plugin 'p00f/nvim-ts-rainbow'
 Plugin 'lewis6991/gitsigns.nvim'
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'projekt0n/github-nvim-theme'
+Plugin 'folke/which-key.nvim'
 
 call vundle#end()
 
@@ -60,6 +65,14 @@ set showcmd
 set incsearch
 set hlsearch
 set wildmenu
+set wildmode=longest,list,full
+set wildignore+=*.pyc
+set wildignore+=*_build/*
+set wildignore+=**/coverage/*
+set wildignore+=**/node_modules/*
+set wildignore+=**/android/*
+set wildignore+=**/ios/*
+set wildignore+=**/.git/*
 set showmatch
 set list
 set listchars=tab:\|\ ,trail:▫
@@ -78,6 +91,7 @@ set cmdheight=2
 set scrolloff=8
 set ttimeout        " time out for key codes
 set ttimeoutlen=100 " wait up to 100ms after Esc for special key
+set textwidth=132
 
 let mapleader = ","
 " turn off search highlight
@@ -95,7 +109,7 @@ set foldnestmax=10      " 10 nested fold max
 " space open/closes folds
 nnoremap <space> za
 set foldmethod=indent   " fold based on indent level
-set colorcolumn=81
+set colorcolumn=132
 syntax on
 " set mouse=a
 "set formatoptions=tcqronj
@@ -113,9 +127,11 @@ try
     "let g:gruvbox_material_palette = 'mix'
     "let g:gruvbox_contrast_dark = 'medium'
     "let g:nvcode_termcolors=256
-    colorscheme tokyonight
+    "let g:tokyonight_style = "night"
+    let g:tokyonight_italic_functions = 1
+    colorscheme github_dark
     " Comments should be in italic style
-    hi Comment cterm=italic
+    " hi Comment cterm=italic
     " Transparent background - use terminal background colour
     " hi Normal guibg=NONE ctermbg=NONE
 catch
@@ -182,30 +198,11 @@ nmap <Leader>c8 <Plug>lightline#bufferline#delete(8)
 nmap <Leader>c9 <Plug>lightline#bufferline#delete(9)
 nmap <Leader>c0 <Plug>lightline#bufferline#delete(10)
 
-" GoTo code navigation.
-"nmap <leader>gd <Plug>(coc-definition)
-"nmap <leader>gy <Plug>(coc-type-definition)
-"nmap <leader>gi <Plug>(coc-implementation)
-"nmap <leader>gr <Plug>(coc-references)
-
-"" rename variable
-"nmap <leader>rr <Plug>(coc-rename)
-
-"" project rename world
-"nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
-"nmap <leader>g[ <Plug>(coc-diagnostic-prev)
-"nmap <leader>g] <Plug>(coc-diagnostic-next)
-"nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
-"nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
-"nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-"nnoremap <leader>cr :CocRestart
-
 " Ctrl + _ for toggling comments
 nmap <C-_>   <Plug>NERDCommenterToggle
 vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
 " Allows you to save files you opened without write permissions via sudo
-cmap w!! w !sudo tee %
+cmap w!! %!sudo tee > /dev/null %
 
 " Format code
 nmap <leader>ai mzgg=G`z
@@ -246,6 +243,23 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
+" Remap a key sequence in insert mode to kick me out to normal
+" mode. This makes it so this key sequence can never be typed
+" again in insert mode, so it has to be unique.
+inoremap jj <esc>
+inoremap jJ <esc>
+inoremap Jj <esc>
+inoremap JJ <esc>
+inoremap jk <esc>
+inoremap jK <esc>
+inoremap Jk <esc>
+inoremap JK <esc>
+
+" Make j/k visual down and up instead of whole lines. This makes word
+" wrapping a lot more pleasent.
+map j gj
+map k gk
+
 "start a search query by pressing \
 nnoremap \  :Ag<space>
 "search for word under cursor by pressing |
@@ -283,32 +297,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 " Shell like behavior(not recommended).
 set completeopt=menuone,noselect
-set wildmode=longest,list,full
-
-" ALE - Error and warning signs.
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '▲'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-highlight link ALEWarningSign String
-highlight link ALEErrorSign Title
-highlight SpecialKey ctermfg=124 guifg=#af3a03
-let g:ale_linters = {
-  \ 'python': ['flake8'],
-  \ 'go': ['goimports'],
-  \ 'markdown': ['markdownlint']
-  \ }
-
-" Custom ALE fixers
-let g:ale_fixers = {
-  \ 'go': ['goimports'],
-  \ 'python': ['black'],
-  \ 'javascript': ['prettier']
-  \ }
-
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_list_window_size = 5
 
 " Relative number toggle based on focus / mode
 augroup numbertoggle
@@ -357,8 +345,8 @@ au BufNewFile,BufRead /tmp/crontab* setf crontab
 au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
 au BufNewFile,BufRead Makefile setlocal nolist
 " au BufRead,BufNewFile *.yml,*.yaml set filetype=yaml.ansible
-au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet textwidth=62
-au FileType python setlocal nolist ts=4 sts=4 sw=4 textwidth=120
+au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet
+au FileType python setlocal nolist ts=4 sts=4 sw=4
 au FileType inform7 setlocal nolist tw=0 ts=4 sw=4 noet foldlevel=999
 au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
 au FileType make setlocal nolist ts=4 sts=4 sw=4 noet
@@ -368,19 +356,7 @@ au FileType markdown syn sync fromstart
 au CursorHold,CursorHoldI * checktime
 augroup END
 
-function! WrapForTmux(s)
-  if !exists('$TMUX')
-    return a:s
-  endif
-
-  let tmux_start = "\<Esc>Ptmux;"
-  let tmux_end = "\<Esc>\\"
-
-  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
-endfunction
-
-let &t_SI .= WrapForTmux("\<Esc>[?2004h")
-let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+set guicursor=i:block-blinkwait175-blinkoff150-blinkon175
 
 function! XTermPasteBegin()
   set pastetoggle=<Esc>[201~
@@ -505,21 +481,6 @@ let g:go_highlight_format_strings = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_auto_sameids = 1
 
-" tree-sitter configuration
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = {},  -- list of language that will be disabled
-  },
-  indent = {
-    enable = true,
-    disable = {"python"}
-  }
-}
-EOF
-
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_fzf_preview = ['right:50%']
 
@@ -529,7 +490,6 @@ endif
 
 let g:comfortable_motion_scroll_down_key = "j"
 let g:comfortable_motion_scroll_up_key = "k"
-lua require'colorizer'.setup()
 let NERDTreeShowHidden=1
 
 let g:compe = {}
@@ -554,67 +514,50 @@ let g:compe.source.nvim_lsp = v:true
 let g:compe.source.nvim_lua = v:true
 
 lua << EOF
-require'lspconfig'.pyright.setup{}
-EOF
-
-lua << EOF
-local nvim_lsp = require('lspconfig')
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.api.nvim_set_keymap('n', '<leader>vd', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  --Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
-  local opts = { noremap=true, silent=true }
-
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-h>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>vws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>vrn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>vca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>vr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'i', '<leader>vf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "pyright", "rust_analyzer", "tsserver" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
+local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
+for _, lsp in pairs(servers) do
+  require('lspconfig')[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      -- This will be the default in neovim 0.7+
+      debounce_text_changes = 150,
+    }
+  }
 end
 
-local function setup_servers()
-  require'lspinstall'.setup()
-  local servers = require'lspinstall'.installed_servers()
-  for _, server in pairs(servers) do
-    require'lspconfig'[server].setup{}
-  end
-end
+require("which-key").setup {
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+  -- refer to the configuration section below
+}
 
-setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
-  setup_servers() -- reload installed servers
-  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-end
 require('gitsigns').setup {
   signs = {
       add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
@@ -622,5 +565,60 @@ require('gitsigns').setup {
       delete       = {hl = 'GitSignsDelete', text = '-', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'}
     }
 }
+require'nvim-treesitter.configs'.setup {
+  rainbow = {
+    enable = true,
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    -- colors = {}, -- table of hex strings
+    -- termcolors = {} -- table of colour name strings
+  }
+}
+
+require'hop'.setup()
+
+local cmp = require("cmp")
+cmp.setup({
+   mapping = {
+      ["<C-p>"] = cmp.mapping.select_prev_item(),
+      ["<C-n>"] = cmp.mapping.select_next_item(),
+      ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+      ["<C-f>"] = cmp.mapping.scroll_docs(4),
+      ["<C-Space>"] = cmp.mapping.complete(),
+      ["<C-e>"] = cmp.mapping.close(),
+      ["<CR>"] = cmp.mapping.confirm({
+         behavior = cmp.ConfirmBehavior.Replace,
+         select = true,
+      }),
+      ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
+      ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
+   },
+   sources = {
+      { name = "buffer" },
+      { name = "nvim_lsp" },
+      { name = "path" },
+   },
+})
+
+vim.cmd([[
+augroup NvimCmp
+   au!
+   au FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }
+augroup END
+]])
+
+
+local lsp_installer = require("nvim-lsp-installer")
+
+-- Register a handler that will be called for all installed servers.
+-- Alternatively, you may also register handlers on specific server instances instead (see example below).
+lsp_installer.on_server_ready(function(server)
+    local opts = {}
+    server:setup(opts)
+end)
+
+require'colorizer'.setup()
+
+
 EOF
 
