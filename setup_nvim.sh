@@ -22,10 +22,10 @@ echo 'git is not installed - exiting...'
 exit 1
 fi
 
-# check if we have git
-if ! which vim >/dev/null 2>&1;
+# check if we have nvim
+if ! which nvim >/dev/null 2>&1;
 then
-echo 'vim is not installed - exiting...'
+echo 'neovim is not installed - exiting...'
 exit 1
 fi
 
