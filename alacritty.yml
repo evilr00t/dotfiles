@@ -10,16 +10,16 @@ window:
   padding:
     x: 5
     y: 27
+  dynamic_padding: true
   decorations: transparent
 
 dynamic_title: true
 
 font:
   normal:
-    #family: Fira Code
-    family: Fantasque Sans Mono
-    #family: IBM Plex Mono
-  use_thin_strokes: true
+    # family: Fantasque Sans Mono
+    #family: FantasqueSansMono Nerd Font Mono
+    family: PragmataPro Mono
 
   size: 14
   offset:
@@ -127,6 +127,7 @@ draw_bold_text_with_bright_colors: true
 
 cursor:
   style: Block
+  unfocused_hollow: true
 
 live_config_reload: true
 
