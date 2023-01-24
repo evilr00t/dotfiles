@@ -149,18 +149,10 @@ set softtabstop=2
 set expandtab
 set number relativenumber
 
-" nmap <F8> :TagbarToggle<CR>
-" nmap <F9> :bprev<CR>
-" nmap <F10> :bnext<CR>
-"nmap <Leader>B :Buffers<CR>
-"nmap <Leader>h :History<CR>
-"nmap <Leader>f :GFiles<CR>
-"nmap <Leader>F :Files<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-"nmap <Leader>q :Tags<CR>
 " Open/close tagbar with \b
 nmap <silent> <leader>T :TagbarToggle<CR>
 
@@ -204,19 +196,6 @@ vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
 " Allows you to save files you opened without write permissions via sudo
 cmap w!! %!sudo tee > /dev/null %
 
-" Format code
-nmap <leader>ai mzgg=G`z
-
-" Easy split navigation
-map <C-j> <C-w>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-" Simplify using tabs using alt+<h/l> (Polish Pro)
-nnoremap ł gT
-nnoremap ķ gt
-nnoremap T :tabnew<cr>
 
 nnoremap <F5> "=strftime("%FT%T%z")<CR>P
 inoremap <F5> <C-R>=strftime("%FT%T%z")<CR>
@@ -236,29 +215,6 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Yank without newline...
 nnoremap Y y$
-
-" Temporary just to get used to proper vim navigation
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-
-" Remap a key sequence in insert mode to kick me out to normal
-" mode. This makes it so this key sequence can never be typed
-" again in insert mode, so it has to be unique.
-inoremap jj <esc>
-inoremap jJ <esc>
-inoremap Jj <esc>
-inoremap JJ <esc>
-inoremap jk <esc>
-inoremap jK <esc>
-inoremap Jk <esc>
-inoremap JK <esc>
-
-" Make j/k visual down and up instead of whole lines. This makes word
-" wrapping a lot more pleasent.
-map j gj
-map k gk
 
 "start a search query by pressing \
 nnoremap \  :Ag<space>
@@ -390,9 +346,6 @@ let g:silicon = {
       \ 'round-corner':          v:true,
       \ 'window-controls':       v:true,
       \ }
-
-
-
 if exists('$TMUX')
   autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " . expand("%:t"))
   autocmd VimLeave * call system("tmux setw automatic-rename")
@@ -422,22 +375,6 @@ endif
 
 " Because I want to see raw markdown when editing
 let g:vim_markdown_conceal = 0
-
-"function! s:show_documentation()
-  "if (index(['vim','help'], &filetype) >= 0)
-    "execute 'h '.expand('<cword>')
-  "elseif (coc#rpc#ready())
-    "call CocActionAsync('doHover')
-  "else
-    "execute '!' . &keywordprg . " " . expand('<cword>')
-  "endif
-"endfunction
-
-"autocmd CursorHold * silent call CocActionAsync('highlight')
-
-"function! CocCurrentFunction()
-    "return get(b:, 'coc_current_function', '')
-"endfunction
 
 set showtabline=1
 let g:lightline#bufferline#min_buffer_count = 2
