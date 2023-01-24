@@ -4,8 +4,8 @@ export ZSH=$HOME/.oh-my-zsh
 # https://github.com/ohmyzsh/ohmyzsh/issues/6338
 DISABLE_MAGIC_FUNCTIONS=true
 
-HISTSIZE=10000000
-SAVEHIST=10000000
+HISTSIZE=999999999
+SAVEHIST=999999999
 
 ZSH_THEME="evilroot"
 
@@ -17,7 +17,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 HIST_STAMPS="dd.mm.yyyy"
 HIST_IGNORE_SPACE="true"
-plugins=(macos history history-substring-search git-prompt colored-man-pages vi-mode extract fast-syntax-highlighting ssh-agent gpg-agent autoswitch_virtualenv)
+plugins=(macos history history-substring-search git-prompt colored-man-pages vi-mode extract fast-syntax-highlighting ssh-agent gpg-agent autoswitch_virtualenv fzf-tab)
 autoload -Uz compinit
 
 for dump in ~/.zcompdump(N.mh+24); do
@@ -58,3 +58,6 @@ eval "$(zoxide init zsh)"
 # Scaleway CLI autocomplete initialization.
 eval "$(scw autocomplete script shell=zsh)"
 export DOCKER_HOST='unix:///Users/evilroot/.local/share/containers/podman/machine/podman-machine-default/podman.sock'
+
+# zsh-bd
+. $HOME/.zsh/plugins/bd/bd.zsh
