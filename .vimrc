@@ -6,54 +6,54 @@ set nocompatible
 filetype off
 
 " TODO: Get rid of FZF
-set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=/usr/local/opt/fzf
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'itchyny/lightline.vim'
-Plugin 'mengelbrecht/lightline-bufferline'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'jbgutierrez/vim-better-comments'
-Plugin 'Yggdroot/indentLine'
-Plugin 'junegunn/fzf.vim'
-Plugin 'liuchengxu/vista.vim'
-Plugin 'vim-scripts/a.vim'
-Plugin 'folke/tokyonight.nvim'
-Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plugin 'mbbill/undotree'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-sensible'
-Plugin 'machakann/vim-highlightedyank'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'tpope/vim-surround'
-Plugin 'godlygeek/tabular'
-Plugin 'segeljakt/vim-silicon'
-Plugin 'rking/ag.vim'
-Plugin 'junegunn/goyo.vim'
-Plugin 'Pocco81/TrueZen.nvim'
-Plugin 'junegunn/limelight.vim' " <- Used by goyo to highlight current paragraph.
-Plugin 'mhinz/vim-startify'
-Plugin 'phaazon/hop.nvim'
-Plugin 'norcalli/nvim-colorizer.lua'
-Plugin 'scrooloose/nerdtree'
-Plugin 'yuttie/comfortable-motion.vim'
-Plugin 'nvim-lua/popup.nvim'
-Plugin 'nvim-lua/plenary.nvim'
-Plugin 'nvim-telescope/telescope.nvim'
-Plugin 'williamboman/nvim-lsp-installer'
-Plugin 'neovim/nvim-lspconfig'
-Plugin 'hrsh7th/nvim-cmp'
-Plugin 'hrsh7th/cmp-buffer'
-Plugin 'hrsh7th/cmp-path'
-Plugin 'hrsh7th/cmp-nvim-lsp'
-Plugin 'hrsh7th/cmp-nvim-lua'
-Plugin 'p00f/nvim-ts-rainbow'
-Plugin 'lewis6991/gitsigns.nvim'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'projekt0n/github-nvim-theme'
-Plugin 'folke/which-key.nvim'
+call plug#begin()
+"Plug 'itchyny/lightline.vim'
+"Plug 'mengelbrecht/lightline-bufferline'
+Plug 'scrooloose/nerdcommenter'
+" Plug 'jbgutierrez/vim-better-comments'
+Plug 'Yggdroot/indentLine'
+Plug 'junegunn/fzf.vim'
+Plug 'liuchengxu/vista.vim'
+Plug 'vim-scripts/a.vim'
+Plug 'folke/tokyonight.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'mbbill/undotree'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
+Plug 'machakann/vim-highlightedyank'
+Plug 'sheerun/vim-polyglot'
+" Plug 'tpope/vim-surround'
+Plug 'godlygeek/tabular'
+Plug 'segeljakt/vim-silicon'
+Plug 'rking/ag.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'Pocco81/TrueZen.nvim'
+Plug 'junegunn/limelight.vim' " <- Used by goyo to highlight current paragraph.
+" Plug 'mhinz/vim-startify'
+Plug 'phaazon/hop.nvim'
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'scrooloose/nerdtree'
+Plug 'yuttie/comfortable-motion.vim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'williamboman/nvim-lsp-installer'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'p00f/nvim-ts-rainbow'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'projekt0n/github-nvim-theme'
+Plug 'folke/which-key.nvim'
+Plug 'echasnovski/mini.nvim'
+Plug 'pearofducks/ansible-vim'
 
-call vundle#end()
+call plug#end()
 
 filetype plugin indent on
 
@@ -269,58 +269,11 @@ augroup END
 augroup vimrc
 autocmd!
 
-au BufNewFile,BufRead *.cson    set ft=coffee
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-au BufNewFile,BufRead *.groovy    set syntax=Jenkinsfile
-au BufNewFile,BufRead *.glsl    setf glsl
-au BufNewFile,BufRead *.gyp     set ft=python
-au BufNewFile,BufRead *.html    setlocal nocindent smartindent
-au BufNewFile,BufRead *.i7x     setf inform7
-au BufNewFile,BufRead *.ini     setf conf
-au BufNewFile,BufRead *.input   setf gnuplot
-au BufNewFile,BufRead *.json    set ft=json tw=0
-au BufNewFile,BufRead *.template,*.yml,*.yaml    set ft=yaml ts=2 sw=2
-au BufNewFile,BufRead *.less    setlocal ft=less nocindent smartindent
-au BufNewFile,BufRead *.md      setlocal ft=markdown nolist spell
-au BufNewFile,BufRead *.md,*.markdown setlocal foldlevel=999 tw=0 nocin
-au BufNewFile,BufRead *.ni      setlocal ft=inform nolist ts=2 sw=2 noet
-au BufNewFile,BufRead *.plist   setf xml
-au BufNewFile,BufRead *.rb      setlocal noai
-au BufNewFile,BufRead *.rxml    setf ruby
-au BufNewFile,BufRead *.sass    setf sass
-au BufNewFile,BufRead *.ttml    setf xml
-au BufNewFile,BufRead *.vert,*.frag set ft=glsl
-au BufNewFile,BufRead *.xml     setlocal ft=xml  ts=2 sw=2 et
-au BufNewFile,BufRead *.zone    setlocal nolist ts=4 sw=4 noet
-au BufNewFile,BufRead *.zsh     setf zsh
-au BufNewFile,BufRead .git/config setlocal ft=gitconfig nolist ts=4 sw=4 noet
-au BufNewFile,BufRead .gitconfig* setlocal ft=gitconfig nolist ts=4 sw=4 noet
-au BufNewFile,BufRead .vimlocal,.gvimlocal setf vim
-au BufNewFile,BufRead .zshlocal setf zsh
-au BufNewFile,BufRead /tmp/crontab* setf crontab
-au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
-au BufNewFile,BufRead Makefile setlocal nolist
-" au BufRead,BufNewFile *.yml,*.yaml set filetype=yaml.ansible
-au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet
-au FileType python setlocal nolist ts=4 sts=4 sw=4
-au FileType inform7 setlocal nolist tw=0 ts=4 sw=4 noet foldlevel=999
-au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
-au FileType make setlocal nolist ts=4 sts=4 sw=4 noet
-au FileType markdown syn sync fromstart
-
 " autoreload file if cursor does not move
 au CursorHold,CursorHoldI * checktime
 augroup END
 
 set guicursor=i:block-blinkwait175-blinkoff150-blinkon175
-
-function! XTermPasteBegin()
-  set pastetoggle=<Esc>[201~
-  set paste
-  return ""
-endfunction
-
-inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
@@ -346,25 +299,6 @@ let g:silicon = {
       \ 'round-corner':          v:true,
       \ 'window-controls':       v:true,
       \ }
-if exists('$TMUX')
-  autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " . expand("%:t"))
-  autocmd VimLeave * call system("tmux setw automatic-rename")
-endif
-
-" run :GoBuild or :GoTestCompile based on the go file
-function! s:build_go_files()
-  let l:file = expand('%')
-  if l:file =~# '^\f\+_test\.go$'
-    call go#test#Test(0, 1)
-  elseif l:file =~# '^\f\+\.go$'
-    call go#cmd#Build(0)
-  endif
-endfunction
-
-autocmd FileType go nmap <leader>t <Plug>(go-test)
-autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
-autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
-
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path="0;33"', <bang>0)
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
@@ -377,30 +311,30 @@ endif
 let g:vim_markdown_conceal = 0
 
 set showtabline=1
-let g:lightline#bufferline#min_buffer_count = 2
-let g:lightline#bufferline#show_number = 1
-let g:lightline = {
-      \ 'colorscheme': 'one',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead',
-      \ },
-      \ 'tabline': {
-      \   'left': [ ['buffers'] ],
-      \   'right': [ ]
-      \ },
-      \ 'component_expand': {
-      \   'buffers': 'lightline#bufferline#buffers'
-      \ },
-      \ 'component_type': {
-      \   'buffers': 'tabsel'
-      \ }
-      \ }
-
-autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
+"let g:lightline#bufferline#min_buffer_count = 2
+"let g:lightline#bufferline#show_number = 1
+"let g:lightline = {
+"      \ 'colorscheme': 'one',
+"      \ 'active': {
+"      \   'left': [ [ 'mode', 'paste' ],
+"      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+"      \ },
+"      \ 'component_function': {
+"      \   'gitbranch': 'FugitiveHead',
+"      \ },
+"      \ 'tabline': {
+"      \   'left': [ ['buffers'] ],
+"      \   'right': [ ]
+"      \ },
+"      \ 'component_expand': {
+"      \   'buffers': 'lightline#bufferline#buffers'
+"      \ },
+"      \ 'component_type': {
+"      \   'buffers': 'tabsel'
+"      \ }
+"      \ }
+"
+"autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
 " --- vim go (polyglot) settings.
 let g:go_highlight_build_constraints = 1
@@ -555,7 +489,10 @@ lsp_installer.on_server_ready(function(server)
 end)
 
 require'colorizer'.setup()
-
-
+require('mini.animate').setup()
+require('mini.basics').setup()
+require('mini.pairs').setup()
+require('mini.statusline').setup()
+require('mini.cursorword').setup()
 EOF
 
