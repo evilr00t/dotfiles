@@ -6,7 +6,6 @@
 # INCLUDE EXTERNAL FILES
 export PROMPT_EOL_MARK='%K{red} '
 export EDITOR=nvim
-export GPG_TTY=`tty`
 
 if [ -f ~/.ec2 ]; then
   source ~/.ec2
@@ -21,13 +20,10 @@ if [ -f ~/.home ]; then
 fi
 
 # EXPORTS
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
-
 # GOLANG
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
-# ADD RUST BINARIES
-export PATH=$GOROOT/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$GOROOT/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH"
 
 # FUNCTIONS
 
@@ -36,7 +32,7 @@ export PATH=$GOROOT/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH
   #if [ ! -z "$ANSIBLE_BECOME_PASS" ]; then
     #ansible-playbook -e "ansible_become_pass=$ANSIBLE_BECOME_PASS" $@
   #else
-    ## \xE2\x9D\x98 is a cross mark ;-)
+    ## \xE2\x9D\x98 is a cross mark
     #echo -e "[\e[1;31m\xE2\x9C\x98\e[0m] Did you forget about: "
     #echo -e "\e[31mexport ANSIBLE_BECOME_PASS=XXX\e[0m"
     #echo -e "[\e[1;31m\xE2\x9C\x98\e[0m] Oh, yes... you do!"
@@ -52,11 +48,10 @@ k8env() {
 
 k8sgetsec() {
   kubectl get secret $1 -o json | jq '.data'
-#base64 --decode
 }
 
 k8sdecode() {
-  kubectl get secret $1 -o json | jq '.data | map_values(@base64d)'
+  kubectl get secret $1 -o jsonpath="{.data}" | jq '.data | map_values(@base64d)'
 }
 
 cht() {
