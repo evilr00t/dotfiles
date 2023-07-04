@@ -5,10 +5,10 @@ My config files since *2011*, some of them were written when I've been using Lin
 Nowadays I moved to MacBook Pro.
 
 ```sh
-brew install coreutils gnu-sed macvim the_silver_searcher diff-so-fancy ctags \
-reattach-to-user-namespace shellcheck sshpass mosh gnupg2 asciinema fzf \
-grep gawk screenfetch tflint hadolint jsonlint gnu-sed gnu-awk httpie neovim \
-tidy-html5 wrk bat
+brew install coreutils gnu-sed macvim the_silver_searcher \
+shellcheck sshpass mosh gnupg2 asciinema fzf \
+grep gawk screenfetch tflint hadolint jsonlint gnu-awk httpie neovim \
+wrk bat git-delta recrangle wezterm raycast vscode
 ```
 
 Additional libraries/utilities:
@@ -16,23 +16,20 @@ Additional libraries/utilities:
 * https://github.com/zsh-users/zsh-completions
 * https://github.com/zsh-users/zsh-autosuggestions
 * https://github.com/zsh-users/zsh-syntax-highlighting
-
-### ScreenShot
-
-![](https://i.imgur.com/2BFuGjB.png)
+* https://lunarvim.org/
 
 # License
 
 |                      |                                          |
 |:---------------------|:-----------------------------------------|
 | **Author:**          | Karol Czeryna (<k@e-dot.uk>)
-| **Copyright:**       | Copyright 2019, e-dot.uk
+| **Copyright:**       | Copyright 2023, e-dot.uk
 | **License:**         | BSD 2-Clause License
 
 ```
 BSD 2-Clause License
 
-Copyright (c) 2019, Karol Czeryna
+Copyright (c) 2023, Karol Czeryna
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
