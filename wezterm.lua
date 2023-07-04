@@ -14,6 +14,7 @@ end
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
+config.ssh_backend = "Ssh2"
 config.color_scheme = 'nightfox'
 config.line_height = 1.2
 config.adjust_window_size_when_changing_font_size = false
@@ -63,5 +64,6 @@ config.keys = {
   },
   { key = 'r', mods = 'LEADER', action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false, }, },
 }
+
 -- and finally, return the configuration to wezterm
 return config
