@@ -23,7 +23,7 @@ fi
 # GOLANG
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$GOROOT/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$GOROOT/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH"
 
 # FUNCTIONS
 
@@ -183,6 +183,8 @@ alias kubectl="kubecolor"
 alias kube-bash='k run --rm -i --tty $(whoami)-shell --image=evilroot/k8s-debug-pod --restart=Never'
 alias kube-dns='k run dnsutils --image=gcr.io/kubernetes-e2e-test-images/dnsutils:latest -- sleep 3600'
 alias radios='vlc -I ncurses https://gist.githubusercontent.com/evilr00t/23cd50fbceed255fb5330d484c5a8273/raw/internet_radios_playlist.m3u'
+
+export LESSOPEN="| ~/.lessfilter %s"
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias idea="open -a 'IntelliJ IDEA'"
 alias code='code-insiders'
@@ -250,3 +252,4 @@ function vg() {
 
 # use bat to colorize man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+. "$HOME/.cargo/env"
