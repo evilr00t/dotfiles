@@ -69,6 +69,7 @@ config.keys = {
     }
   },
   { key = 'z', mods = 'CTRL', action = act.TogglePaneZoomState },
+  { key = 'f', mods = 'CTRL', action = act.Search { CaseInSensitiveString = '' } },
   { key = 'r', mods = 'LEADER', action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false, }, },
 }
 
