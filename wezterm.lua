@@ -68,6 +68,7 @@ config.keys = {
       act.SendKey { key = 'L', mods = 'CTRL' }
     }
   },
+  { key = 'z', mods = 'CTRL', action = act.TogglePaneZoomState },
   { key = 'r', mods = 'LEADER', action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false, }, },
 }
 
