@@ -30,7 +30,7 @@ config.font_size = 14.0
 config.leader = { key = ' ', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.window_decorations = "RESIZE"
 config.inactive_pane_hsb = { saturation = 0.8, brightness = 0.7 }
-config.window_frame = { font = wezterm.font { family = 'Noto Sans', weight = 'Regular' }}
+config.window_frame = { font = wezterm.font { family = 'Noto Sans', weight = 'Bold' }}
 config.tab_bar_at_bottom = true
 config.leader = { key = 'b', mods = 'CMD', timeout_milliseconds = 2000 }
 config.keys = {
@@ -71,5 +71,53 @@ config.keys = {
   { key = 'r', mods = 'LEADER', action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false, }, },
 }
 
+config.colors = {
+  -- The default text color
+  foreground = '#C4BDB5',
+  -- The default background color
+  background = '#1E1E1E',
+
+  -- Overrides the cell background color when the current cell is occupied by the
+  -- cursor and the cursor style is set to Block
+  cursor_bg = '#C02030',
+  -- Overrides the text color when the current cell is occupied by the cursor
+  cursor_fg = '#00ff00',
+  -- Specifies the border color of the cursor when the cursor style is set to Block,
+  -- or the color of the vertical or horizontal bar when the cursor style is set to
+  -- Bar or Underline.
+  -- cursor_border = '#52ad70',
+
+  -- the foreground color of selected text
+  -- selection_fg = 'black',
+  -- the background color of selected text
+  -- selection_bg = '#fffacd',
+
+  -- The color of the scrollbar "thumb"; the portion that represents the current viewport
+  -- scrollbar_thumb = '#222222',
+
+  -- The color of the split lines between panes
+  -- split = '#444444',
+
+  ansi = {
+    '#201020',
+    '#CC241D',
+    '#98971A',
+    '#E7A931',
+    '#458588',
+    '#B16286',
+    '#689E6A',
+    '#C0B0A0',
+  },
+  brights = {
+    '#928374',
+    '#F42C3E',
+    '#B5C033',
+    '#FABE2F',
+    '#99C6CA',
+    '#D66282',
+    '#8AE180',
+    '#DDCCAA',
+  },
+}
 -- and finally, return the configuration to wezterm
 return config
