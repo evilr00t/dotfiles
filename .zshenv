@@ -5,7 +5,7 @@
 #
 # INCLUDE EXTERNAL FILES
 export PROMPT_EOL_MARK='%K{red} '
-export EDITOR=nvim
+export EDITOR=lvim
 
 if [ -f ~/.ec2 ]; then
   source ~/.ec2
@@ -120,7 +120,7 @@ fo() {
   local files
   IFS=$'\n'
   files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
-  [[ -n "$files" ]] && ${EDITOR:-nvim} "${files[@]}"
+  [[ -n "$files" ]] && ${EDITOR:-lvim} "${files[@]}"
 }
 
 # tf_config
@@ -168,8 +168,8 @@ alias piplist='pip3 freeze | cut -d = -f 1 | xargs -n 1 pip3 search | grep -B2 L
 alias py="source virt/bin/activate;clear"
 alias grep='ggrep'
 alias shrug="echo '¯\_(ツ)_/¯' | pbcopy";
-alias vim='nvim'
-alias penvi='poetry run nvim'
+alias vim='lvim'
+alias penvi='poetry run lvim'
 alias bue="brew update && brew upgrade && brew outdated --cask|cut -f 1 -d ' '|xargs brew cask reinstall"
 alias local_svcs='lsof -i -n -P|grep LISTEN'
 alias ols='gls -hovA --indicator-style=file-type --color=always --group-directories-first --time-style="+%b %_d %Y %H:%M:%S"'
