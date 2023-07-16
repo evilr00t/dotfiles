@@ -46,7 +46,15 @@ local plugins = {
       require("better_escape").setup()
     end,
   },
-
+  {
+    "karloskar/poetry-nvim",
+    config = function()
+        require("poetry-nvim").setup()
+    end,
+  },
+  {
+    "sheerun/vim-polyglot"
+  },
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",
@@ -60,9 +68,6 @@ local plugins = {
   --   "mg979/vim-visual-multi",
   --   lazy = false,
   -- }
-  {
-  "sheerun/vim-polyglot"
-  }
 }
 
 return plugins
