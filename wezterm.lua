@@ -25,8 +25,8 @@ config.color_scheme = 'nightfox'
 config.line_height = 1.2
 config.adjust_window_size_when_changing_font_size = false
 config.hide_tab_bar_if_only_one_tab = true
-config.font = wezterm.font 'Pragmata Pro Mono'
-config.font_size = 14.0
+config.font = wezterm.font 'Fantasque Sans M Nerd Font'
+config.font_size = 12.0
 config.leader = { key = ' ', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.window_decorations = "RESIZE"
 config.inactive_pane_hsb = { saturation = 0.8, brightness = 0.7 }
