@@ -23,7 +23,7 @@ fi
 # GOLANG
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
-export PATH="$HOME/.local/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$GOROOT/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/opt/homebrew/opt/postgresql@15/bin:$GOROOT/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH"
 
 # FUNCTIONS
 
