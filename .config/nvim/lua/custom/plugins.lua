@@ -53,7 +53,7 @@ local plugins = {
     end,
   },
   {
-    "sheerun/vim-polyglot"
+    "sheerun/vim-polyglot", lazy = false,
   },
   -- To make a plugin not be loaded
   -- {
