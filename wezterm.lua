@@ -31,6 +31,8 @@ config.leader = { key = ' ', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.window_decorations = "RESIZE"
 config.inactive_pane_hsb = { saturation = 0.8, brightness = 0.7 }
 config.window_frame = { font = wezterm.font { family = 'Noto Sans', weight = 'Bold' }}
+-- turn off ligatures - i just can't read those...
+config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 config.tab_bar_at_bottom = true
 config.leader = { key = 'b', mods = 'CMD', timeout_milliseconds = 2000 }
 config.keys = {
