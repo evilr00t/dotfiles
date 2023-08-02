@@ -4,7 +4,7 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 local lspconfig = require "lspconfig"
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "tsserver", "clangd", "ansiblels", "pyright", "yamlls" }
+local servers = { "html", "cssls", "tsserver", "clangd", "ansiblels", "pyright", "yamlls", "terraformls" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -18,5 +18,9 @@ lspconfig["ansiblels"].setup({
   single_file_support = false,
 })
 
+lspconfig["terraformls"].setup({
+  filetypes = { "hcl" },
+  single_file_support = false,
+})
 -- 
 -- lspconfig.pyright.setup { blabla}
