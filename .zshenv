@@ -54,7 +54,7 @@ k8sdecode() {
   kubectl get secret $1 -o jsonpath="{.data}" | jq '.data | map_values(@base64d)'
 }
 
-cht() {
+tldr() {
   local topic="${1}" ; shift
   curl -s "cht.sh/${topic}/${*// }"
 }
