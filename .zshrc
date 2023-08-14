@@ -1,37 +1,31 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
+
 # Disable all the magic plugins - I really don't like them
 # https://github.com/ohmyzsh/ohmyzsh/issues/6338
 DISABLE_MAGIC_FUNCTIONS=true
-
 HISTSIZE=999999999
 SAVEHIST=999999999
-
 ZSH_THEME="evilroot"
-
 CASE_SENSITIVE="false"
-
 HYPHEN_INSENSITIVE="false"
-
 DISABLE_UNTRACKED_FILES_DIRTY="true"
-
 HIST_STAMPS="dd.mm.yyyy"
 HIST_IGNORE_SPACE="true"
-plugins=(history history-substring-search git-prompt colored-man-pages extract fast-syntax-highlighting ssh-agent gpg-agent fzf-tab)
-autoload -Uz compinit
+export LC_CTYPE=en_GB.UTF-8
+export LANG=en_GB.UTF-8
+plugins=(history history-substring-search git-prompt colored-man-pages extract ssh-agent gpg-agent fzf-tab F-Sy-H)
 
+source $ZSH/oh-my-zsh.sh
+
+autoload -Uz compinit
 for dump in ~/.zcompdump(N.mh+24); do
   compinit
 done
-
-#compinit -C
-source $ZSH/oh-my-zsh.sh
-
 # from: https://gist.github.com/15cm/88e320d71fe7fe5a4bb24b99da6b93f0
 
-eval $( dircolors -b $HOME/.dircolors )
-export LC_CTYPE=en_GB.UTF-8
-export LANG=en_GB.UTF-8
+eval $( gdircolors -b $HOME/.dircolors )
+
 set umask 022
 unsetopt nomatch
 
