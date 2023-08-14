@@ -176,7 +176,6 @@ alias ols='gls -hovA --indicator-style=file-type --color=always --group-director
 alias ola='gls -A'
 alias ls='exa --long -g --git -a -s modified'
 alias lsd='exa --long -g -D --git -a -s modified'
-alias ag='ag -u'
 # k8s related
 alias k="kubecolor"
 alias kubectl="kubecolor"

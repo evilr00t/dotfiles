@@ -44,17 +44,21 @@ if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
   source /usr/local/opt/fzf/shell/completion.zsh
 fi
 
-# fzf + ag configuration
-export FZF_DEFAULT_COMMAND='ag -u --nocolor -g ""'
+# fzf + ripgrep configuration
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='--height 80% --layout=reverse'
+export MCFLY_KEY_SCHEME=vim
+export MCFLY_RESULTS=50
+export MCFLY_FUZZY=2
+export MCFLY_INTERFACE_VIEW=BOTTOM
+export MCFLY_DISABLE_MENU=TRUE
+export MCFLY_RESULTS_SORT=LAST_RUN
+
 source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Custom things
 . ~/.zshenv
 eval "$(zoxide init zsh)"
-
-# zsh-bd
-. $HOME/.zsh/plugins/bd/bd.zsh
-eval "$(rbenv init - zsh)"
+eval "$(mcfly init zsh)"
