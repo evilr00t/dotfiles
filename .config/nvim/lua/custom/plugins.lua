@@ -30,7 +30,39 @@ local plugins = {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = overrides.treesitter,
+    opts = {
+      ensure_installed = {
+        -- defaults 
+        "vim",
+        "lua",
+
+        -- web dev 
+        "html",
+        "css",
+        "javascript",
+        "typescript",
+        "tsx",
+        "json",
+        "vue",
+        "svelte",
+
+        -- evilroot
+        "bash",
+        "dockerfile",
+        "gitcommit",
+        "go",
+        "hcl",
+        "jsonnet",
+        "python",
+        "sql",
+        "terraform",
+        "yaml",
+
+       -- low level
+        "c",
+        "zig"
+      },
+    },
   },
 
   {
