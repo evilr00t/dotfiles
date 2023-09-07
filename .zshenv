@@ -174,8 +174,7 @@ alias bue="brew update && brew upgrade && brew outdated --cask|cut -f 1 -d ' '|x
 alias local_svcs='lsof -i -n -P|grep LISTEN'
 alias ols='gls -hovA --indicator-style=file-type --color=always --group-directories-first --time-style="+%b %_d %Y %H:%M:%S"'
 alias ola='gls -A'
-alias ls='exa --long -g --git -a -s modified'
-alias lsd='exa --long -g -D --git -a -s modified'
+alias lsd='eza --long -g -D --git -a -s modified'
 # k8s related
 alias k="kubecolor"
 alias kubectl="kubecolor"
@@ -216,7 +215,7 @@ zz() {
 }
 
 unalias ls 2>/dev/null
-alias ls='exa -l --git -a -s modified'
+alias ls='eza -l --git -a -s modified'
 
 function kp() {
   local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')

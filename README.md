@@ -5,10 +5,10 @@ My config files since *2011*, some of them were written when I've been using Lin
 Nowadays I moved to MacBook Pro.
 
 ```sh
-brew install coreutils gnu-sed ripgrep kubecolor lazydocker lazygit tig mcfly mtr packer \
+brew install coreutils gnu-sed ripgrep kubecolor lazydocker lazygit tig mtr packer \
 shellcheck mosh gnupg2 asciinema fzf ipcalc pinetry zoxide font-fantasque-sans-mono-nerd-font \
 grep gawk screenfetch tflint hadolint jsonlint gnu-awk httpie neovim vlc vagrant \
-wrk bat git-delta recrangle wezterm raycast vscode colordiff diff-so-fancy difftastic 
+wrk bat git-delta recrangle wezterm raycast vscode colordiff diff-so-fancy difftastic eza
 ```
 
 Additional libraries/utilities:
