@@ -161,9 +161,6 @@ alias wgetm='wget -c -r -l 0 -k --no-parent'
 alias cp='cp -av'
 alias mv='mv -v'
 alias ssh='ssh -C'
-alias lsnew="\ls -rl *(D.om[1,10])"     # display the newest files
-alias lsold="\ls -rtlh *(D.om[1,10])"   # display the oldest files
-alias lssmall="\ls -Srl *(.oL[1,10])"   # display the smallest files
 alias piplist='pip3 freeze | cut -d = -f 1 | xargs -n 1 pip3 search | grep -B2 LATEST:'
 alias py="source virt/bin/activate;clear"
 alias grep='ggrep'
@@ -172,8 +169,6 @@ alias vim='nvim'
 alias penvi='poetry run nvim'
 alias bue="brew update && brew upgrade && brew outdated --cask|cut -f 1 -d ' '|xargs brew cask reinstall"
 alias local_svcs='lsof -i -n -P|grep LISTEN'
-alias ols='gls -hovA --indicator-style=file-type --color=always --group-directories-first --time-style="+%b %_d %Y %H:%M:%S"'
-alias ola='gls -A'
 alias lsd='eza --long -g -D --git -a -s modified'
 # k8s related
 alias k="kubecolor"
@@ -182,7 +177,7 @@ alias kube-bash='k run --rm -i --tty $(whoami)-shell --image=evilroot/k8s-debug-
 alias kube-dns='k run dnsutils --image=gcr.io/kubernetes-e2e-test-images/dnsutils:latest -- sleep 3600'
 alias radios='vlc -I ncurses https://gist.githubusercontent.com/evilr00t/23cd50fbceed255fb5330d484c5a8273/raw/internet_radios_playlist.m3u'
 
-export LESSOPEN="| ~/.lessfilter %s"
+
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias idea="open -a 'IntelliJ IDEA'"
 alias code='code-insiders'
@@ -215,7 +210,7 @@ zz() {
 }
 
 unalias ls 2>/dev/null
-alias ls='eza -l --git -a -s modified'
+alias ls='eza -l --git -a -s name --time-style=long-iso'
 
 function kp() {
   local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
@@ -250,4 +245,5 @@ function vg() {
 
 # use bat to colorize man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-. "$HOME/.cargo/env"
+export LESSOPEN="| ~/.lessfilter %s"
+
