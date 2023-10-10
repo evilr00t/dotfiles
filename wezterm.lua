@@ -26,7 +26,8 @@ config.line_height = 1.2
 config.force_reverse_video_cursor = true
 config.adjust_window_size_when_changing_font_size = false
 config.hide_tab_bar_if_only_one_tab = true
-config.font = wezterm.font 'FantasqueSansM Nerd Font'
+-- config.font = wezterm.font 'FantasqueSansM Nerd Font'
+config.font = wezterm.font 'Pragmata Pro Mono'
 config.font_size = 13.0
 
 config.leader = { key = ' ', mods = 'CTRL', timeout_milliseconds = 1000 }
