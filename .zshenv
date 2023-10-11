@@ -82,12 +82,12 @@ diff()
 
 cat()
 {
-  bat -pp --theme='Sublime Snazzy' $@
+  bat -pp $@
 }
 
 lcat()
 {
-  bat --paging=always -p --theme='Sublime Snazzy' $@
+  bat --paging=always -p $@
 }
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
