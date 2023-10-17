@@ -186,7 +186,7 @@ alias python=python3
 alias pip=pip3
 alias tp='terraform validate && terraform plan'
 alias mtr='sudo $(brew --prefix mtr)/sbin/mtr'
-alias rg='rg -uuu'
+alias rg='rg -uu'
 alias ag='rg'
 
 # fzf stuff
