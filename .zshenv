@@ -176,6 +176,8 @@ alias kubectl="kubecolor"
 alias kube-bash='k run --rm -i --tty $(whoami)-shell --image=evilroot/k8s-debug-pod --restart=Never'
 alias kube-dns='k run dnsutils --image=gcr.io/kubernetes-e2e-test-images/dnsutils:latest -- sleep 3600'
 alias radios='vlc -I ncurses https://gist.githubusercontent.com/evilr00t/23cd50fbceed255fb5330d484c5a8273/raw/internet_radios_playlist.m3u'
+
+
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias idea="open -a 'IntelliJ IDEA'"
 alias code='code-insiders'
@@ -184,12 +186,8 @@ alias python=python3
 alias pip=pip3
 alias tp='terraform validate && terraform plan'
 alias mtr='sudo $(brew --prefix mtr)/sbin/mtr'
-
-# ansible - python2 fix
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-
-# Enabled true color support for terminals
-export NVIM_TUI_ENABLE_TRUE_COLOR=1
+alias rg='rg -uuu'
+alias ag='rg'
 
 # fzf stuff
 unalias z 2> /dev/null
@@ -244,3 +242,4 @@ function vg() {
 # use bat to colorize man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export LESSOPEN="| ~/.lessfilter %s"
+
