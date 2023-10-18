@@ -70,7 +70,24 @@ ssh_rev_proxy() {
 
 
 events() {
-  curl -s https://raw.githubusercontent.com/droctothorpe/kubecolor/master/bin/events | sh /dev/stdin
+  kubectl get events --all-namespaces --watch \
+    -o 'go-template={{.lastTimestamp}} ^ {{.involvedObject.kind}} ^ {{.message}} ^ ({{.involvedObject.name}}){{"\n"}}' \
+    | awk -F^ \
+    -v black=$(tput setaf 0) \
+    -v red=$(tput setaf 1) \
+    -v green=$(tput setaf 2) \
+    -v yellow=$(tput setaf 3) \
+    -v blue=$(tput setaf 4) \
+    -v magenta=$(tput setaf 5) \
+    -v cyan=$(tput setaf 6) \
+    -v white=$(tput setaf 7) \
+    '{
+        $1=blue $1
+        $2=green $2
+        $3=white $3
+    }
+    1'
+  # curl -s https://raw.githubusercontent.com/droctothorpe/kubecolor/master/bin/events | sh /dev/stdin
 }
 
 
