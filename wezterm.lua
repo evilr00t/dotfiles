@@ -21,22 +21,23 @@ end)
 
 -- For example, changing the color scheme:
 config.ssh_backend = "Ssh2"
-config.color_scheme = 'nightfox'
-config.line_height = 1.2
+-- config.color_scheme = 'nightfox'
+-- config.line_height = 1.1
 config.force_reverse_video_cursor = true
 config.adjust_window_size_when_changing_font_size = false
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
-config.use_fancy_tab_bar = false
--- config.font = wezterm.font 'FantasqueSansM Nerd Font'
-config.font = wezterm.font 'Pragmata Pro Mono'
+-- config.font = wezterm.font 'Pragmata Pro Mono'
+config.font = wezterm.font { family = 'Monaspace Neon Var', weight = "Regular" }
+config.freetype_load_flags = 'NO_HINTING'
+config.freetype_load_target = 'HorizontalLcd'
+config.front_end = 'OpenGL'
 config.font_size = 13.0
 config.mouse_wheel_scrolls_tabs = false
-
 config.leader = { key = ' ', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.window_decorations = "RESIZE"
 config.inactive_pane_hsb = { saturation = 0.8, brightness = 0.7 }
-config.window_frame = { font = wezterm.font { family = 'Noto Sans', weight = 'Bold' }}
+config.window_frame = { font = wezterm.font { family = 'Monaspace Krypton', weight = 'Regular' }}
 config.window_padding = {
   left = 5,
   right = 5,
@@ -44,7 +45,7 @@ config.window_padding = {
   bottom = 0,
 }
 -- turn off ligatures - i just can't read those...
-config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
+-- config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
 config.leader = { key = 'b', mods = 'CMD', timeout_milliseconds = 2000 }
 config.keys = {
