@@ -28,7 +28,7 @@ config.adjust_window_size_when_changing_font_size = false
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
 -- config.font = wezterm.font 'Pragmata Pro Mono'
-config.font = wezterm.font { family = 'Monaspace Neon Var', weight = "Regular" }
+config.font = wezterm.font { family = 'Monaspace Neon Var', weight = 650 }
 config.freetype_load_flags = 'NO_HINTING'
 config.freetype_load_target = 'HorizontalLcd'
 config.front_end = 'OpenGL'
