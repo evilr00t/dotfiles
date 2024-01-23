@@ -32,7 +32,7 @@ config.font = wezterm.font { family = 'Monaspace Neon Var', weight = 650 }
 config.freetype_load_flags = 'NO_HINTING'
 config.freetype_load_target = 'HorizontalLcd'
 config.front_end = 'OpenGL'
-config.font_size = 13.0
+config.font_size = 12.0
 config.mouse_wheel_scrolls_tabs = false
 config.leader = { key = ' ', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.window_decorations = "RESIZE"
