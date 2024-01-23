@@ -190,15 +190,10 @@ alias lsd='eza --long -g -D --git -a -s modified'
 # k8s related
 alias k="kubecolor"
 alias kubectl="kubecolor"
-alias kube-bash='k run --rm -i --tty $(whoami)-shell --image=evilroot/k8s-debug-pod --restart=Never'
-alias kube-dns='k run dnsutils --image=gcr.io/kubernetes-e2e-test-images/dnsutils:latest -- sleep 3600'
-alias radios='vlc -I ncurses https://gist.githubusercontent.com/evilr00t/23cd50fbceed255fb5330d484c5a8273/raw/internet_radios_playlist.m3u'
-
-
-alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
-alias idea="open -a 'IntelliJ IDEA'"
-alias code='code-insiders'
-alias mate='/Applications/TextMate.app/Contents/Resources/mate'
+alias kube-bash="k run --rm -i --tty $(whoami)-shell --image=evilroot/k8s-debug-pod --restart=Never"
+alias kube-dns="k run dnsutils --image=gcr.io/kubernetes-e2e-test-images/dnsutils:latest -- sleep 3600"
+alias radios="vlc -I ncurses https://gist.githubusercontent.com/evilr00t/23cd50fbceed255fb5330d484c5a8273/raw/internet_radios_playlist.m3u"
+alias code="code-insiders"
 alias python=python3
 alias pip=pip3
 alias tp='terraform validate && terraform plan'
