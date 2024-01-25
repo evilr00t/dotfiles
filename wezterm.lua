@@ -12,10 +12,11 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
-wezterm.on('gui-startup', function(cmd)
-  local tab, pane, window = mux.spawn_window(cmd or {})
-  window:gui_window():maximize()
-end)
+-- FullScreen on StartUp
+-- wezterm.on('gui-startup', function(cmd)
+--   local tab, pane, window = mux.spawn_window(cmd or {})
+--   window:gui_window():maximize()
+-- end)
 
 -- This is where you actually apply your config choices
 
