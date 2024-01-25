@@ -124,7 +124,8 @@ local plugins = {
   event = {"CmdlineEnter"},
   ft = {"go", 'gomod'},
   build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
-},
+  },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
   -- All NvChad plugins are lazy-loaded by default
   -- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`
