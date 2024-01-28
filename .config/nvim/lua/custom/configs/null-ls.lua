@@ -17,6 +17,11 @@ local sources = {
 
   -- cpp
   b.formatting.clang_format,
+  -- evilroot
+  b.formatting.beautysh,
+  b.formatting.black,
+  b.formatting.terraform_fmt,
+  b.formatting.yamlfmt,
 }
 
 null_ls.setup {
