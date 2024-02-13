@@ -200,6 +200,7 @@ alias tp='terraform validate && terraform plan'
 alias mtr='sudo $(brew --prefix mtr)/sbin/mtr'
 alias rg='rg -uu'
 alias ag='rg'
+alias kill_dns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
 # fzf stuff
 unalias z 2> /dev/null
