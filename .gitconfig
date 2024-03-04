@@ -4,39 +4,40 @@
 	signingkey = EA4471E98C0F1E03BB1CDDA231D91F31DE7B040D
 
 [alias]
-	a = add -p
-	s = show
-	st = status -s -b
-	d = diff
-	dc = diff --cached
-	c = commit
-	cm = commit -m
-	co = checkout
-	r = remote -v
-	t = tag -l
-	b = branch -v
-	nb = checkout -b
-	p = pull
-	pnf = pull --no-ff
-	pr = !git p --rebase
-	prnf = !git pnf --rebase
-	f = fetch
-	unstage = reset HEAD
-	uncommit = reset --soft HEAD^
-	last = diff HEAD^
-	lastc = diff HEAD^ --cached
-	recent = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
-	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	ll = log --graph --decorate --oneline --stat --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --date=relative
-	undo = reset HEAD~1 --mixed
-	save = !git add -A && git commit -m 'SAVEPOINT'
-	wip = commit -am "WIP"
-	prune = fetch --prune
-	wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
-	rank = shortlog -sn --no-merges
-	# Remove all merged branches
-	bdm = "!git branch --merged | grep -v '*' | xargs -n 1 git branch -d"
-	stunt = !git stash --include-untracked --keep-index
+  a = add -p
+  s = show
+  st = status -s -b
+  d = diff
+  dc = diff --cached
+  c = commit
+  cm = commit -m
+  co = checkout
+  r = remote -v
+  t = tag -l
+  b = branch -v
+  nb = checkout -b
+  p = pull
+  pnf = pull --no-ff
+  pr = !git p --rebase
+  prnf = !git pnf --rebase
+  f = fetch
+  unstage = reset HEAD
+  uncommit = reset --soft HEAD^
+  last = diff HEAD^
+  lastc = diff HEAD^ --cached
+  recent = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  ll = log --graph --decorate --oneline --stat --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --date=relative
+  undo = reset HEAD~1 --mixed
+  save = !git add -A && git commit -m 'SAVEPOINT'
+  wip = commit -am "WIP"
+  prune = fetch --prune
+  wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+  rank = shortlog -sn --no-merges
+  # Remove all merged branches
+  bdm = "!git branch --merged | grep -v '*' | xargs -n 1 git branch -d"
+  stunt = !git stash --include-untracked --keep-index
+  bb = !git for-each-ref --color --sort=-committerdate --format=$'%(color:red)%(ahead-behind:HEAD)\t%(color:blue)%(refname:short)\t%(color:yellow)%(committerdate:relative)\t%(color:default)%(describe)' refs/heads/ --no-merged | sed 's/ /\t/' | column -s=$'\t' -t -c 'Ahead,Behind,Branch Name,Last Commit,Description'
 
 [color]
 	ui = true
@@ -87,3 +88,7 @@
 	diffFilter = riff
 [rerere]
 	enabled = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
