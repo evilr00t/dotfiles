@@ -31,10 +31,11 @@ config.tab_bar_at_bottom = true
 -- config.font = wezterm.font 'Pragmata Pro Mono'
 config.font = wezterm.font 'SauceCodePro Nerd Font Mono'
 -- config.font = wezterm.font { family = 'Monaspace Neon Var', weight = 650 }
--- config.freetype_load_flags = 'NO_HINTING'
--- config.freetype_load_target = 'HorizontalLcd'
--- config.front_end = 'OpenGL'
-config.font_size = 12.0
+config.freetype_load_flags = 'NO_HINTING'
+config.window_decorations = "RESIZE"
+config.freetype_load_target = 'HorizontalLcd'
+config.front_end = 'OpenGL'
+config.font_size = 12
 config.mouse_wheel_scrolls_tabs = false
 config.leader = { key = ' ', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.inactive_pane_hsb = { saturation = 0.8, brightness = 0.7 }
