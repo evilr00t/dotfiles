@@ -22,8 +22,8 @@ fi
 # EXPORTS
 # GOLANG
 export GOPATH=$HOME/golang
-export GOROOT=/usr/local/opt/go/libexec
-export PATH="$HOME/.local/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/opt/homebrew/opt/postgresql@15/bin:$GOROOT/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH"
+#export GOROOT=/usr/local/opt/go/libexec
+export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/opt/postgresql@15/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH"
 
 # FUNCTIONS
 
@@ -54,11 +54,6 @@ k8sdecode() {
   kubectl get secret $1 -o jsonpath="{.data}" | jq '.data | map_values(@base64d)'
 }
 
-tldr() {
-  local topic="${1}" ; shift
-  curl -s "cht.sh/${topic}/${*// }"
-}
-
 # Make a reverse proxy tunnel using:
 # ssh_rev_proxy [PORT] [HOST]
 # service will be available at: localhost:[PORT]
@@ -70,6 +65,8 @@ ssh_rev_proxy() {
 
 
 events() {
+  # from:
+  # curl -s https://raw.githubusercontent.com/droctothorpe/kubecolor/master/bin/events | sh /dev/stdin
   kubectl get events --all-namespaces --watch \
     -o 'go-template={{.lastTimestamp}} ^ {{.involvedObject.kind}} ^ {{.message}} ^ ({{.involvedObject.name}}){{"\n"}}' \
     | awk -F^ \
@@ -87,13 +84,12 @@ events() {
         $3=white $3
     }
     1'
-  # curl -s https://raw.githubusercontent.com/droctothorpe/kubecolor/master/bin/events | sh /dev/stdin
 }
 
 
 diff()
 {
-  colordiff -Nuar $@ | delta --color-only
+  colordiff -Nuar $@ | delta --color-only --diff-so-fancy
 }
 
 
@@ -187,20 +183,28 @@ alias penvi='poetry run nvim'
 alias bue="brew update && brew upgrade && brew outdated --cask|cut -f 1 -d ' '|xargs brew cask reinstall"
 alias local_svcs='lsof -i -n -P|grep LISTEN'
 alias lsd='eza --long -g -D --git -a -s modified'
-# k8s related
-alias k="kubecolor"
-alias kubectl="kubecolor"
-alias kube-bash="k run --rm -i --tty $(whoami)-shell --image=evilroot/k8s-debug-pod --restart=Never"
-alias kube-dns="k run dnsutils --image=gcr.io/kubernetes-e2e-test-images/dnsutils:latest -- sleep 3600"
-alias radios="vlc -I ncurses https://gist.githubusercontent.com/evilr00t/23cd50fbceed255fb5330d484c5a8273/raw/internet_radios_playlist.m3u"
-alias code="code-insiders"
-alias python=python3
-alias pip=pip3
+
+alias radios='vlc -I ncurses https://gist.githubusercontent.com/evilr00t/23cd50fbceed255fb5330d484c5a8273/raw/internet_radios_playlist.m3u'
+alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+alias idea="open -a 'IntelliJ IDEA'"
+alias code='code-insiders'
+alias mate='/Applications/TextMate.app/Contents/Resources/mate'
+alias python='python3'
+alias pip='pip3'
 alias tp='terraform validate && terraform plan'
 alias mtr='sudo $(brew --prefix mtr)/sbin/mtr'
 alias rg='rg -uu'
 alias ag='rg'
 alias kill_dns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+# use gnu-make
+alias make='gmake'
+
+# k8s related
+alias k="kubecolor"
+alias kubectl="kubecolor"
+# alias kube-bash='k run --rm -i --tty evilroot-shell --image=evilroot/k8s-debug-pod --restart=Never'
+alias kube-bash='k run --rm -i --tty evilroot-shell --image=nicolaka/netshoot --restart=Never'
+alias kube-dns='k run --rm -i --tty dnsutils --image=gcr.io/kubernetes-e2e-test-images/dnsutils:latest'
 
 # fzf stuff
 unalias z 2> /dev/null
@@ -252,7 +256,16 @@ function vg() {
   | gawk '{print $1}' | xargs -I{} -o vgrep --show {}
 }
 
+
+function co_author() {
+  git shortlog --summary --numbered --email --all . \
+    | cut -f2- \
+    | awk '$0="Co-authored-by: "$0' \
+    | fgrep -v "$(git config user.email)" \
+    | fzf --multi --exit-0 --no-sort \
+    | pbcopy
+}
+
 # use bat to colorize man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export LESSOPEN="| ~/.lessfilter %s"
-
