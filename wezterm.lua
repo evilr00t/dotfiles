@@ -28,7 +28,7 @@ config.adjust_window_size_when_changing_font_size = false
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
 -- config.font = wezterm.font 'Pragmata Pro Mono'
-config.font = wezterm.font("SauceCodePro Nerd Font Mono")
+config.font = wezterm.font({ family = "SauceCodePro Nerd Font Mono", weight = 500 })
 -- config.font = wezterm.font { family = 'Monaspace Neon Var', weight = 650 }
 config.freetype_load_flags = "NO_HINTING"
 config.window_decorations = "RESIZE"
