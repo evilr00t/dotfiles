@@ -1,11 +1,9 @@
 -- by evilroot <k@e-dot.uk>
--- Pull in the wezterm API
+--
 local wezterm = require("wezterm")
-
--- This table will hold the configuration.
 local config = {}
 local act = wezterm.action
-local mux = wezterm.mux
+
 -- In newer versions of wezterm, use the config_builder which will
 -- help provide clearer error messages
 if wezterm.config_builder then
@@ -22,14 +20,15 @@ end
 
 -- For example, changing the color scheme:
 config.ssh_backend = "Ssh2"
--- config.line_height = 1.1
 config.force_reverse_video_cursor = true
 config.adjust_window_size_when_changing_font_size = false
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
--- config.font = wezterm.font 'Pragmata Pro Mono'
-config.font = wezterm.font({ family = "SauceCodePro Nerd Font Mono", weight = 500 })
--- config.font = wezterm.font { family = 'Monaspace Neon Var', weight = 650 }
+-- config.font = wezterm.font("Pragmata Pro Mono")
+-- config.font = wezterm.font({ family = "SauceCodePro Nerd Font Mono", weight = 500 })
+-- config.font = wezterm.font({ family = "Monaspace Neon Var", weight = 650 })
+config.font = wezterm.font({ family = "Cascadia Mono PL" })
+config.font_size = 13
 config.freetype_load_flags = "NO_HINTING"
 config.window_decorations = "RESIZE"
 config.freetype_load_target = "HorizontalLcd"
