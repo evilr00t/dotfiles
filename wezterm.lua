@@ -28,8 +28,7 @@ config.tab_bar_at_bottom = true
 -- config.font = wezterm.font({ family = "SauceCodePro Nerd Font Mono", weight = 500 })
 -- config.font = wezterm.font({ family = "Monaspace Neon Var", weight = 650 })
 config.font = wezterm.font({ family = "Cascadia Mono PL" })
-config.font_size = 12
-config.front_end = "OpenGL"
+config.font_size = 13
 config.window_decorations = "RESIZE"
 config.mouse_wheel_scrolls_tabs = false
 config.leader = { key = " ", mods = "CTRL", timeout_milliseconds = 1000 }
@@ -120,7 +119,7 @@ config.colors = {
 
 	ansi = {
 		"#201020",
-		"#CC241D",
+		"#e3443d",
 		"#98971A",
 		"#E7A931",
 		"#458588",
@@ -130,7 +129,7 @@ config.colors = {
 	},
 	brights = {
 		"#928374",
-		"#F42C3E",
+		"#f65665",
 		"#B5C033",
 		"#FABE2F",
 		"#99C6CA",
