@@ -28,6 +28,7 @@ config.tab_bar_at_bottom = true
 -- config.font = wezterm.font({ family = "SauceCodePro Nerd Font Mono", weight = 500 })
 -- config.font = wezterm.font({ family = "Monaspace Neon Var", weight = 650 })
 config.font = wezterm.font({ family = "Cascadia Mono PL" })
+config.window_background_opacity = 0.98
 config.font_size = 13
 config.window_decorations = "RESIZE"
 config.mouse_wheel_scrolls_tabs = false
@@ -62,12 +63,12 @@ config.keys = {
 		action = act.CharSelect({ copy_on_select = true, copy_to = "ClipboardAndPrimarySelection" }),
 	},
 	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
-	{ key = "PageUp", mods = "CTRL", action = act.ActivateTabRelative(-1) },
-	{ key = "PageDown", mods = "CTRL", action = act.ActivateTabRelative(1) },
-	{ key = "LeftArrow", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Left") },
-	{ key = "RightArrow", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Right") },
-	{ key = "UpArrow", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Up") },
-	{ key = "DownArrow", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Down") },
+	-- { key = "PageUp", mods = "CTRL", action = act.ActivateTabRelative(-1) },
+	-- { key = "PageDown", mods = "CTRL", action = act.ActivateTabRelative(1) },
+	--{ key = "LeftArrow", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Left") },
+	--{ key = "RightArrow", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Right") },
+	--{ key = "UpArrow", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Up") },
+	--{ key = "DownArrow", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Down") },
 	{ key = "f", mods = "CMD", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "d", mods = "CMD", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 	{ key = "h", mods = "CMD", action = act.ActivatePaneDirection("Left") },
@@ -75,19 +76,12 @@ config.keys = {
 	{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "w", mods = "CMD", action = act.CloseCurrentTab({ confirm = false }) },
 	{ key = "x", mods = "CMD", action = act.CloseCurrentPane({ confirm = false }) },
-	{ key = "b", mods = "LEADER|CTRL", action = act.SendString("\x02") },
+	{ key = "b", mods = "LEADER|CTRL", action = act.SendString("\x03") },
 	{ key = "Enter", mods = "LEADER", action = act.ActivateCopyMode },
-	{
-		key = "k",
-		mods = "CTRL|ALT",
-		action = act.Multiple({
-			act.ClearScrollback("ScrollbackAndViewport"),
-			act.SendKey({ key = "L", mods = "CTRL" }),
-		}),
-	},
 	{ key = "z", mods = "CTRL", action = act.TogglePaneZoomState },
 	{ key = "f", mods = "CTRL", action = act.Search({ CaseInSensitiveString = "" }) },
-	{ key = "r", mods = "LEADER", action = act.ActivateKeyTable({ name = "resize_pane", one_shot = false }) },
+	{ key = "o", mods = "CTRL", action = wezterm.action({ PaneSelect = { mode = "SwapWithActive" } }) },
+	{ key = "o", mods = "CMD", action = wezterm.action({ PaneSelect = {} }) },
 }
 
 config.colors = {
