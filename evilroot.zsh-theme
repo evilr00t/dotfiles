@@ -4,14 +4,18 @@
 KUBE_PS1_SYMBOL_ENABLE=false
 
 # display exitcode when >0
-return_code="%(?..%{$fg[red]%}%?（╯°□°）╯︵ ┻━┻ %{$reset_color%})"
+# NOTE: Old fscked table
+#return_code="%(?..%{$fg[red]%}%?（╯°□°）╯︵ ┻━┻ %{$reset_color%})"
+# NOTE: lambda colour
+NEWLINE=$'\n'
+return_code="%(?.%{$fg[yellow]%}.%{$fg[red]%})λ%{$reset_color%} "
 RPROMPT=""
 
-PROMPT='${return_code}%{$fg[cyan]%}%~$(git_prompt_info)%{$fg[yellow]%} λ%{$reset_color%} '
+PROMPT='%{$fg[cyan]%}%~$(git_prompt_info)$(git_prompt_short_sha)%{$fg[yellow]%}${NEWLINE}${return_code}'
 
 ZSH_THEME_GIT_PROMPT_DIRTY=""
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[red]%}@%{$fg[blue]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[red]%}:%{$fg[magenta]%}$(git_prompt_short_sha)%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[red]%}:%{$fg[magenta]%}%{$reset_color%}"
 
 # vi:syntax=sh
