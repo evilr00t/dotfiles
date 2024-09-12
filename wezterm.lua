@@ -124,7 +124,13 @@ config.mouse_bindings = {
 		mods = "NONE",
 		action = wezterm.action.CompleteSelection("Clipboard"),
 	},
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "SUPER",
+		action = wezterm.action.OpenLinkAtMouseCursor,
+	},
 }
+
 -- NOTE: credits to https://alexplescan.com/posts/2024/08/10/wezterm/
 local function segments_for_right_status(window)
 	return {
@@ -147,7 +153,7 @@ wezterm.on("update-status", function(window, _)
 	-- We'll build up the elements to send to wezterm.format in this table.
 	local elements = {}
 
-	for i, seg in ipairs(segments) do
+	for _, seg in ipairs(segments) do
 		table.insert(elements, { Background = { Color = bg } })
 		table.insert(elements, { Foreground = { Color = fg } })
 		table.insert(elements, { Text = " " .. seg .. " " })
