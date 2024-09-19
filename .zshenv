@@ -194,7 +194,7 @@ alias pip='pip3'
 alias tp='terraform validate && terraform plan'
 alias mtr='sudo $(brew --prefix mtr)/sbin/mtr'
 alias rg='rg -uu'
-alias ag='rg'
+alias ag='rg -i'
 alias kill_dns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 # use gnu-make
 alias make='gmake'
