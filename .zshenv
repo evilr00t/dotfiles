@@ -178,6 +178,7 @@ alias piplist='pip3 freeze | cut -d = -f 1 | xargs -n 1 pip3 search | grep -B2 L
 alias py="source virt/bin/activate;clear"
 alias grep='ggrep'
 alias shrug="echo '¯\_(ツ)_/¯' | pbcopy";
+alias vi='vim'
 alias vim='nvim'
 alias penvi='poetry run nvim'
 alias bue="brew update && brew upgrade && brew outdated --cask|cut -f 1 -d ' '|xargs brew cask reinstall"
