@@ -8,7 +8,7 @@ KUBE_PS1_SYMBOL_ENABLE=false
 #return_code="%(?..%{$fg[red]%}%?（╯°□°）╯︵ ┻━┻ %{$reset_color%})"
 # NOTE: lambda colour
 NEWLINE=$'\n'
-return_code="%(?.%{$fg[yellow]%}.%{$fg[red]%})λ%{$reset_color%} "
+return_code="%(?.%{$fg[yellow]%}.%{$bg[red]%})λ%{$reset_color%} "
 RPROMPT=""
 
 PROMPT='%{$fg[cyan]%}%~$(git_prompt_info)$(git_prompt_short_sha)%{$fg[yellow]%}${NEWLINE}${return_code}'
