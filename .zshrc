@@ -14,7 +14,7 @@ HIST_STAMPS="dd.mm.yyyy"
 HIST_IGNORE_SPACE="true"
 export LC_CTYPE=en_GB.UTF-8
 export LANG=en_GB.UTF-8
-plugins=(history history-substring-search git-prompt colored-man-pages extract ssh-agent gpg-agent fzf-tab F-Sy-H zsh-fzf-history-search)
+plugins=(history history-substring-search git-prompt colored-man-pages extract ssh-agent gpg-agent fzf-tab F-Sy-H zsh-fzf-history-search asdf)
 
 source $ZSH/oh-my-zsh.sh
 
