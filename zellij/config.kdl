@@ -1,0 +1,47 @@
+// If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
+plugins {
+    tab-bar location="zellij:tab-bar"
+    status-bar location="zellij:status-bar"
+    strider location="zellij:strider"
+    compact-bar location="zellij:compact-bar"
+    session-manager location="zellij:session-manager"
+    welcome-screen location="zellij:session-manager" {
+        welcome_screen true
+    }
+    filepicker location="zellij:strider" {
+        cwd "/"
+    }
+}
+
+themes {
+   dracula {
+        fg 248 248 242
+        bg 40 42 54
+        black 0 0 0
+        red 255 85 85
+        green 80 250 123
+        yellow 241 250 140
+        blue 98 114 164
+        magenta 255 121 198
+        cyan 139 233 253
+        white 255 255 255
+        orange 255 184 108
+    }
+}
+
+theme "dracula"
+simplified_ui true
+default_layout "compact"
+
+layout {
+    pane split_direction="vertical" {
+        pane
+        pane split_direction="horizontal" {
+            pane
+            pane
+        }
+    }
+    pane size=1 borderless=true {
+        plugin location="zellij:compact-bar"
+    }
+}
