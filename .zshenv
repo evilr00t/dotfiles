@@ -22,8 +22,7 @@ fi
 # EXPORTS
 # GOLANG
 export GOPATH=$HOME/golang
-#export GOROOT=/usr/local/opt/go/libexec
-export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/opt/postgresql@15/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/opt/postgresql@17/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH"
 
 # FUNCTIONS
 
@@ -87,21 +86,21 @@ events() {
 }
 
 
-diff()
-{
-  colordiff -Nuar $@ | delta --color-only --diff-so-fancy
-}
+# diff()
+# {
+#   colordiff -Nuar $@ | delta --color-only --diff-so-fancy
+# }
 
 
-cat()
-{
-  bat -pp $@
-}
-
-lcat()
-{
-  bat --paging=always -p $@
-}
+# cat()
+# {
+#   bat -pp $@
+# }
+#
+# lcat()
+# {
+#   bat --paging=always -p $@
+# }
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
@@ -163,6 +162,9 @@ ftmk() {
 }
 
 # various useful aliases
+alias cat='bat -pp'
+alias lcat='bat --paging=always -p'
+alias diff='difft'
 alias lless='ll -R --color=always | less -r'
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -183,13 +185,10 @@ alias vim='nvim'
 alias penvi='poetry run nvim'
 alias bue="brew update && brew upgrade && brew outdated --cask|cut -f 1 -d ' '|xargs brew cask reinstall"
 alias local_svcs='lsof -i -n -P|grep LISTEN'
+alias ls='eza -l --git -a -s name --time-style=long-iso'
 alias lsd='eza --long -g -D --git -a -s modified'
-
 alias radios='vlc -I ncurses https://gist.githubusercontent.com/evilr00t/23cd50fbceed255fb5330d484c5a8273/raw/internet_radios_playlist.m3u'
-alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
-alias idea="open -a 'IntelliJ IDEA'"
 alias code='code-insiders'
-alias mate='/Applications/TextMate.app/Contents/Resources/mate'
 alias python='python3'
 alias pip='pip3'
 alias tp='terraform validate && terraform plan'
@@ -197,10 +196,7 @@ alias mtr='sudo $(brew --prefix mtr)/sbin/mtr'
 alias rg='rg -uu'
 alias ag='rg -i'
 alias kill_dns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
-# use gnu-make
 alias make='gmake'
-
-# k8s related
 alias k="kubecolor"
 alias kubectl="kubecolor"
 alias kube-bash='k run --rm -i --tty k8s-debug-pod --image=nicolaka/netshoot --restart=Never'
@@ -222,8 +218,7 @@ zz() {
   cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q "$_last_z_args")"
 }
 
-unalias ls 2>/dev/null
-alias ls='eza -l --git -a -s name --time-style=long-iso'
+
 
 function kp() {
   local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
@@ -234,28 +229,9 @@ function kp() {
   fi
 }
 
-# Helper for temp files
-function td {
-  cd $(mktemp -d /tmp/${1}.XXXX)
-}
-
-function t {
-  cd $(mktemp /tmp/${1}.XXXX)
-}
-
 function showcrt {
   openssl x509 -in ${1} -text -noout
 }
-
-function vg() {
-  # from https://github.com/vrothberg/vgrep
-  INITIAL_QUERY="$1"
-  VGREP_PREFIX="$(brew --prefix vgrep)/bin/vgrep --no-header "
-  FZF_DEFAULT_COMMAND="$VGREP_PREFIX '$INITIAL_QUERY'" \
-  fzf --bind "change:reload:$VGREP_PREFIX {q} || true" --ansi --phony --tac --query "$INITIAL_QUERY" \
-  | gawk '{print $1}' | xargs -I{} -o vgrep --show {}
-}
-
 
 function co_author() {
   git shortlog --summary --numbered --email --all . \
