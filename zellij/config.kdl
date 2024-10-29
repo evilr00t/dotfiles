@@ -32,6 +32,13 @@ themes {
 theme "dracula"
 simplified_ui true
 default_layout "compact"
+copy_on_select true
+
+ui {
+    pane_frames {
+        hide_session_name true
+    }
+}
 
 layout {
     pane split_direction="vertical" {
