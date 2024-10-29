@@ -43,8 +43,8 @@ TERM = "xterm-256color"
 size = 14
 
 [font.normal]
-family = "Cascadia Mono PL"
-#family = 'SauceCodePro Nerd Font Mono'
+# family = "Cascadia Mono PL"
+family = 'SauceCodePro Nerd Font Mono'
 
 # [font.offset]
 # y = 1
@@ -183,14 +183,14 @@ mods = "Alt|Shift"
 program = "/opt/homebrew/Cellar/zsh/5.9/bin/zsh"
 
 [window]
-decorations = "transparent"
-dynamic_padding = true
+decorations = "Buttonless"
+# dynamic_padding = true
 opacity = 0.95
 
 [window.dimensions]
 columns = 160
 lines = 40
 
-[window.padding]
-x = 5
-y = 27
+# [window.padding]
+# x = 5
+# y = 27
