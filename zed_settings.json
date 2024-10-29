@@ -14,7 +14,7 @@
     },
     "version": "2"
   },
-  "theme": "Gruvbox Dark",
+  "theme": "One Dark",
   "vim_mode": true,
   "ui_font_size": 13,
   "base_keymap": "VSCode",
