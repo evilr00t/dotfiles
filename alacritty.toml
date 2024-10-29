@@ -1,3 +1,4 @@
+[general]
 live_config_reload = true
 
 [colors]
@@ -39,11 +40,11 @@ unfocused_hollow = true
 TERM = "xterm-256color"
 
 [font]
-size = 12
+size = 14
 
 [font.normal]
-# family = "Pragmata Pro Mono"
-family = 'SauceCodePro Nerd Font Mono'
+family = "Cascadia Mono PL"
+#family = 'SauceCodePro Nerd Font Mono'
 
 # [font.offset]
 # y = 1
@@ -178,7 +179,7 @@ chars = "\u001BX"
 key = "X"
 mods = "Alt|Shift"
 
-[shell]
+[terminal.shell]
 program = "/opt/homebrew/Cellar/zsh/5.9/bin/zsh"
 
 [window]
