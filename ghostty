@@ -4,3 +4,7 @@ background-opacity = 0.95
 background-blur-radius = 20
 font-family = SauceCodePro NFM
 font-size = 14
+theme = evilroot
+copy-on-select = true
+confirm-close-surface = false
+macos-titlebar-style = hidden
