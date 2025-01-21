@@ -1,0 +1,6 @@
+# kc's ghostty config - still not sold on ghostty but givin' it a chance.
+
+background-opacity = 0.95
+background-blur-radius = 20
+font-family = SauceCodePro NFM
+font-size = 14
