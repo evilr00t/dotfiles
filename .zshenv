@@ -193,7 +193,6 @@ alias python='python3'
 alias pip='pip3'
 alias tp='terraform validate && terraform plan'
 alias mtr='sudo $(brew --prefix mtr)/sbin/mtr'
-alias rg='rg -uu'
 alias ag='rg -i'
 alias kill_dns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 alias make='gmake'
@@ -245,3 +244,5 @@ function co_author() {
 # use bat to colorize man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export LESSOPEN="| ~/.lessfilter %s"
+
+# vi:syntax=sh
