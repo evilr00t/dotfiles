@@ -14,7 +14,7 @@ HIST_STAMPS="dd.mm.yyyy"
 HIST_IGNORE_SPACE="true"
 export LC_CTYPE=en_GB.UTF-8
 export LANG=en_GB.UTF-8
-plugins=(history history-substring-search git-prompt colored-man-pages extract ssh-agent gpg-agent fzf-tab F-Sy-H zsh-fzf-history-search asdf)
+plugins=(history history-substring-search git-prompt colored-man-pages extract ssh-agent gpg-agent fzf-tab F-Sy-H zsh-fzf-history-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -22,8 +22,8 @@ autoload -Uz compinit
 for dump in ~/.zcompdump(N.mh+24); do
   compinit
 done
-# from: https://gist.github.com/15cm/88e320d71fe7fe5a4bb24b99da6b93f0
 
+# from: https://gist.github.com/15cm/88e320d71fe7fe5a4bb24b99da6b93f0
 eval $( gdircolors -b $HOME/.dircolors )
 
 set umask 022
@@ -33,10 +33,10 @@ unsetopt nomatch
 setopt hist_ignore_all_dups
 
 # fzf via Homebrew
-if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
-  source /usr/local/opt/fzf/shell/key-bindings.zsh
-  source /usr/local/opt/fzf/shell/completion.zsh
-fi
+# if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
+#   source /usr/local/opt/fzf/shell/key-bindings.zsh
+#   source /usr/local/opt/fzf/shell/completion.zsh
+# fi
 
 # fzf + ripgrep configuration
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'

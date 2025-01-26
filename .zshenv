@@ -3,13 +3,16 @@
 #
 # Author: Karol Czeryna <k@e-dot.uk>
 #
-# INCLUDE EXTERNAL FILES
 export PROMPT_EOL_MARK='%K{red} '
 export EDITOR=nvim
+export GOPATH=$HOME/golang
+export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/opt/postgresql@17/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH"
 
-if [ -f ~/.ec2 ]; then
-  source ~/.ec2
+# Ensure that a non-login, non-interactive shell has a defined environment.
+if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
+
 
 if [ -f ~/.work ]; then
   source ~/.work
@@ -18,26 +21,6 @@ fi
 if [ -f ~/.home ]; then
   source ~/.home
 fi
-
-# EXPORTS
-# GOLANG
-export GOPATH=$HOME/golang
-export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/opt/postgresql@17/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH"
-
-# FUNCTIONS
-
-#apb()
-#{
-  #if [ ! -z "$ANSIBLE_BECOME_PASS" ]; then
-    #ansible-playbook -e "ansible_become_pass=$ANSIBLE_BECOME_PASS" $@
-  #else
-    ## \xE2\x9D\x98 is a cross mark
-    #echo -e "[\e[1;31m\xE2\x9C\x98\e[0m] Did you forget about: "
-    #echo -e "\e[31mexport ANSIBLE_BECOME_PASS=XXX\e[0m"
-    #echo -e "[\e[1;31m\xE2\x9C\x98\e[0m] Oh, yes... you do!"
-
-  #fi
-#}
 
 k8env() {
   local ke
@@ -62,7 +45,6 @@ ssh_rev_proxy() {
   ssh -fNg -L ${port}:127.0.0.1:${port} ${host}
 }
 
-
 events() {
   # from:
   # curl -s https://raw.githubusercontent.com/droctothorpe/kubecolor/master/bin/events | sh /dev/stdin
@@ -85,46 +67,6 @@ events() {
     1'
 }
 
-
-# diff()
-# {
-#   colordiff -Nuar $@ | delta --color-only --diff-so-fancy
-# }
-
-
-# cat()
-# {
-#   bat -pp $@
-# }
-#
-# lcat()
-# {
-#   bat --paging=always -p $@
-# }
-
-# Ensure that a non-login, non-interactive shell has a defined environment.
-if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprofile"
-fi
-
-# Old function... now I'm using KeePass...
-#pass() {
-#if which gpg >/dev/null 2>&1;
-#then
-  #BIN=gpg
-#elif which gpg2 >/dev/null 2>&1;
-#then
-  #BIN=gpg2
-#else
-  #echo 'No gnupg installed... exiting'
-  #exit 1;
-#fi
-#if [ -z "$1" ]; then
-  #$BIN --quiet -d ~/Dropbox/pass.gpg 2> /dev/null
-#else
-  #$BIN --quiet -d ~/Dropbox/pass.gpg 2> /dev/null|grep -iA5 $1
-#fi
-#}
 
 
 # file open using fzf and vim!
@@ -159,6 +101,43 @@ ftmk() {
     tmux kill-session -t "$1"; return
   fi
   session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux kill-session -t "$session" || echo "No session found to delete."
+}
+
+z() {
+  if [[ -z "$*" ]]; then
+    cd "$(_z -l 2>&1 | fzf +s --tac | sed 's/^[0-9,.]* *//')"
+  else
+    _last_z_args="$@"
+    _z "$@"
+  fi
+}
+
+zz() {
+  cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q "$_last_z_args")"
+}
+
+
+
+function kp() {
+  local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
+  if [ "x$pid" != "x" ]
+  then
+    echo $pid | xargs kill -${1:-9}
+    kp
+  fi
+}
+
+function showcrt {
+  openssl x509 -in ${1} -text -noout
+}
+
+function co_author() {
+  git shortlog --summary --numbered --email --all . \
+    | cut -f2- \
+    | awk '$0="Co-authored-by: "$0' \
+    | fgrep -v "$(git config user.email)" \
+    | fzf --multi --exit-0 --no-sort \
+    | pbcopy
 }
 
 # various useful aliases
@@ -202,45 +181,8 @@ alias kube-bash='k run --rm -i --tty k8s-debug-pod --image=nicolaka/netshoot --r
 alias kube-dns='k run --rm -i --tty dnsutils --image=registry.k8s.io/e2e-test-images/jessie-dnsutils:1.3'
 
 # fzf stuff
-unalias z 2> /dev/null
-
-z() {
-  if [[ -z "$*" ]]; then
-    cd "$(_z -l 2>&1 | fzf +s --tac | sed 's/^[0-9,.]* *//')"
-  else
-    _last_z_args="$@"
-    _z "$@"
-  fi
-}
-
-zz() {
-  cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q "$_last_z_args")"
-}
-
-
-
-function kp() {
-  local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
-  if [ "x$pid" != "x" ]
-  then
-    echo $pid | xargs kill -${1:-9}
-    kp
-  fi
-}
-
-function showcrt {
-  openssl x509 -in ${1} -text -noout
-}
-
-function co_author() {
-  git shortlog --summary --numbered --email --all . \
-    | cut -f2- \
-    | awk '$0="Co-authored-by: "$0' \
-    | fgrep -v "$(git config user.email)" \
-    | fzf --multi --exit-0 --no-sort \
-    | pbcopy
-}
-
+# unalias z 2> /dev/null
+#
 # use bat to colorize man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export LESSOPEN="| ~/.lessfilter %s"
