@@ -297,7 +297,9 @@ OTHER_WRITABLE 38;5;110
 .gemspec         0;38;5;3
 *Procfile        0;38;5;244
 *Gopkg.toml      0;38;5;3
+*go.mod      0;38;5;3
 *Gopkg.lock      0;38;5;239
+*go.sum      0;38;5;239
 .gitignore       0;38;5;243
 .gitattributes   0;38;5;243
 *README          01;38;5;200
