@@ -177,8 +177,6 @@ alias kill_dns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 alias make='gmake'
 alias k="kubecolor"
 alias kubectl="kubecolor"
-alias kube-bash='k run --rm -i --tty k8s-debug-pod --image=nicolaka/netshoot --restart=Never'
-alias kube-dns='k run --rm -i --tty dnsutils --image=registry.k8s.io/e2e-test-images/jessie-dnsutils:1.3'
 
 # fzf stuff
 # unalias z 2> /dev/null
