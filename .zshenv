@@ -3,16 +3,21 @@
 #
 # Author: Karol Czeryna <k@e-dot.uk>
 #
+
 export PROMPT_EOL_MARK='%K{red} '
 export EDITOR=nvim
 export GOPATH=$HOME/golang
 export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/opt/postgresql@17/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH"
 
+# use bat to colorize man pages
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export LESSOPEN="| ~/.lessfilter %s"
+
+
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
-
 
 if [ -f ~/.work ]; then
   source ~/.work
@@ -67,8 +72,6 @@ events() {
     1'
 }
 
-
-
 # file open using fzf and vim!
 fo() {
   local files
@@ -102,20 +105,6 @@ ftmk() {
   fi
   session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux kill-session -t "$session" || echo "No session found to delete."
 }
-
-z() {
-  if [[ -z "$*" ]]; then
-    cd "$(_z -l 2>&1 | fzf +s --tac | sed 's/^[0-9,.]* *//')"
-  else
-    _last_z_args="$@"
-    _z "$@"
-  fi
-}
-
-zz() {
-  cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q "$_last_z_args")"
-}
-
 
 
 function kp() {
@@ -178,8 +167,7 @@ alias make='gmake'
 alias k="kubecolor"
 alias kubectl="kubecolor"
 
-# use bat to colorize man pages
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export LESSOPEN="| ~/.lessfilter %s"
+
+eval "$(zoxide init zsh)"
 
 # vi:syntax=sh
