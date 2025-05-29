@@ -45,7 +45,7 @@ size = 14
 [font.normal]
 #family = "FantasqueSansM Nerd Font Mono"
 family = 'SauceCodePro Nerd Font Mono'
-style = "SemiBold"
+# style = "SemiBold"
 
 
 [font.italic]
@@ -190,7 +190,7 @@ program = "/opt/homebrew/Cellar/zsh/5.9/bin/zsh"
 [window]
 decorations = "Buttonless"
 # dynamic_padding = true
-opacity = 0.95
+opacity = 0.96
 
 [window.dimensions]
 columns = 160

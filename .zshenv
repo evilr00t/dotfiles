@@ -178,9 +178,6 @@ alias make='gmake'
 alias k="kubecolor"
 alias kubectl="kubecolor"
 
-# fzf stuff
-# unalias z 2> /dev/null
-#
 # use bat to colorize man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export LESSOPEN="| ~/.lessfilter %s"
